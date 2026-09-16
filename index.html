@@ -1,1883 +1,1060 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XI Spartans Cricket Club | Strength • Passion • Victory</title>
-<meta name="description" content="XI Spartans is a premier competitive cricket club. Explore our teams, players, achievements, match schedule and join the squad.">
-<meta name="keywords" content="XI Spartans, cricket club, cricket team, tournament, league champions, cricket players">
-<meta property="og:title" content="XI Spartans Cricket Club">
-<meta property="og:description" content="Strength • Passion • Victory — the official home of XI Spartans Cricket Club.">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230D47A1' stroke='%23FFC107' stroke-width='4'/%3E%3Ctext x='50' y='65' font-size='45' text-anchor='middle' fill='white' font-family='Georgia'%3EXI%3C/text%3E%3C/svg%3E">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XI Spartans Cricket Club | Official Portal</title>
+  <meta name="description" content="XI Spartans Cricket Club - Passion. Discipline. Teamwork. Excellence." />
 
-<!-- ============================================================
-     GOOGLE FONTS
-     Bebas Neue  -> big stadium-signage display headings
-     Rajdhani    -> athletic / technical UI + data numerals
-     Inter       -> body copy, readable at small sizes
-============================================================= -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-<style>
-/* =================================================================
-   XI SPARTANS CRICKET CLUB — SINGLE FILE WEBSITE
-   Design tokens
-================================================================= */
-:root{
-  --primary:#0D47A1;
-  --primary-light:#1663d6;
-  --primary-dark:#082a63;
-  --secondary:#FFC107;
-  --accent:#00E5FF;
-  --bg:#050816;
-  --bg-alt:#080c20;
-  --bg-rise:#0b1130;
-  --card:rgba(255,255,255,.06);
-  --card-border:rgba(255,255,255,.12);
-  --card-hover:rgba(255,255,255,.10);
-  --text:#ffffff;
-  --text-dim:rgba(255,255,255,.68);
-  --text-faint:rgba(255,255,255,.42);
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --dark-green: #063B2A;
+      --cricket-green: #087A4B;
+      --light-green: #E8F5EE;
+      --gold: #D4AF37;
+      --gold-dark: #b89726;
+      --dark-text: #111827;
+      --gray-text: #4B5563;
+      --light-gray: #F9FAFB;
+      --border-color: #E5E7EB;
+      --danger: #DC2626;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(6, 59, 42, 0.08);
+      --shadow-lg: 0 12px 30px rgba(6, 59, 42, 0.14);
+      --shadow-gold: 0 6px 20px rgba(212, 175, 55, 0.25);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition: all 0.3s ease;
+    }
 
-  --font-display:'Bebas Neue', sans-serif;
-  --font-heading:'Rajdhani', sans-serif;
-  --font-body:'Inter', sans-serif;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; color: var(--dark-text); background-color: var(--white); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+    a { text-decoration: none; color: inherit; transition: var(--transition); }
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-padding { padding: 4.5rem 0; }
+    
+    .section-title-wrap { text-align: center; max-width: 700px; margin: 0 auto 3rem auto; }
+    .section-subtitle { color: var(--cricket-green); text-transform: uppercase; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; display: block; margin-bottom: 0.4rem; }
+    .section-title { font-size: 2.2rem; color: var(--dark-green); position: relative; margin-bottom: 0.8rem; }
+    .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: linear-gradient(90deg, var(--cricket-green), var(--gold)); margin: 0.6rem auto 0; border-radius: 2px; }
+    .section-desc { color: var(--gray-text); font-size: 1rem; }
 
-  --radius-s:8px;
-  --radius-m:16px;
-  --radius-l:28px;
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.4rem; font-size: 0.92rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: var(--transition); text-transform: uppercase; }
+    .btn-primary { background: var(--cricket-green); color: var(--white); }
+    .btn-primary:hover { background: var(--dark-green); color: var(--white); }
+    .btn-gold { background: var(--gold); color: var(--dark-green); font-weight: 700; }
+    .btn-gold:hover { background: var(--gold-dark); color: var(--white); }
+    .btn-outline { border-color: var(--white); color: var(--white); background: transparent; }
+    .btn-outline:hover { background: var(--white); color: var(--dark-green); }
+    .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
 
-  --shadow-glow-accent: 0 0 24px rgba(0,229,255,.35);
-  --shadow-glow-gold: 0 0 24px rgba(255,193,7,.30);
-  --ease: cubic-bezier(.2,.8,.2,1);
-}
+    /* Admin-Only Elements (hidden by default until approved email signs in) */
+    .admin-only { display: none !important; }
+    body.is-admin .admin-only { display: inline-flex !important; }
+    body.is-admin div.admin-only, body.is-admin section.admin-only { display: block !important; }
+    body.is-admin .admin-dock-bar { display: flex !important; }
 
-/* Day-Match theme — toggled by the "Day / Night Match" switch in navbar.
-   Cricket is genuinely played as day or day/night fixtures, so this toggle
-   maps to something real about the sport rather than a generic light-mode. */
-body[data-match="day"]{
-  --bg:#eef3fb;
-  --bg-alt:#e4ecf8;
-  --bg-rise:#dbe6f5;
-  --card:rgba(13,71,161,.05);
-  --card-border:rgba(13,71,161,.14);
-  --card-hover:rgba(13,71,161,.09);
-  --text:#0b1130;
-  --text-dim:rgba(11,17,48,.68);
-  --text-faint:rgba(11,17,48,.45);
-}
+    /* Live Editing Visuals */
+    .inline-editable { border-radius: 4px; transition: outline 0.2s; }
+    body.edit-mode-active .inline-editable { outline: 2px dashed #D4AF37 !important; background-color: rgba(212, 175, 55, 0.1) !important; cursor: text !important; }
 
-*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; }
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-body);
-  overflow-x:hidden;
-  transition:background .5s var(--ease), color .5s var(--ease);
-  cursor:none;
-}
-img{ max-width:100%; display:block; }
-a{ color:inherit; text-decoration:none; }
-ul{ list-style:none; }
-button{ font-family:inherit; border:none; background:none; cursor:pointer; color:inherit; }
-input,textarea{ font-family:inherit; }
-section{ position:relative; padding:120px 6vw; }
-.section-inner{ max-width:1280px; margin:0 auto; position:relative; z-index:2; }
-@media(max-width:768px){ section{ padding:80px 6vw; } }
+    /* Top Bar & Navbar */
+    .top-bar { background: #04271c; color: #cbd5e1; font-size: 0.825rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+    .navbar { position: sticky; top: 0; left: 0; width: 100%; background: var(--dark-green); z-index: 1000; box-shadow: var(--shadow-md); }
+    .navbar-container { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.5rem; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; color: var(--white); }
+    .logo-icon { font-size: 1.8rem; color: var(--gold); }
+    .logo-text h1 { font-size: 1.35rem; line-height: 1; color: var(--white); text-transform: uppercase; font-weight: 800; }
+    .logo-text span { font-size: 0.7rem; letter-spacing: 0.18em; color: var(--gold); display: block; font-weight: 600; }
+    .nav-menu { display: flex; align-items: center; gap: 1.2rem; list-style: none; }
+    .nav-item a { color: #e2e8f0; font-weight: 500; font-size: 0.9rem; }
+    .nav-item a:hover { color: var(--gold); }
+    .user-profile-badge { display: flex; align-items: center; gap: 0.5rem; color: var(--white); background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.85rem; }
+    .user-profile-badge img { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--gold); }
+    .admin-pill { background: var(--gold); color: var(--dark-green); font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 10px; }
+    .user-pill { background: #64748b; color: var(--white); font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 10px; }
 
-::selection{ background:var(--accent); color:#00121a; }
+    /* Hero */
+    .hero { position: relative; min-height: 75vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(6,59,42,0.92), rgba(4,39,28,0.85)), url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80') center/cover; color: var(--white); }
+    .hero-content { max-width: 760px; }
+    .hero-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1rem; text-transform: uppercase; }
+    .hero-title span { color: var(--gold); }
+    .hero-sub { font-size: 1.2rem; color: #e2e8f0; margin-bottom: 1rem; }
+    .hero-desc { font-size: 1rem; color: #cbd5e1; margin-bottom: 2rem; }
 
-/* Scrollbar */
-::-webkit-scrollbar{ width:10px; }
-::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:linear-gradient(var(--primary),var(--accent)); border-radius:10px; }
+    /* Stats Bar */
+    .stats-card-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; background: var(--white); padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); margin-top: -2.5rem; position: relative; z-index: 5; border: 1px solid var(--border-color); text-align: center; }
+    .stat-number { font-size: 2.2rem; font-weight: 900; color: var(--dark-green); }
+    .stat-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--gray-text); }
 
-/* Reduced motion respect */
-@media (prefers-reduced-motion: reduce){
-  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
-}
+    /* Section Actions Bar */
+    .section-action-header { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; gap: 0.75rem; }
 
-/* =================================================================
-   TYPOGRAPHY
-================================================================= */
-.eyebrow{
-  font-family:var(--font-heading);
-  font-weight:700;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  font-size:.78rem;
-  color:var(--accent);
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:18px;
-}
-.eyebrow::before{
-  content:'';
-  width:36px; height:2px;
-  background:var(--secondary);
-  display:inline-block;
-}
-h1,h2,h3,h4{ font-family:var(--font-display); letter-spacing:.02em; line-height:1.02; text-transform:uppercase; }
-.section-title{
-  font-size:clamp(2.4rem,5vw,4.2rem);
-  margin-bottom:20px;
-  background:linear-gradient(100deg,var(--text) 40%,var(--accent));
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.section-lede{
-  font-family:var(--font-body);
-  color:var(--text-dim);
-  max-width:640px;
-  font-size:1.05rem;
-  line-height:1.75;
-  margin-bottom:56px;
-}
-.mono-num{ font-family:var(--font-heading); font-weight:700; }
+    /* Player Cards */
+    .players-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
+    .player-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); position: relative; display: flex; flex-direction: column; }
+    .player-jersey-badge { position: absolute; top: 1rem; left: 1rem; width: 36px; height: 36px; background: var(--dark-green); border: 2px solid var(--gold); color: var(--gold); font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; }
+    .player-role-badge { position: absolute; top: 1rem; right: 1rem; background: rgba(6,59,42,0.9); color: var(--white); font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 50px; font-weight: 700; z-index: 2; }
+    .player-img-wrap { height: 260px; background: #e2e8f0; cursor: pointer; }
+    .player-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .player-info-body { padding: 1.25rem; text-align: center; cursor: pointer; }
+    .player-name { font-size: 1.15rem; color: var(--dark-green); font-weight: 700; }
+    .player-subrole { font-size: 0.8rem; color: var(--cricket-green); font-weight: 600; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .player-brief-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; border-top: 1px solid var(--border-color); padding-top: 0.8rem; font-size: 0.8rem; }
+    .card-admin-action-bar { display: flex; justify-content: space-between; padding: 0.6rem 1rem; background: #f8fafc; border-top: 1px solid var(--border-color); }
 
-/* =================================================================
-   CUSTOM CURSOR + SPOTLIGHT
-================================================================= */
-.cursor-dot,.cursor-ring{
-  position:fixed; top:0; left:0; pointer-events:none; z-index:9999;
-  border-radius:50%; transform:translate(-50%,-50%);
-  will-change:transform;
-}
-.cursor-dot{ width:6px; height:6px; background:var(--accent); box-shadow:0 0 8px var(--accent); }
-.cursor-ring{ width:34px; height:34px; border:1.5px solid rgba(0,229,255,.5); transition:width .2s,height .2s,border-color .2s,background .2s; }
-.cursor-ring.active{ width:56px; height:56px; background:rgba(0,229,255,.08); border-color:var(--secondary); }
-@media(hover:none){ .cursor-dot,.cursor-ring{ display:none; } body{ cursor:auto; } }
+    /* Live Scoreboard */
+    .scoreboard-section { background: linear-gradient(135deg, #032419, #063B2A); color: var(--white); }
+    .live-scoreboard-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: var(--radius-lg); padding: 2rem; max-width: 900px; margin: 0 auto; box-shadow: var(--shadow-lg); }
+    .sb-header { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+    .sb-teams-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; text-align: center; margin-bottom: 1.5rem; }
+    .sb-team-name { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; }
+    .sb-team-score { font-size: 2.5rem; font-weight: 900; color: var(--gold); }
+    .sb-vs-badge { font-size: 1.2rem; font-weight: 900; background: rgba(255,255,255,0.1); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); border: 1px solid rgba(212,175,55,0.4); margin: 0 auto; }
+    .sb-status-footer { text-align: center; font-size: 0.95rem; font-weight: 600; background: rgba(8,122,75,0.4); padding: 0.6rem; border-radius: 6px; }
 
-#spotlight{
-  position:fixed; inset:0; pointer-events:none; z-index:5;
-  background:radial-gradient(600px circle at var(--sx,50%) var(--sy,50%), rgba(0,229,255,.06), transparent 70%);
-}
+    /* Matches */
+    .matches-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .match-card { background: var(--white); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+    .match-teams-box { display: flex; justify-content: space-between; align-items: center; margin: 1rem 0; }
+    .m-team-name { font-size: 1.1rem; font-weight: 800; color: var(--dark-green); }
+    .m-team-score { font-size: 1.2rem; font-weight: 900; color: var(--cricket-green); }
+    .match-result-badge { text-align: center; padding: 0.4rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; margin-top: auto; background: #def7ec; color: #03543f; }
 
-/* =================================================================
-   PAGE LOADER
-================================================================= */
-#loader{
-  position:fixed; inset:0; z-index:10000;
-  background:var(--bg);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px;
-  transition:opacity .6s var(--ease), visibility .6s var(--ease);
-}
-#loader.hidden{ opacity:0; visibility:hidden; }
-.loader-ball{
-  width:54px; height:54px; border-radius:50%;
-  background:radial-gradient(circle at 35% 30%, #d94a1c, #7a1f0a);
-  position:relative;
-  animation:loaderSpin 1s linear infinite;
-  box-shadow:0 0 30px rgba(217,74,28,.6);
-}
-.loader-ball::before,.loader-ball::after{
-  content:''; position:absolute; top:0; bottom:0; left:50%; width:2px; background:#fff2e0;
-  transform:translateX(-50%) rotate(20deg); opacity:.85;
-}
-.loader-ball::after{ transform:translateX(-50%) rotate(-20deg); }
-@keyframes loaderSpin{ to{ transform:rotate(360deg); } }
-.loader-pct{ font-family:var(--font-heading); font-size:1.6rem; font-weight:700; letter-spacing:.1em; color:var(--accent); }
-.loader-label{ font-family:var(--font-heading); letter-spacing:.4em; font-size:.75rem; color:var(--text-faint); text-transform:uppercase; }
+    /* Trophies & Gallery */
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .achievement-card { background: var(--white); padding: 1.8rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); text-align: center; box-shadow: var(--shadow-sm); }
+    .trophy-icon-wrap { width: 60px; height: 60px; background: #FEF3C7; color: var(--gold-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 1rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; height: 220px; box-shadow: var(--shadow-sm); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,59,42,0.85), transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; color: #fff; }
 
-/* =================================================================
-   NAVBAR
-================================================================= */
-header#navbar{
-  position:fixed; top:0; left:0; width:100%; z-index:1000;
-  padding:18px 6vw;
-  display:flex; align-items:center; justify-content:space-between;
-  transition:background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
-  background:transparent;
-}
-header#navbar.scrolled{
-  background:rgba(5,8,22,.7);
-  backdrop-filter:blur(16px) saturate(140%);
-  -webkit-backdrop-filter:blur(16px) saturate(140%);
-  padding:12px 6vw;
-  box-shadow:0 4px 30px rgba(0,0,0,.35);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-body[data-match="day"] header#navbar.scrolled{ background:rgba(238,243,251,.75); border-bottom:1px solid rgba(13,71,161,.1); }
+    /* Floating Admin Dock */
+    .admin-dock-bar { position: fixed; bottom: 1.5rem; left: 1.5rem; background: var(--dark-green); color: var(--white); padding: 0.5rem 1rem; border-radius: 50px; box-shadow: var(--shadow-lg); border: 2px solid var(--gold); z-index: 1500; display: none; align-items: center; gap: 0.6rem; }
 
-.brand{ display:flex; align-items:center; gap:12px; }
-.brand-mark{
-  width:44px; height:44px; border-radius:50%;
-  background:conic-gradient(from 0deg,var(--primary),var(--accent),var(--secondary),var(--primary));
-  display:flex; align-items:center; justify-content:center;
-  position:relative;
-  animation:brandRotate 8s linear infinite;
-}
-.brand-mark span{
-  background:var(--bg); width:37px; height:37px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-display); color:var(--text); font-size:1.05rem; letter-spacing:.03em;
-  animation:brandRotate 8s linear infinite reverse;
-}
-@keyframes brandRotate{ to{ transform:rotate(360deg); } }
-.brand-name{ font-family:var(--font-display); font-size:1.5rem; letter-spacing:.06em; }
-.brand-name em{ color:var(--secondary); font-style:normal; }
+    /* Modals */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition); padding: 1.5rem; }
+    .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+    .modal-box { background: var(--white); width: 100%; max-width: 680px; max-height: 90vh; overflow-y: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); position: relative; padding: 2rem; }
+    .modal-close-btn { position: absolute; top: 1rem; right: 1rem; background: #e5e7eb; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .form-control { width: 100%; padding: 0.7rem 0.9rem; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.9rem; outline: none; }
 
-nav.menu{ display:flex; align-items:center; gap:2px; }
-nav.menu a{
-  position:relative; font-family:var(--font-heading); font-weight:600; font-size:.92rem;
-  letter-spacing:.03em; padding:10px 16px; text-transform:uppercase; color:var(--text-dim);
-  transition:color .3s;
-}
-nav.menu a::after{
-  content:''; position:absolute; left:16px; right:16px; bottom:4px; height:2px;
-  background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease);
-  box-shadow:0 0 10px var(--accent);
-}
-nav.menu a:hover{ color:var(--text); text-shadow:0 0 12px rgba(0,229,255,.6); }
-nav.menu a:hover::after{ transform:scaleX(1); }
+    /* Toast */
+    .toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.8rem; }
+    .toast { background: var(--dark-green); color: var(--white); padding: 0.8rem 1.2rem; border-radius: 8px; box-shadow: var(--shadow-lg); border-left: 4px solid var(--gold); font-size: 0.9rem; }
 
-.nav-actions{ display:flex; align-items:center; gap:14px; }
-.theme-switch{
-  display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-size:.72rem;
-  letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint);
-}
-.switch-track{
-  width:52px; height:26px; border-radius:20px; background:rgba(255,255,255,.1);
-  border:1px solid var(--card-border); position:relative; cursor:pointer; flex-shrink:0;
-}
-.switch-thumb{
-  position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
-  background:linear-gradient(135deg,var(--secondary),#ff8a00);
-  transition:transform .35s var(--ease); box-shadow:0 0 10px rgba(255,193,7,.6);
-}
-body[data-match="day"] .switch-thumb{ transform:translateX(26px); background:linear-gradient(135deg,#fff,#cfe0ff); }
-
-.btn{
-  position:relative; overflow:hidden; font-family:var(--font-heading); font-weight:700;
-  letter-spacing:.06em; text-transform:uppercase; font-size:.85rem; padding:13px 30px;
-  border-radius:40px; display:inline-flex; align-items:center; gap:10px; isolation:isolate;
-}
-.btn-primary{ background:linear-gradient(120deg,var(--primary),var(--primary-light)); color:#fff; box-shadow:0 8px 24px rgba(13,71,161,.45); }
-.btn-primary:hover{ box-shadow:0 8px 30px rgba(0,229,255,.5); }
-.btn-outline{ border:1.5px solid var(--secondary); color:var(--secondary); }
-.btn-outline:hover{ background:rgba(255,193,7,.1); box-shadow:var(--shadow-glow-gold); }
-.btn .ripple{
-  position:absolute; border-radius:50%; background:rgba(255,255,255,.5); transform:scale(0);
-  animation:rippleAnim .6s var(--ease) forwards; pointer-events:none;
-}
-@keyframes rippleAnim{ to{ transform:scale(3); opacity:0; } }
-
-.hamburger{ display:none; flex-direction:column; gap:5px; width:30px; z-index:1001; }
-.hamburger span{ height:2px; background:var(--text); border-radius:2px; transition:transform .35s var(--ease), opacity .3s; }
-.hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2){ opacity:0; }
-.hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-
-@media(max-width:980px){
-  nav.menu{
-    position:fixed; inset:0 0 0 auto; width:min(78vw,340px); height:100vh;
-    background:rgba(5,8,22,.97); backdrop-filter:blur(20px);
-    flex-direction:column; align-items:flex-start; justify-content:center; gap:6px;
-    padding:40px; transform:translateX(100%); transition:transform .45s var(--ease);
-  }
-  nav.menu.open{ transform:translateX(0); }
-  nav.menu a{ font-size:1.1rem; padding:12px 0; }
-  .hamburger{ display:flex; }
-  .nav-actions .btn-outline{ display:none; }
-}
-
-/* =================================================================
-   HERO
-================================================================= */
-#home{
-  height:100svh; min-height:640px; padding:0; display:flex; align-items:center;
-  overflow:hidden; background:radial-gradient(ellipse at 50% 20%,var(--bg-rise),var(--bg) 70%);
-}
-#stadium-canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
-.hero-scrim{
-  position:absolute; inset:0; z-index:1;
-  background:
-    linear-gradient(180deg,rgba(5,8,22,.2) 0%,rgba(5,8,22,.55) 60%,var(--bg) 100%);
-}
-.hero-grid{
-  position:absolute; inset:0; z-index:1; opacity:.25;
-  background-image:linear-gradient(rgba(0,229,255,.15) 1px,transparent 1px), linear-gradient(90deg,rgba(0,229,255,.15) 1px,transparent 1px);
-  background-size:46px 46px;
-  mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent 80%);
-}
-.hero-content{ position:relative; z-index:3; text-align:center; width:100%; padding:0 6vw; }
-.hero-eyebrow{
-  font-family:var(--font-heading); letter-spacing:.5em; font-size:.85rem; color:var(--secondary);
-  text-transform:uppercase; margin-bottom:18px; opacity:0;
-}
-.hero-title{
-  font-size:clamp(3.6rem,13vw,10.5rem); line-height:.88;
-  background:linear-gradient(180deg,#fff 30%,#bcd7ff);
-  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 40px rgba(0,229,255,.25));
-}
-.hero-title .char{ display:inline-block; opacity:0; transform:translateY(60px) rotateX(60deg); }
-.hero-sub{
-  font-family:var(--font-heading); font-weight:600; font-size:clamp(1rem,2vw,1.5rem);
-  letter-spacing:.35em; text-transform:uppercase; color:var(--text-dim); margin:18px 0 44px;
-  opacity:0;
-}
-.hero-sub .dot{ color:var(--secondary); margin:0 10px; }
-.hero-actions{ display:flex; gap:20px; justify-content:center; flex-wrap:wrap; opacity:0; }
-
-.hero-ball{
-  position:absolute; width:34px; height:34px; border-radius:50%; z-index:3;
-  background:radial-gradient(circle at 35% 30%,#e2572c,#8a2410);
-  box-shadow:0 0 22px rgba(217,74,28,.55);
-  animation:ballFloat 6s ease-in-out infinite;
-}
-.hero-ball::before,.hero-ball::after{
-  content:''; position:absolute; top:0; bottom:0; left:50%; width:1.5px; background:rgba(255,240,224,.8);
-  transform:translateX(-50%) rotate(18deg);
-}
-.hero-ball::after{ transform:translateX(-50%) rotate(-18deg); }
-@keyframes ballFloat{ 0%,100%{ transform:translate(0,0) rotate(0deg); } 50%{ transform:translate(-16px,-40px) rotate(220deg); } }
-
-.scroll-cue{
-  position:absolute; bottom:34px; left:50%; transform:translateX(-50%); z-index:3;
-  display:flex; flex-direction:column; align-items:center; gap:10px; opacity:0;
-}
-.scroll-mouse{ width:26px; height:42px; border:2px solid var(--text-dim); border-radius:16px; position:relative; }
-.scroll-mouse::before{
-  content:''; position:absolute; top:6px; left:50%; width:4px; height:8px; background:var(--accent);
-  border-radius:3px; transform:translateX(-50%); animation:scrollDot 1.6s ease-in-out infinite;
-}
-@keyframes scrollDot{ 0%{ opacity:1; top:6px;} 70%{ opacity:0; top:22px;} 100%{opacity:0;top:6px;} }
-.scroll-label{ font-family:var(--font-heading); font-size:.65rem; letter-spacing:.3em; color:var(--text-faint); text-transform:uppercase; }
-
-/* =================================================================
-   REVEAL ANIMATION UTILITIES (Intersection Observer driven)
-================================================================= */
-.reveal{ opacity:0; transition:opacity .8s var(--ease), transform .8s var(--ease); }
-.reveal-up{ transform:translateY(50px); }
-.reveal-left{ transform:translateX(-60px); }
-.reveal-right{ transform:translateX(60px); }
-.reveal-zoom{ transform:scale(.85); }
-.reveal.in{ opacity:1; transform:translate(0,0) scale(1); }
-
-/* stagger helper */
-.stagger > *{ transition-delay:calc(var(--i,0) * 90ms); }
-
-/* =================================================================
-   GLASS CARD BASE
-================================================================= */
-.glass{
-  background:var(--card);
-  border:1px solid var(--card-border);
-  border-radius:var(--radius-m);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease), background .45s var(--ease);
-}
-.glass:hover{ transform:translateY(-6px); border-color:rgba(0,229,255,.4); background:var(--card-hover); box-shadow:0 20px 45px rgba(0,0,0,.35), 0 0 30px rgba(0,229,255,.12); }
-
-/* =================================================================
-   ABOUT
-================================================================= */
-#about{ background:linear-gradient(180deg,var(--bg),var(--bg-alt)); }
-.about-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:center; }
-.about-media{ position:relative; }
-.about-media .frame{
-  border-radius:var(--radius-l); overflow:hidden; position:relative; aspect-ratio:4/5;
-  border:1px solid var(--card-border);
-}
-.about-media img{ width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease); }
-.about-media:hover img{ transform:scale(1.06); }
-.about-media .frame::after{ content:''; position:absolute; inset:0; background:linear-gradient(200deg,transparent 50%,rgba(5,8,22,.7)); }
-.about-badge{
-  position:absolute; bottom:-26px; right:-26px; width:130px; height:130px; border-radius:50%;
-  background:radial-gradient(circle,var(--primary),var(--primary-dark));
-  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
-  border:3px solid var(--secondary); box-shadow:0 0 30px rgba(255,193,7,.3);
-  animation:badgeSpin 16s linear infinite;
-}
-@keyframes badgeSpin{ to{ transform:rotate(360deg); } }
-.about-badge b{ font-family:var(--font-display); font-size:1.5rem; }
-.about-badge span{ font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; }
-
-.about-text p{ color:var(--text-dim); line-height:1.85; font-size:1.02rem; margin-bottom:18px; }
-.counters{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:44px; }
-.counter{ text-align:left; }
-.counter b{ font-family:var(--font-display); font-size:clamp(2.2rem,3.6vw,3.2rem); color:var(--accent); display:block; text-shadow:0 0 20px rgba(0,229,255,.35); }
-.counter span{ font-family:var(--font-heading); font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text-faint); }
-@media(max-width:900px){ .about-grid{ grid-template-columns:1fr; } .counters{ grid-template-columns:repeat(2,1fr); } }
-
-/* =================================================================
-   TIMELINE
-================================================================= */
-#journey{ background:var(--bg-alt); }
-.timeline{ position:relative; max-width:800px; margin:0 auto; }
-.timeline::before{
-  content:''; position:absolute; left:50%; top:0; bottom:0; width:2px; transform:translateX(-50%);
-  background:linear-gradient(var(--primary),var(--accent),var(--secondary));
-}
-.t-item{ position:relative; width:50%; padding:0 50px 70px; }
-.t-item:nth-child(odd){ left:0; text-align:right; }
-.t-item:nth-child(even){ left:50%; text-align:left; }
-.t-dot{
-  position:absolute; top:4px; width:18px; height:18px; border-radius:50%;
-  background:var(--bg); border:3px solid var(--accent); box-shadow:0 0 16px var(--accent);
-}
-.t-item:nth-child(odd) .t-dot{ right:-9px; }
-.t-item:nth-child(even) .t-dot{ left:-9px; }
-.t-year{ font-family:var(--font-display); font-size:2.2rem; color:var(--secondary); }
-.t-card{ padding:20px 24px; margin-top:8px; }
-.t-card h4{ font-family:var(--font-heading); font-size:1.1rem; letter-spacing:.03em; margin-bottom:6px; }
-.t-card p{ color:var(--text-dim); font-size:.92rem; line-height:1.6; }
-@media(max-width:760px){
-  .timeline::before{ left:16px; }
-  .t-item,.t-item:nth-child(odd),.t-item:nth-child(even){ width:100%; left:0; text-align:left; padding:0 0 50px 46px; }
-  .t-item:nth-child(odd) .t-dot,.t-item:nth-child(even) .t-dot{ left:7px; right:auto; }
-}
-
-/* =================================================================
-   ACHIEVEMENTS
-================================================================= */
-.grid-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
-.grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
-@media(max-width:1000px){ .grid-4{ grid-template-columns:repeat(2,1fr); } .grid-3{ grid-template-columns:repeat(2,1fr); } }
-@media(max-width:600px){ .grid-4,.grid-3{ grid-template-columns:1fr; } }
-
-.ach-card{ padding:36px 26px; text-align:center; }
-.ach-icon{
-  width:64px; height:64px; margin:0 auto 20px; border-radius:50%;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 0 0 6px rgba(13,71,161,.15);
-  animation:trophyFloat 3.4s ease-in-out infinite;
-}
-.ach-card:nth-child(2) .ach-icon{ animation-delay:.3s; }
-.ach-card:nth-child(3) .ach-icon{ animation-delay:.6s; }
-.ach-card:nth-child(4) .ach-icon{ animation-delay:.9s; }
-@keyframes trophyFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-8px);} }
-.ach-card h4{ font-family:var(--font-heading); font-size:1.15rem; letter-spacing:.02em; margin-bottom:8px; }
-.ach-card p{ color:var(--text-faint); font-size:.85rem; }
-
-/* =================================================================
-   TEAMS
-================================================================= */
-#teams{ background:linear-gradient(180deg,var(--bg-alt),var(--bg)); }
-.team-card{ overflow:hidden; }
-.team-photo{ position:relative; aspect-ratio:16/11; overflow:hidden; }
-.team-photo img{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease); }
-.team-card:hover .team-photo img{ transform:scale(1.1); }
-.team-photo::after{ content:''; position:absolute; inset:0; background:linear-gradient(0deg,rgba(5,8,22,.9),transparent 60%); }
-.team-body{ padding:22px 24px 26px; }
-.team-body h4{ font-family:var(--font-heading); font-size:1.3rem; margin-bottom:4px; }
-.team-body .captain{ color:var(--secondary); font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; margin-bottom:10px; font-family:var(--font-heading); font-weight:600; }
-.team-body p{ color:var(--text-dim); font-size:.9rem; line-height:1.6; }
-
-/* =================================================================
-   PLAYERS
-================================================================= */
-#players{ background:var(--bg); }
-.player-card{
-  padding:28px 22px; text-align:center; perspective:900px;
-}
-.player-photo{
-  width:130px; height:130px; border-radius:50%; margin:0 auto 18px; overflow:hidden;
-  border:3px solid transparent;
-  background:linear-gradient(var(--bg),var(--bg)) padding-box, conic-gradient(var(--accent),var(--secondary),var(--primary),var(--accent)) border-box;
-  transition:transform .5s var(--ease);
-}
-.player-photo img{ width:100%; height:100%; object-fit:cover; }
-.player-card:hover .player-photo{ transform:rotateY(180deg); }
-.player-tilt{ transition:transform .25s var(--ease); transform-style:preserve-3d; }
-.player-role{ font-family:var(--font-heading); color:var(--accent); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; margin-bottom:2px; }
-.player-name{ font-family:var(--font-heading); font-weight:700; font-size:1.25rem; margin-bottom:14px; }
-.player-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:16px; }
-.player-stats div b{ display:block; font-family:var(--font-display); font-size:1.3rem; color:var(--secondary); }
-.player-stats div span{ font-size:.6rem; color:var(--text-faint); letter-spacing:.08em; text-transform:uppercase; }
-.player-social{ display:flex; justify-content:center; gap:12px; }
-.player-social a{
-  width:32px; height:32px; border-radius:50%; border:1px solid var(--card-border);
-  display:flex; align-items:center; justify-content:center; transition:.3s;
-}
-.player-social a:hover{ background:var(--accent); color:#00121a; box-shadow:0 0 14px var(--accent); }
-
-/* =================================================================
-   SCHEDULE
-================================================================= */
-#schedule{ background:var(--bg-alt); }
-.table-wrap{ overflow-x:auto; border-radius:var(--radius-m); border:1px solid var(--card-border); }
-table.schedule{ width:100%; border-collapse:collapse; min-width:700px; }
-table.schedule thead{ background:rgba(13,71,161,.35); }
-table.schedule th{
-  font-family:var(--font-heading); text-transform:uppercase; letter-spacing:.1em; font-size:.75rem;
-  padding:18px 20px; text-align:left; color:var(--secondary);
-}
-table.schedule td{ padding:18px 20px; font-size:.92rem; border-top:1px solid var(--card-border); color:var(--text-dim); }
-table.schedule tbody tr{ opacity:0; transform:translateX(-24px); transition:opacity .5s var(--ease), transform .5s var(--ease), background .3s; }
-table.schedule tbody tr.in{ opacity:1; transform:translateX(0); }
-table.schedule tbody tr:hover{ background:rgba(0,229,255,.05); }
-.status-pill{ padding:5px 14px; border-radius:20px; font-size:.72rem; font-family:var(--font-heading); letter-spacing:.05em; text-transform:uppercase; }
-.status-upcoming{ background:rgba(0,229,255,.12); color:var(--accent); border:1px solid rgba(0,229,255,.4); }
-.status-live{ background:rgba(255,61,61,.12); color:#ff6b6b; border:1px solid rgba(255,61,61,.4); animation:pulseLive 1.6s ease-in-out infinite; }
-@keyframes pulseLive{ 0%,100%{ box-shadow:0 0 0 0 rgba(255,61,61,.4);} 50%{ box-shadow:0 0 0 6px rgba(255,61,61,0);} }
-.status-won{ background:rgba(76,217,100,.12); color:#5ee081; border:1px solid rgba(76,217,100,.4); }
-
-/* =================================================================
-   LIVE SCORE — SIGNATURE ELEMENT: LED STADIUM SCOREBOARD
-================================================================= */
-#livescore{ background:radial-gradient(ellipse at 50% 0%,rgba(13,71,161,.25),var(--bg) 65%); }
-.board{
-  max-width:920px; margin:0 auto; border-radius:var(--radius-l);
-  background:#020409; border:1px solid rgba(0,229,255,.25);
-  box-shadow:0 0 60px rgba(0,229,255,.12), inset 0 0 40px rgba(0,0,0,.6);
-  padding:44px clamp(20px,4vw,56px); position:relative; overflow:hidden;
-}
-.board::before{
-  content:''; position:absolute; inset:0;
-  background:repeating-linear-gradient(180deg,rgba(255,255,255,.02) 0 2px,transparent 2px 4px);
-  pointer-events:none;
-}
-.board-top{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:30px; }
-.board-team{ font-family:var(--font-heading); font-weight:700; font-size:1.1rem; letter-spacing:.08em; text-transform:uppercase; color:var(--secondary); }
-.board-tag{ font-family:var(--font-heading); font-size:.7rem; letter-spacing:.3em; color:var(--text-faint); text-transform:uppercase; }
-
-.led-score{ display:flex; align-items:baseline; justify-content:center; gap:18px; margin:18px 0 36px; flex-wrap:wrap; }
-.led-digits{
-  font-family:'Rajdhani',monospace; font-weight:700; font-size:clamp(3.2rem,10vw,6rem);
-  color:var(--accent); letter-spacing:.02em; text-shadow:0 0 6px var(--accent),0 0 26px rgba(0,229,255,.6);
-  font-variant-numeric:tabular-nums;
-}
-.led-wickets{ font-family:'Rajdhani',monospace; font-weight:700; font-size:clamp(2rem,6vw,3.2rem); color:var(--secondary); text-shadow:0 0 6px var(--secondary),0 0 24px rgba(255,193,7,.5); }
-.led-sep{ font-size:2.2rem; color:var(--text-faint); }
-
-.board-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; text-align:center; }
-.board-stat b{ display:block; font-family:var(--font-heading); font-weight:700; font-size:1.6rem; color:#fff; font-variant-numeric:tabular-nums; }
-.board-stat span{ font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text-faint); }
-.board-footer{ margin-top:30px; display:flex; justify-content:center; }
-.rrr-bar{ width:100%; max-width:420px; height:8px; border-radius:6px; background:rgba(255,255,255,.08); overflow:hidden; }
-.rrr-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--primary),var(--accent)); box-shadow:0 0 12px var(--accent); transition:width 1.6s var(--ease); }
-
-/* =================================================================
-   STATISTICS
-================================================================= */
-#stats{ background:var(--bg); }
-.stat-row{ display:grid; grid-template-columns:180px 1fr 70px; align-items:center; gap:20px; margin-bottom:30px; }
-.stat-label{ font-family:var(--font-heading); font-weight:600; letter-spacing:.03em; }
-.bar-track{ height:12px; border-radius:8px; background:rgba(255,255,255,.07); overflow:hidden; }
-.bar-fill{ height:100%; width:0; border-radius:8px; background:linear-gradient(90deg,var(--primary),var(--accent)); position:relative; transition:width 1.6s var(--ease); }
-.bar-fill::after{ content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent); animation:barShine 2.4s linear infinite; }
-@keyframes barShine{ 0%{ transform:translateX(-100%);} 100%{ transform:translateX(250%);} }
-.stat-value{ font-family:var(--font-display); font-size:1.4rem; color:var(--secondary); text-align:right; }
-
-/* =================================================================
-   GALLERY
-================================================================= */
-#gallery{ background:var(--bg-alt); }
-.masonry{ columns:4 220px; column-gap:18px; }
-@media(max-width:900px){ .masonry{ columns:2 220px; } }
-.masonry figure{
-  break-inside:avoid; margin-bottom:18px; border-radius:var(--radius-m); overflow:hidden; position:relative; cursor:pointer;
-  border:1px solid var(--card-border);
-}
-.masonry img{ width:100%; display:block; transition:transform .6s var(--ease), filter .6s; }
-.masonry figure:hover img{ transform:scale(1.12); filter:brightness(.7); }
-.masonry figcaption{
-  position:absolute; inset:auto 0 0 0; padding:16px; font-family:var(--font-heading); letter-spacing:.05em;
-  font-size:.85rem; background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);
-  opacity:0; transform:translateY(10px); transition:.4s var(--ease);
-}
-.masonry figure:hover figcaption{ opacity:1; transform:translateY(0); }
-
-#lightbox{
-  position:fixed; inset:0; background:rgba(2,3,10,.94); z-index:3000; display:flex; align-items:center; justify-content:center;
-  opacity:0; visibility:hidden; transition:opacity .35s, visibility .35s; padding:5vw;
-}
-#lightbox.open{ opacity:1; visibility:visible; }
-#lightbox img{ max-width:90vw; max-height:85vh; border-radius:12px; box-shadow:0 0 60px rgba(0,229,255,.2); }
-#lightbox .close-lb{ position:absolute; top:26px; right:34px; font-size:2rem; color:#fff; cursor:pointer; }
-
-/* =================================================================
-   VIDEO
-================================================================= */
-#video{ background:var(--bg); }
-.video-frame{
-  position:relative; aspect-ratio:16/8; border-radius:var(--radius-l); overflow:hidden; border:1px solid var(--card-border);
-}
-.video-frame img{ width:100%; height:100%; object-fit:cover; filter:brightness(.55); }
-.play-btn{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:92px; height:92px; border-radius:50%; background:rgba(255,255,255,.12);
-  backdrop-filter:blur(6px); border:2px solid var(--accent); display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
-}
-.play-btn::before{ content:''; position:absolute; inset:0; border-radius:50%; border:2px solid var(--accent); animation:playPulse 2s ease-out infinite; }
-@keyframes playPulse{ 0%{ transform:scale(1); opacity:.8;} 100%{ transform:scale(1.7); opacity:0;} }
-.play-btn svg{ width:28px; height:28px; fill:#fff; margin-left:4px; }
-
-/* =================================================================
-   SPONSORS
-================================================================= */
-#sponsors{ background:var(--bg-alt); padding-top:90px; padding-bottom:90px; }
-.marquee{ overflow:hidden; position:relative; -webkit-mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent); mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent); }
-.marquee-track{ display:flex; gap:60px; width:max-content; animation:marqueeScroll 26s linear infinite; }
-.marquee:hover .marquee-track{ animation-play-state:paused; }
-@keyframes marqueeScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-.sponsor-logo{
-  font-family:var(--font-heading); font-weight:700; font-size:1.3rem; letter-spacing:.06em; color:var(--text-faint);
-  padding:18px 30px; border:1px solid var(--card-border); border-radius:var(--radius-s); white-space:nowrap; transition:.35s;
-}
-.sponsor-logo:hover{ color:var(--accent); border-color:var(--accent); box-shadow:var(--shadow-glow-accent); }
-
-/* =================================================================
-   TESTIMONIALS
-================================================================= */
-#testimonials{ background:var(--bg); }
-.testi-track-wrap{ overflow:hidden; }
-.testi-track{ display:flex; transition:transform .6s var(--ease); }
-.testi-slide{ min-width:100%; display:flex; justify-content:center; }
-.testi-card{ max-width:640px; padding:44px; text-align:center; }
-.testi-card p{ font-size:1.15rem; line-height:1.7; color:var(--text); font-style:italic; margin-bottom:26px; }
-.testi-who{ display:flex; flex-direction:column; align-items:center; gap:4px; }
-.testi-who img{ width:64px; height:64px; border-radius:50%; object-fit:cover; margin-bottom:10px; border:2px solid var(--secondary); }
-.testi-who b{ font-family:var(--font-heading); }
-.testi-who span{ font-size:.78rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.1em; }
-.testi-dots{ display:flex; justify-content:center; gap:10px; margin-top:30px; }
-.testi-dots button{ width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.2); transition:.3s; }
-.testi-dots button.active{ background:var(--accent); box-shadow:0 0 10px var(--accent); width:26px; border-radius:6px; }
-
-/* =================================================================
-   JOIN CTA
-================================================================= */
-#join{
-  background:linear-gradient(120deg,var(--primary-dark),var(--primary) 60%,#083a8f);
-  position:relative; overflow:hidden; text-align:center; padding:130px 6vw;
-}
-#join::before{
-  content:''; position:absolute; inset:-20%; background:conic-gradient(from 0deg,transparent,rgba(0,229,255,.15),transparent 30%);
-  animation:joinSweep 10s linear infinite;
-}
-@keyframes joinSweep{ to{ transform:rotate(360deg); } }
-.join-inner{ position:relative; z-index:2; }
-.join-inner h2{ font-size:clamp(2.4rem,6vw,5rem); margin-bottom:20px; }
-.join-inner p{ color:rgba(255,255,255,.85); max-width:560px; margin:0 auto 38px; font-size:1.05rem; }
-
-/* =================================================================
-   CONTACT
-================================================================= */
-#contact{ background:var(--bg-alt); }
-.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; }
-@media(max-width:900px){ .contact-grid{ grid-template-columns:1fr; } }
-.form-card{ padding:40px; }
-.field{ position:relative; margin-bottom:28px; }
-.field input,.field textarea{
-  width:100%; background:transparent; border:none; border-bottom:1.5px solid var(--card-border);
-  padding:14px 4px; color:var(--text); font-size:1rem; outline:none; transition:border-color .3s;
-}
-.field textarea{ resize:vertical; min-height:90px; }
-.field label{
-  position:absolute; left:4px; top:14px; color:var(--text-faint); font-size:1rem; pointer-events:none;
-  transition:.25s var(--ease);
-}
-.field input:focus,.field textarea:focus{ border-color:var(--accent); box-shadow:0 1px 0 var(--accent); }
-.field input:focus + label,.field input:not(:placeholder-shown) + label,
-.field textarea:focus + label,.field textarea:not(:placeholder-shown) + label{
-  top:-14px; font-size:.72rem; letter-spacing:.05em; color:var(--accent); text-transform:uppercase;
-}
-.map-card{ border-radius:var(--radius-m); overflow:hidden; min-height:320px; position:relative; }
-.map-fake{
-  position:absolute; inset:0; background:
-    linear-gradient(rgba(0,229,255,.08) 1px,transparent 1px) 0 0/40px 40px,
-    linear-gradient(90deg,rgba(0,229,255,.08) 1px,transparent 1px) 0 0/40px 40px,
-    var(--bg-rise);
-}
-.map-pin{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-100%); width:34px; height:34px;
-  color:var(--secondary); filter:drop-shadow(0 0 10px rgba(255,193,7,.7)); animation:pinBounce 2s ease-in-out infinite;
-}
-@keyframes pinBounce{ 0%,100%{ transform:translate(-50%,-100%);} 50%{ transform:translate(-50%,-114%);} }
-
-/* =================================================================
-   FOOTER
-================================================================= */
-footer{ background:#020409; padding:80px 6vw 26px; border-top:1px solid rgba(255,255,255,.06); }
-.footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:50px; margin-bottom:60px; }
-@media(max-width:900px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
-@media(max-width:560px){ .footer-grid{ grid-template-columns:1fr; } }
-.footer-grid h5{ font-family:var(--font-heading); letter-spacing:.1em; text-transform:uppercase; font-size:.85rem; color:var(--secondary); margin-bottom:20px; }
-.footer-grid p{ color:var(--text-faint); font-size:.9rem; line-height:1.7; }
-.footer-links li{ margin-bottom:10px; }
-.footer-links a{ color:var(--text-dim); font-size:.92rem; transition:.25s; }
-.footer-links a:hover{ color:var(--accent); padding-left:4px; }
-.footer-social{ display:flex; gap:12px; margin-top:16px; }
-.footer-social a{ width:38px; height:38px; border-radius:50%; border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center; transition:.3s; }
-.footer-social a:hover{ background:var(--accent); color:#00121a; box-shadow:0 0 14px var(--accent); }
-.news-form{ display:flex; margin-top:16px; border:1px solid var(--card-border); border-radius:40px; overflow:hidden; }
-.news-form input{ flex:1; background:transparent; border:none; padding:12px 18px; color:var(--text); outline:none; font-size:.85rem; }
-.news-form button{ background:var(--accent); color:#00121a; padding:0 22px; font-family:var(--font-heading); font-weight:700; font-size:.8rem; text-transform:uppercase; }
-.footer-bottom{ text-align:center; padding-top:26px; border-top:1px solid rgba(255,255,255,.06); color:var(--text-faint); font-size:.82rem; }
-.footer-bottom span{ color:#ff6b6b; }
-
-/* =================================================================
-   BACK TO TOP
-================================================================= */
-#toTop{
-  position:fixed; bottom:28px; right:28px; z-index:900; width:52px; height:52px; border-radius:50%;
-  background:var(--card); border:1px solid var(--card-border); backdrop-filter:blur(10px);
-  display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none;
-  transform:translateY(20px); transition:.35s var(--ease);
-}
-#toTop.show{ opacity:1; pointer-events:auto; transform:translateY(0); }
-#toTop:hover{ box-shadow:var(--shadow-glow-accent); border-color:var(--accent); }
-#toTop svg{ width:20px; height:20px; stroke:var(--text); }
-
-/* =================================================================
-   FIREWORKS + CONFETTI CANVAS
-================================================================= */
-#fx-canvas{ position:fixed; inset:0; z-index:9998; pointer-events:none; }
-
-/* Typing effect cursor */
-.typed-cursor{ display:inline-block; width:3px; background:var(--accent); margin-left:4px; animation:blinkCursor .8s steps(1) infinite; }
-@keyframes blinkCursor{ 50%{ opacity:0; } }
-
-/* Wave divider */
-.wave-divider{ display:block; width:100%; height:70px; margin-top:-2px; }
-</style>
+    @media(max-width: 768px) {
+      .stats-card-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-title { font-size: 2.4rem; }
+      .nav-menu { display: none; }
+      .sb-teams-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body data-match="night">
+<body>
 
-<!-- ============================================================
-     PAGE LOADER
-============================================================= -->
-<div id="loader">
-  <div class="loader-ball"></div>
-  <div class="loader-pct" id="loaderPct">0%</div>
-  <div class="loader-label">Walking Out To Bat</div>
-</div>
+  <!-- Top Announcement Bar -->
+  <header class="top-bar">
+    <div class="container">
+      <div>
+        <span><i class="fa-solid fa-location-dot"></i> <span id="txt_club_venue" class="inline-editable" data-edit-key="club_venue">Spartans Ground, Chennai</span></span>
+      </div>
+      <div>
+        <span><i class="fa-solid fa-envelope"></i> <span id="txt_club_email" class="inline-editable" data-edit-key="club_email">contact@xispartans.in</span></span>
+      </div>
+    </div>
+  </header>
 
-<!-- Custom cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div id="spotlight"></div>
-<canvas id="fx-canvas"></canvas>
+  <!-- Sticky Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container container">
+      <a href="#home" class="logo-area">
+        <i class="fa-solid fa-shield-halved logo-icon"></i>
+        <div class="logo-text">
+          <h1 id="txt_brand_name" class="inline-editable" data-edit-key="brand_name">XI Spartans</h1>
+          <span>Cricket Club</span>
+        </div>
+      </a>
 
-<!-- ============================================================
-     NAVBAR
-============================================================= -->
-<header id="navbar">
-  <a href="#home" class="brand">
-    <span class="brand-mark"><span>XI</span></span>
-    <span class="brand-name">SPARTANS <em>CC</em></span>
-  </a>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="#home">Home</a></li>
+        <li class="nav-item"><a href="#players">Players</a></li>
+        <li class="nav-item"><a href="#matches">Fixtures</a></li>
+        <li class="nav-item"><a href="#liveScoreSection">Live Center</a></li>
+        <li class="nav-item"><a href="#achievements">Trophies</a></li>
+        <li class="nav-item"><a href="#gallery">Gallery</a></li>
+      </ul>
 
-  <nav class="menu" id="navMenu">
-    <a href="#home" class="nav-link">Home</a>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#achievements" class="nav-link">Achievements</a>
-    <a href="#teams" class="nav-link">Teams</a>
-    <a href="#players" class="nav-link">Players</a>
-    <a href="#gallery" class="nav-link">Gallery</a>
-    <a href="#schedule" class="nav-link">Schedule</a>
-    <a href="#sponsors" class="nav-link">Sponsors</a>
-    <a href="#contact" class="nav-link">Contact</a>
+      <div class="nav-auth">
+        <div id="authContainer">
+          <button class="btn btn-gold btn-sm" id="googleLoginBtn">
+            <i class="fa-brands fa-google"></i> Google Sign In
+          </button>
+        </div>
+      </div>
+    </div>
   </nav>
 
-  <div class="nav-actions">
-    <div class="theme-switch">
-      <span id="matchLabel">Night</span>
-      <div class="switch-track" id="themeToggle"><div class="switch-thumb"></div></div>
-    </div>
-    <a href="#join" class="btn btn-outline rippleBtn">Join Team</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</header>
-
-<!-- ============================================================
-     HERO
-============================================================= -->
-<section id="home">
-  <canvas id="stadium-canvas"></canvas>
-  <div class="hero-grid"></div>
-  <div class="hero-scrim"></div>
-
-  <div class="hero-ball" style="top:22%; left:12%;"></div>
-  <div class="hero-ball" style="top:65%; left:82%; width:22px; height:22px; animation-delay:1.5s;"></div>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow reveal reveal-up">Est. 2019 &nbsp;•&nbsp; Premier Club Cricket</div>
-    <h1 class="hero-title" id="heroTitle">XI SPARTANS</h1>
-    <p class="hero-sub reveal reveal-up" id="heroSub">Strength <span class="dot">•</span> Passion <span class="dot">•</span> Victory</p>
-    <div class="hero-actions reveal reveal-up">
-      <a href="#join" class="btn btn-primary rippleBtn">Join Team</a>
-      <a href="#gallery" class="btn btn-outline rippleBtn">View Gallery</a>
-    </div>
-  </div>
-
-  <div class="scroll-cue">
-    <div class="scroll-mouse"></div>
-    <span class="scroll-label">Scroll</span>
-  </div>
-</section>
-
-<!-- ============================================================
-     ABOUT
-============================================================= -->
-<section id="about">
-  <div class="section-inner about-grid">
-    <div class="about-media reveal reveal-left">
-      <div class="frame">
-        <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&auto=format&fit=crop" alt="XI Spartans players huddled before a match" loading="lazy">
-      </div>
-      <div class="about-badge">
-        <b>07</b>
-        <span>Years Strong</span>
-      </div>
-    </div>
-    <div class="about-text reveal reveal-right">
-      <div class="eyebrow">Who We Are</div>
-      <h2 class="section-title">Built On The Field,<br>Forged As A Family</h2>
-      <p>XI Spartans is a professional club cricket outfit competing in weekend leagues and open tournaments on both turf and matted wickets. What began as a group of friends chasing a Sunday game has grown into a structured club with four active squads, a coaching set-up, and a season that runs almost year-round.</p>
-      <p>We train hard, travel further for good cricket, and play every match like a final. On and off the field, the Spartans code is simple: discipline first, ego never, and the team above the individual.</p>
-      <div class="counters stagger">
-        <div class="counter reveal reveal-up" style="--i:0"><b class="count-up" data-target="86">0</b><span>Members</span></div>
-        <div class="counter reveal reveal-up" style="--i:1"><b class="count-up" data-target="7">0</b><span>Years</span></div>
-        <div class="counter reveal reveal-up" style="--i:2"><b class="count-up" data-target="214">0</b><span>Matches</span></div>
-        <div class="counter reveal reveal-up" style="--i:3"><b class="count-up" data-target="149">0</b><span>Wins</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     JOURNEY TIMELINE
-============================================================= -->
-<section id="journey">
-  <div class="section-inner">
-    <div class="eyebrow" style="justify-content:center">Our Story</div>
-    <h2 class="section-title" style="text-align:center">Our Journey</h2>
-    <p class="section-lede" style="margin:0 auto 60px;text-align:center">Seven seasons, four squads, one badge. Here's how the Spartans went from a park kickabout to a league-winning club.</p>
-
-    <div class="timeline">
-      <div class="t-item reveal reveal-up">
-        <div class="t-dot"></div>
-        <div class="t-year">2019</div>
-        <div class="t-card glass"><h4>Club Founded</h4><p>Fourteen founding members pooled kit bags and rented their first matted ground on the edge of the city.</p></div>
-      </div>
-      <div class="t-item reveal reveal-up">
-        <div class="t-dot"></div>
-        <div class="t-year">2020</div>
-        <div class="t-card glass"><h4>First Tournament</h4><p>Entered our maiden knockout tournament and reached the semi-finals in our debut season.</p></div>
-      </div>
-      <div class="t-item reveal reveal-up">
-        <div class="t-dot"></div>
-        <div class="t-year">2022</div>
-        <div class="t-card glass"><h4>Championship</h4><p>Lifted our first silverware, winning the city T20 championship undefeated through the knockouts.</p></div>
-      </div>
-      <div class="t-item reveal reveal-up">
-        <div class="t-dot"></div>
-        <div class="t-year">2024</div>
-        <div class="t-card glass"><h4>League Winners</h4><p>Topped the weekend league table across turf and matted divisions, our best season on record.</p></div>
-      </div>
-      <div class="t-item reveal reveal-up">
-        <div class="t-dot"></div>
-        <div class="t-year">2026</div>
-        <div class="t-card glass"><h4>Future Goals</h4><p>Building a dedicated academy for junior Spartans and chasing our first national-level tournament berth.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     ACHIEVEMENTS
-============================================================= -->
-<section id="achievements">
-  <div class="section-inner">
-    <div class="eyebrow">Trophy Cabinet</div>
-    <h2 class="section-title">Achievements</h2>
-    <p class="section-lede">A quick look at the silverware and recognition the club has earned on the way up.</p>
-
-    <div class="grid-4 stagger">
-      <div class="ach-card glass reveal reveal-up" style="--i:0">
-        <div class="ach-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFC107" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v3a5 5 0 0 1-10 0V4Z"/><path d="M17 5h2a2 2 0 0 1 2 2c0 2-1.5 3-3 3M7 5H5a2 2 0 0 0-2 2c0 2 1.5 3 3 3"/></svg>
-        </div>
-        <h4>League Champions</h4><p>2024 &amp; 2022 season</p>
-      </div>
-      <div class="ach-card glass reveal reveal-up" style="--i:1">
-        <div class="ach-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFC107" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v3a5 5 0 0 1-10 0V4Z"/><path d="M17 5h2a2 2 0 0 1 2 2c0 2-1.5 3-3 3M7 5H5a2 2 0 0 0-2 2c0 2 1.5 3 3 3"/></svg>
-        </div>
-        <h4>Tournament Winners</h4><p>City Knockout Cup, 2022</p>
-      </div>
-      <div class="ach-card glass reveal reveal-up" style="--i:2">
-        <div class="ach-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFC107" stroke-width="1.8"><path d="M12 2 15 8 21 9 16.5 13.5 18 20 12 16.5 6 20 7.5 13.5 3 9 9 8Z"/></svg>
-        </div>
-        <h4>Best Team Award</h4><p>Regional Cricket Council</p>
-      </div>
-      <div class="ach-card glass reveal reveal-up" style="--i:3">
-        <div class="ach-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFC107" stroke-width="1.8"><path d="M12 2 15 8 21 9 16.5 13.5 18 20 12 16.5 6 20 7.5 13.5 3 9 9 8Z"/></svg>
-        </div>
-        <h4>Fair Play Award</h4><p>Three seasons running</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TEAMS
-============================================================= -->
-<section id="teams">
-  <div class="section-inner">
-    <div class="eyebrow">The Squads</div>
-    <h2 class="section-title">Our Teams</h2>
-    <p class="section-lede">Four squads, one club. From first-team fixtures to the next generation coming through.</p>
-
-    <div class="grid-4 stagger">
-      <div class="team-card glass reveal reveal-up" style="--i:0">
-        <div class="team-photo"><img src="https://images.unsplash.com/photo-1607734834519-d8576ae60ea6?q=80&w=800&auto=format&fit=crop" alt="Senior team players in Spartans kit" loading="lazy"></div>
-        <div class="team-body">
-          <h4>Senior Team</h4>
-          <div class="captain">Captain: Arjun Menon</div>
-          <p>Our flagship XI, competing in the top division of the weekend league.</p>
-        </div>
-      </div>
-      <div class="team-card glass reveal reveal-up" style="--i:1">
-        <div class="team-photo"><img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=800&auto=format&fit=crop" alt="Junior team training session" loading="lazy"></div>
-        <div class="team-body">
-          <h4>Junior Team</h4>
-          <div class="captain">Captain: Rohit Kadam</div>
-          <p>Our under-19 pipeline, developing the club's next generation of talent.</p>
-        </div>
-      </div>
-      <div class="team-card glass reveal reveal-up" style="--i:2">
-        <div class="team-photo"><img src="https://images.unsplash.com/photo-1595435742656-5272d0b3fa82?q=80&w=800&auto=format&fit=crop" alt="Women's cricket team" loading="lazy"></div>
-        <div class="team-body">
-          <h4>Women's Team</h4>
-          <div class="captain">Captain: Kavya Iyer</div>
-          <p>Fielding a full women's XI since 2022, now the fastest-growing squad at the club.</p>
-        </div>
-      </div>
-      <div class="team-card glass reveal reveal-up" style="--i:3">
-        <div class="team-photo"><img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=800&auto=format&fit=crop" alt="Practice squad net session" loading="lazy"></div>
-        <div class="team-body">
-          <h4>Practice Squad</h4>
-          <div class="captain">Coach: Vikram Deshpande</div>
-          <p>Nets, fitness, and fielding drills that keep every Spartan match-ready.</p>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span id="txt_hero_title" class="inline-editable" data-edit-key="hero_title">We Play To Win. Born To Rule The Pitch.</span>
+        </h1>
+        <p class="hero-sub">
+          <span id="txt_hero_subtitle" class="inline-editable" data-edit-key="hero_subtitle">Passion. Discipline. Teamwork. Excellence.</span>
+        </p>
+        <p class="hero-desc">
+          <span id="txt_hero_desc" class="inline-editable" data-edit-key="hero_desc">Official home of XI Spartans Cricket Club. Competing in premier club championships and fostering grassroots athletic excellence.</span>
+        </p>
+        <div style="display: flex; gap: 1rem;">
+          <a href="#players" class="btn btn-primary">Squad <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#matches" class="btn btn-outline">Fixtures <i class="fa-solid fa-calendar-days"></i></a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================================
-     STAR PLAYERS
-============================================================= -->
-<section id="players">
-  <div class="section-inner">
-    <div class="eyebrow">Squad Spotlight</div>
-    <h2 class="section-title">Star Players</h2>
-    <p class="section-lede">Meet the players carrying the Spartans colours this season.</p>
-
-    <div class="grid-4 stagger">
-      <div class="player-card glass reveal reveal-up tiltCard" style="--i:0">
-        <div class="player-photo"><img src="https://images.unsplash.com/photo-1626248801379-51a0748a5f96?q=80&w=400&auto=format&fit=crop" alt="Arjun Menon, captain and batsman" loading="lazy"></div>
-        <div class="player-role">Captain / Batsman</div>
-        <div class="player-name">Arjun Menon</div>
-        <div class="player-stats">
-          <div><b class="count-up" data-target="1842">0</b><span>Runs</span></div>
-          <div><b class="count-up" data-target="4">0</b><span>Wkts</span></div>
-          <div><b class="count-up" data-target="138">0</b><span>S/R</span></div>
-          <div><b class="count-up" data-target="96">0</b><span>Mat</span></div>
-        </div>
-        <div class="player-social">
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="Twitter">X</a>
-        </div>
+  <!-- Animated Statistics Bar -->
+  <section class="container">
+    <div class="stats-card-grid">
+      <div class="stat-item">
+        <div class="stat-number inline-editable" id="st_num_years" data-edit-key="st_years">12</div>
+        <div class="stat-label">Years of Glory</div>
       </div>
-      <div class="player-card glass reveal reveal-up tiltCard" style="--i:1">
-        <div class="player-photo"><img src="https://images.unsplash.com/photo-1615922234658-73f96c0563a0?q=80&w=400&auto=format&fit=crop" alt="Sameer Khan, fast bowler" loading="lazy"></div>
-        <div class="player-role">Fast Bowler</div>
-        <div class="player-name">Sameer Khan</div>
-        <div class="player-stats">
-          <div><b class="count-up" data-target="212">0</b><span>Runs</span></div>
-          <div><b class="count-up" data-target="87">0</b><span>Wkts</span></div>
-          <div><b class="count-up" data-target="6">0</b><span>Econ</span></div>
-          <div><b class="count-up" data-target="72">0</b><span>Mat</span></div>
-        </div>
-        <div class="player-social">
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="Twitter">X</a>
-        </div>
+      <div class="stat-item">
+        <div class="stat-number inline-editable" id="st_num_players" data-edit-key="st_players">48</div>
+        <div class="stat-label">Elite Players</div>
       </div>
-      <div class="player-card glass reveal reveal-up tiltCard" style="--i:2">
-        <div class="player-photo"><img src="https://images.unsplash.com/photo-1594736797933-d0f06ba30f27?q=80&w=400&auto=format&fit=crop" alt="Kavya Iyer, all-rounder" loading="lazy"></div>
-        <div class="player-role">All-Rounder</div>
-        <div class="player-name">Kavya Iyer</div>
-        <div class="player-stats">
-          <div><b class="count-up" data-target="964">0</b><span>Runs</span></div>
-          <div><b class="count-up" data-target="41">0</b><span>Wkts</span></div>
-          <div><b class="count-up" data-target="121">0</b><span>S/R</span></div>
-          <div><b class="count-up" data-target="58">0</b><span>Mat</span></div>
-        </div>
-        <div class="player-social">
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="Twitter">X</a>
-        </div>
+      <div class="stat-item">
+        <div class="stat-number inline-editable" id="st_num_matches" data-edit-key="st_matches">210</div>
+        <div class="stat-label">Matches Played</div>
       </div>
-      <div class="player-card glass reveal reveal-up tiltCard" style="--i:3">
-        <div class="player-photo"><img src="https://images.unsplash.com/photo-1560012057-4372e14c5085?q=80&w=400&auto=format&fit=crop" alt="Rohit Kadam, wicketkeeper" loading="lazy"></div>
-        <div class="player-role">Wicketkeeper</div>
-        <div class="player-name">Rohit Kadam</div>
-        <div class="player-stats">
-          <div><b class="count-up" data-target="1108">0</b><span>Runs</span></div>
-          <div><b class="count-up" data-target="0">0</b><span>Wkts</span></div>
-          <div><b class="count-up" data-target="146">0</b><span>S/R</span></div>
-          <div><b class="count-up" data-target="80">0</b><span>Mat</span></div>
-        </div>
-        <div class="player-social">
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="Twitter">X</a>
-        </div>
+      <div class="stat-item">
+        <div class="stat-number inline-editable" id="st_num_won" data-edit-key="st_won">152</div>
+        <div class="stat-label">Matches Won</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number inline-editable" id="st_num_trophies" data-edit-key="st_trophies">18</div>
+        <div class="stat-label">Championships</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number inline-editable" id="st_num_winrate" data-edit-key="st_winrate">72%</div>
+        <div class="stat-label">Win Ratio</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================================
-     MATCH SCHEDULE
-============================================================= -->
-<section id="schedule">
-  <div class="section-inner">
-    <div class="eyebrow">Fixtures</div>
-    <h2 class="section-title">Match Schedule</h2>
-    <p class="section-lede">Where to find the Spartans over the coming weeks.</p>
+  <!-- Squad Section -->
+  <section class="section-padding" id="players">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Meet The Spartans</span>
+        <h2 class="section-title">Spartan Squad Directory</h2>
+      </div>
 
-    <div class="table-wrap">
-      <table class="schedule">
-        <thead>
-          <tr><th>Opponent</th><th>Date</th><th>Venue</th><th>Time</th><th>Status</th></tr>
-        </thead>
-        <tbody id="scheduleBody">
-          <tr><td>Royal Challengers CC</td><td>18 Jul 2026</td><td>Spartans Ground, Turf 1</td><td>2:00 PM</td><td><span class="status-pill status-upcoming">Upcoming</span></td></tr>
-          <tr><td>Deccan Warriors</td><td>25 Jul 2026</td><td>City Sports Complex</td><td>9:30 AM</td><td><span class="status-pill status-upcoming">Upcoming</span></td></tr>
-          <tr><td>Northside Tigers</td><td>02 Aug 2026</td><td>Spartans Ground, Matted</td><td>3:00 PM</td><td><span class="status-pill status-live">Live Soon</span></td></tr>
-          <tr><td>Eastern Falcons</td><td>09 Aug 2026</td><td>Riverside Oval</td><td>10:00 AM</td><td><span class="status-pill status-upcoming">Upcoming</span></td></tr>
-          <tr><td>Metro Strikers</td><td>28 Jun 2026</td><td>Spartans Ground, Turf 1</td><td>2:00 PM</td><td><span class="status-pill status-won">Won</span></td></tr>
-        </tbody>
-      </table>
+      <!-- Admin Add Player Button (Visible ONLY to Admin Email) -->
+      <div class="section-action-header admin-only">
+        <button class="btn btn-primary btn-sm" id="addNewPlayerBtn">
+          <i class="fa-solid fa-user-plus"></i> Add New Player (Admin)
+        </button>
+      </div>
+
+      <div class="players-grid" id="playersGridContainer"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================================
-     LIVE SCORE MOCKUP
-============================================================= -->
-<section id="livescore">
-  <div class="section-inner">
-    <div class="eyebrow" style="justify-content:center">Match Centre</div>
-    <h2 class="section-title" style="text-align:center">Live Score</h2>
-
-    <div class="board reveal reveal-zoom">
-      <div class="board-top">
-        <div class="board-team">XI Spartans <span style="color:var(--text-faint); font-weight:500;">vs Northside Tigers</span></div>
-        <div class="board-tag">2nd Innings • Turf 1</div>
+  <!-- Live Scoreboard -->
+  <section class="section-padding scoreboard-section" id="liveScoreSection">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle" style="color: var(--gold);">Live Match Center</span>
+        <h2 class="section-title" style="color: var(--white);">Premier League Live Fixture</h2>
       </div>
 
-      <div class="led-score">
-        <span class="led-digits" data-count-to="182">000</span>
-        <span class="led-sep">/</span>
-        <span class="led-wickets" data-count-to="5">0</span>
+      <div class="section-action-header admin-only" style="justify-content: center; margin-bottom: 1.5rem;">
+        <button class="btn btn-gold btn-sm" id="editLiveScoreBtn">
+          <i class="fa-solid fa-tower-broadcast"></i> Edit Live Scoreboard (Admin)
+        </button>
       </div>
 
-      <div class="board-grid">
-        <div class="board-stat"><b data-count-to="19.3" data-decimal="1">0.0</b><span>Overs</span></div>
-        <div class="board-stat"><b data-count-to="201">0</b><span>Target</span></div>
-        <div class="board-stat"><b data-count-to="11.4" data-decimal="1">0.0</b><span>Req. Run Rate</span></div>
-      </div>
-
-      <div class="board-footer">
-        <div class="rrr-bar"><div class="rrr-fill" id="rrrFill"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     STATISTICS
-============================================================= -->
-<section id="stats">
-  <div class="section-inner">
-    <div class="eyebrow">Season Form</div>
-    <h2 class="section-title">Club Statistics</h2>
-    <p class="section-lede">A snapshot of how the Spartans are performing across the board this season.</p>
-
-    <div class="stat-bars">
-      <div class="stat-row reveal reveal-left" data-percent="78">
-        <div class="stat-label">Winning %</div>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-        <div class="stat-value">78%</div>
-      </div>
-      <div class="stat-row reveal reveal-left" data-percent="64">
-        <div class="stat-label">Batting Avg</div>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-        <div class="stat-value">34.2</div>
-      </div>
-      <div class="stat-row reveal reveal-left" data-percent="70">
-        <div class="stat-label">Bowling Econ</div>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-        <div class="stat-value">6.4</div>
-      </div>
-      <div class="stat-row reveal reveal-left" data-percent="88">
-        <div class="stat-label">Fielding</div>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-        <div class="stat-value">88%</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     GALLERY
-============================================================= -->
-<section id="gallery">
-  <div class="section-inner">
-    <div class="eyebrow">Moments</div>
-    <h2 class="section-title">Photo Gallery</h2>
-    <p class="section-lede">Highlights from match days, celebrations, and life around the club.</p>
-
-    <div class="masonry" id="masonryGrid">
-      <!-- figures injected via JS list below for brevity of markup, but written directly for SEO -->
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1200"><img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=500&auto=format&fit=crop" alt="Team huddle before the toss" loading="lazy"><figcaption>Team huddle, Season Opener</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?q=80&w=1200"><img src="https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?q=80&w=500&auto=format&fit=crop" alt="Bowler mid delivery" loading="lazy"><figcaption>Sameer's Match-Winning Spell</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1607734834519-d8576ae60ea6?q=80&w=1200"><img src="https://images.unsplash.com/photo-1607734834519-d8576ae60ea6?q=80&w=500&auto=format&fit=crop" alt="Batsman playing a cover drive" loading="lazy"><figcaption>Cover Drive, Finals Day</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1595435742656-5272d0b3fa82?q=80&w=1200"><img src="https://images.unsplash.com/photo-1595435742656-5272d0b3fa82?q=80&w=500&auto=format&fit=crop" alt="Womens team celebrating a wicket" loading="lazy"><figcaption>Women's Team Celebration</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=1200"><img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=500&auto=format&fit=crop" alt="Nets practice session" loading="lazy"><figcaption>Evening Nets Session</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1626248801379-51a0748a5f96?q=80&w=1200"><img src="https://images.unsplash.com/photo-1626248801379-51a0748a5f96?q=80&w=500&auto=format&fit=crop" alt="Captain lifting the championship trophy" loading="lazy"><figcaption>2024 League Trophy Lift</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1615922234658-73f96c0563a0?q=80&w=1200"><img src="https://images.unsplash.com/photo-1615922234658-73f96c0563a0?q=80&w=500&auto=format&fit=crop" alt="Close up of a fast bowler" loading="lazy"><figcaption>Pace &amp; Power</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1594736797933-d0f06ba30f27?q=80&w=1200"><img src="https://images.unsplash.com/photo-1594736797933-d0f06ba30f27?q=80&w=500&auto=format&fit=crop" alt="All rounder practicing in the nets" loading="lazy"><figcaption>All-Rounder At Work</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1560012057-4372e14c5085?q=80&w=1200"><img src="https://images.unsplash.com/photo-1560012057-4372e14c5085?q=80&w=500&auto=format&fit=crop" alt="Wicketkeeper behind the stumps" loading="lazy"><figcaption>Keeper's View</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1595854341625-fc2836f3fc06?q=80&w=1200"><img src="https://images.unsplash.com/photo-1595854341625-fc2836f3fc06?q=80&w=500&auto=format&fit=crop" alt="Cricket stadium floodlights at dusk" loading="lazy"><figcaption>Lights On, Game On</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1580891034872-14dc7ac04756?q=80&w=1200"><img src="https://images.unsplash.com/photo-1580891034872-14dc7ac04756?q=80&w=500&auto=format&fit=crop" alt="Cricket ball and bat close up" loading="lazy"><figcaption>Tools Of The Trade</figcaption></figure>
-      <figure class="reveal reveal-zoom" data-full="https://images.unsplash.com/photo-1595435934859-4914e6d69699?q=80&w=1200"><img src="https://images.unsplash.com/photo-1595435934859-4914e6d69699?q=80&w=500&auto=format&fit=crop" alt="Team photo after a win" loading="lazy"><figcaption>Full Squad, Full Smiles</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<div id="lightbox">
-  <span class="close-lb" id="closeLb">&times;</span>
-  <img src="" alt="Enlarged gallery photo" id="lightboxImg">
-</div>
-
-<!-- ============================================================
-     VIDEO SECTION
-============================================================= -->
-<section id="video-section">
-  <div class="section-inner">
-    <div class="eyebrow">Watch</div>
-    <h2 class="section-title">Season Highlights</h2>
-    <div class="video-frame reveal reveal-zoom">
-      <img src="https://images.unsplash.com/photo-1595854341625-fc2836f3fc06?q=80&w=1400&auto=format&fit=crop" alt="Cricket stadium at night, video placeholder">
-      <div class="play-btn" id="playBtn" aria-label="Play highlights video">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SPONSORS
-============================================================= -->
-<section id="sponsors">
-  <div class="section-inner">
-    <div class="eyebrow" style="justify-content:center">Backed By</div>
-    <h2 class="section-title" style="text-align:center;margin-bottom:50px;">Our Sponsors</h2>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track" id="marqueeTrack">
-      <span class="sponsor-logo">APEX SPORTS</span>
-      <span class="sponsor-logo">TURFLINE</span>
-      <span class="sponsor-logo">BOUNDARY BANK</span>
-      <span class="sponsor-logo">PROSPORT GEAR</span>
-      <span class="sponsor-logo">VELOCITY FUELS</span>
-      <span class="sponsor-logo">CITY MOTORS</span>
-      <span class="sponsor-logo">GRIT NUTRITION</span>
-      <!-- duplicated for seamless loop -->
-      <span class="sponsor-logo">APEX SPORTS</span>
-      <span class="sponsor-logo">TURFLINE</span>
-      <span class="sponsor-logo">BOUNDARY BANK</span>
-      <span class="sponsor-logo">PROSPORT GEAR</span>
-      <span class="sponsor-logo">VELOCITY FUELS</span>
-      <span class="sponsor-logo">CITY MOTORS</span>
-      <span class="sponsor-logo">GRIT NUTRITION</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TESTIMONIALS
-============================================================= -->
-<section id="testimonials">
-  <div class="section-inner">
-    <div class="eyebrow" style="justify-content:center">Voices Of The Club</div>
-    <h2 class="section-title" style="text-align:center">Testimonials</h2>
-
-    <div class="testi-track-wrap">
-      <div class="testi-track" id="testiTrack">
-        <div class="testi-slide">
-          <div class="testi-card glass">
-            <p>"Captaining the Spartans has taught me more about leadership than any boardroom ever could. This club plays for each other, every single over."</p>
-            <div class="testi-who">
-              <img src="https://images.unsplash.com/photo-1626248801379-51a0748a5f96?q=80&w=200&auto=format&fit=crop" alt="Arjun Menon">
-              <b>Arjun Menon</b><span>Captain, Senior Team</span>
-            </div>
+      <div class="live-scoreboard-card">
+        <div class="sb-header">
+          <span id="sb_tourney_text" style="color: var(--gold); font-weight: 700;"><i class="fa-solid fa-trophy"></i> TNCA Premier Club Trophy 2026</span>
+          <span style="background: var(--danger); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800;">LIVE</span>
+        </div>
+        <div class="sb-teams-row">
+          <div>
+            <div class="sb-team-name" id="sb_t1_name">Marina Strikers</div>
+            <div class="sb-team-score" id="sb_t1_score">174/8</div>
+          </div>
+          <div class="sb-vs-badge">VS</div>
+          <div>
+            <div class="sb-team-name" id="sb_t2_name" style="color: var(--gold);">XI Spartans</div>
+            <div class="sb-team-score" id="sb_t2_score" style="color: #4ade80;">173/4</div>
           </div>
         </div>
-        <div class="testi-slide">
-          <div class="testi-card glass">
-            <p>"I've coached a lot of sides. Few have the hunger this squad shows at every single net session, rain or shine."</p>
-            <div class="testi-who">
-              <img src="https://images.unsplash.com/photo-1615922234658-73f96c0563a0?q=80&w=200&auto=format&fit=crop" alt="Vikram Deshpande">
-              <b>Vikram Deshpande</b><span>Head Coach</span>
-            </div>
+        <div class="sb-status-footer" id="sb_status_note">
+          <i class="fa-solid fa-circle-info"></i> XI Spartans need 2 runs in 8 balls to win the Championship
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Matches Section -->
+  <section class="section-padding" id="matches">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Calendar</span>
+        <h2 class="section-title">Matches & Results</h2>
+      </div>
+
+      <div class="section-action-header admin-only">
+        <button class="btn btn-primary btn-sm" id="addNewMatchBtn">
+          <i class="fa-solid fa-calendar-plus"></i> Add Match (Admin)
+        </button>
+      </div>
+
+      <div class="matches-grid" id="matchesGridContainer"></div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="section-padding" id="achievements" style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Trophy Cabinet</span>
+        <h2 class="section-title">Club Achievements</h2>
+      </div>
+
+      <div class="section-action-header admin-only">
+        <button class="btn btn-gold btn-sm" id="addNewAchievementBtn">
+          <i class="fa-solid fa-trophy"></i> Add Trophy (Admin)
+        </button>
+      </div>
+
+      <div class="achievements-grid" id="achievementsContainer"></div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section class="section-padding" id="gallery">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Moments</span>
+        <h2 class="section-title">Spartans Photo Gallery</h2>
+      </div>
+
+      <div class="section-action-header admin-only">
+        <button class="btn btn-primary btn-sm" id="addNewGalleryBtn">
+          <i class="fa-solid fa-camera"></i> Add Photograph (Admin)
+        </button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Floating Admin Bar (Visible ONLY when authorized admin signs in) -->
+  <div class="admin-dock-bar" id="adminDockBar">
+    <button class="btn btn-gold btn-sm" id="toggleEditModeBtn">
+      <i class="fa-solid fa-pencil"></i> <span id="editModeBtnText">Live On-Page Edit</span>
+    </button>
+    <button class="btn btn-primary btn-sm" id="savePageEditsBtn" style="display: none;">
+      <i class="fa-solid fa-floppy-disk"></i> Save Page Text
+    </button>
+  </div>
+
+  <!-- MODAL: Player Details Profile -->
+  <div class="modal-backdrop" id="playerModalBackdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="closePlayerModalBtn">&times;</button>
+      <div id="playerModalContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Player Edit Form (Admin Only) -->
+  <div class="modal-backdrop" id="playerEditModalBackdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="closePlayerEditModalBtn">&times;</button>
+      <h3 id="playerEditModalTitle" style="color: var(--dark-green); margin-bottom: 1.2rem;">Edit Player</h3>
+      <form id="playerForm">
+        <input type="hidden" id="pf_id" />
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Player Name *</label>
+            <input type="text" id="pf_name" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label>Jersey Number *</label>
+            <input type="number" id="pf_jersey" class="form-control" required />
           </div>
         </div>
-        <div class="testi-slide">
-          <div class="testi-card glass">
-            <p>"Joining the Women's Team here was the best cricket decision I've made. We're taken seriously, and it shows in every fixture."</p>
-            <div class="testi-who">
-              <img src="https://images.unsplash.com/photo-1594736797933-d0f06ba30f27?q=80&w=200&auto=format&fit=crop" alt="Kavya Iyer">
-              <b>Kavya Iyer</b><span>All-Rounder</span>
-            </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Role</label>
+            <select id="pf_role" class="form-control">
+              <option value="Batsman">Batsman</option>
+              <option value="Bowler">Bowler</option>
+              <option value="All-Rounder">All-Rounder</option>
+              <option value="Wicket Keeper">Wicket Keeper</option>
+              <option value="Captain">Captain</option>
+              <option value="Vice Captain">Vice Captain</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Assigned Squad / Team</label>
+            <input type="text" id="pf_team" class="form-control" placeholder="XI Spartans First XI" />
           </div>
         </div>
-      </div>
-    </div>
-    <div class="testi-dots" id="testiDots"></div>
-  </div>
-</section>
-
-<!-- ============================================================
-     JOIN THE CLUB CTA
-============================================================= -->
-<section id="join">
-  <div class="join-inner reveal reveal-zoom">
-    <h2>Become A Spartan Today</h2>
-    <p>Trials run every month across all four squads. Bring your kit, bring your energy — we'll take care of the rest.</p>
-    <a href="#contact" class="btn btn-primary rippleBtn" id="joinBtn" style="background:linear-gradient(120deg,var(--secondary),#ff8a00); box-shadow:0 8px 30px rgba(255,193,7,.4);">Register Interest</a>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONTACT
-============================================================= -->
-<section id="contact">
-  <div class="section-inner">
-    <div class="eyebrow">Get In Touch</div>
-    <h2 class="section-title">Contact The Club</h2>
-    <p class="section-lede">Questions about trials, sponsorship, or fixtures? Drop us a line.</p>
-
-    <div class="contact-grid">
-      <form class="form-card glass" id="contactForm">
-        <div class="field">
-          <input type="text" id="cName" placeholder=" " required>
-          <label for="cName">Full Name</label>
+        <div class="form-group">
+          <label>Photo URL (Direct Image URL) *</label>
+          <input type="url" id="pf_image" class="form-control" required />
         </div>
-        <div class="field">
-          <input type="tel" id="cPhone" placeholder=" " required>
-          <label for="cPhone">Phone Number</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Batting Style</label>
+            <input type="text" id="pf_batting" class="form-control" placeholder="Right Hand Bat" />
+          </div>
+          <div class="form-group">
+            <label>Bowling Style</label>
+            <input type="text" id="pf_bowling" class="form-control" placeholder="Right Arm Fast" />
+          </div>
         </div>
-        <div class="field">
-          <input type="email" id="cEmail" placeholder=" " required>
-          <label for="cEmail">Email Address</label>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;">
+          <div class="form-group">
+            <label>Matches</label>
+            <input type="number" id="pf_matches" class="form-control" value="0" />
+          </div>
+          <div class="form-group">
+            <label>Runs</label>
+            <input type="number" id="pf_runs" class="form-control" value="0" />
+          </div>
+          <div class="form-group">
+            <label>Wickets</label>
+            <input type="number" id="pf_wickets" class="form-control" value="0" />
+          </div>
         </div>
-        <div class="field">
-          <textarea id="cMessage" placeholder=" " required></textarea>
-          <label for="cMessage">Message</label>
-        </div>
-        <button type="submit" class="btn btn-primary rippleBtn" style="width:100%; justify-content:center;">Send Message</button>
-      </form>
-
-      <div class="map-card glass reveal reveal-right">
-        <div class="map-fake">
-          <svg class="map-pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/></svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     FOOTER
-============================================================= -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="brand" style="margin-bottom:16px;">
-        <span class="brand-mark" style="animation:none;"><span style="animation:none;">XI</span></span>
-        <span class="brand-name">SPARTANS <em>CC</em></span>
-      </div>
-      <p>A professional cricket club playing competitive league and tournament cricket, built on discipline, passion, and team above self.</p>
-      <div class="footer-social">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="Facebook">FB</a>
-        <a href="#" aria-label="Twitter">X</a>
-        <a href="#" aria-label="YouTube">YT</a>
-      </div>
-    </div>
-    <div>
-      <h5>Quick Links</h5>
-      <ul class="footer-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#teams">Teams</a></li>
-        <li><a href="#players">Players</a></li>
-        <li><a href="#schedule">Schedule</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Club</h5>
-      <ul class="footer-links">
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#sponsors">Sponsors</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Newsletter</h5>
-      <p>Get match reports and fixture updates straight to your inbox.</p>
-      <form class="news-form" id="newsForm">
-        <input type="email" placeholder="Your email" required>
-        <button type="submit">Join</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+          Save Player to Firestore
+        </button>
       </form>
     </div>
   </div>
-  <div class="footer-bottom">
-    &copy; <span id="year"></span> XI Spartans Cricket Club. All rights reserved. &nbsp;·&nbsp; Designed with <span>&hearts;</span> for XI Spartans
+
+  <!-- MODAL: Match Event Form (Admin Only) -->
+  <div class="modal-backdrop" id="matchEditModalBackdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="closeMatchEditModalBtn">&times;</button>
+      <h3 id="matchEditModalTitle" style="color: var(--dark-green); margin-bottom: 1.2rem;">Add Match</h3>
+      <form id="matchForm">
+        <input type="hidden" id="mf_id" />
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Team A (Spartans)</label>
+            <input type="text" id="mf_teamA" class="form-control" value="XI Spartans" required />
+          </div>
+          <div class="form-group">
+            <label>Team B (Opponent)</label>
+            <input type="text" id="mf_teamB" class="form-control" required />
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Team A Score</label>
+            <input type="text" id="mf_scoreA" class="form-control" placeholder="189/6 (20 ov)" />
+          </div>
+          <div class="form-group">
+            <label>Team B Score</label>
+            <input type="text" id="mf_scoreB" class="form-control" placeholder="165/9 (20 ov)" />
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Date & Time</label>
+            <input type="text" id="mf_date" class="form-control" placeholder="Oct 24, 2026" required />
+          </div>
+          <div class="form-group">
+            <label>Venue</label>
+            <input type="text" id="mf_venue" class="form-control" placeholder="Spartans Arena" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Result / Status Note</label>
+          <input type="text" id="mf_result" class="form-control" placeholder="WON BY 24 RUNS" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Match</button>
+      </form>
+    </div>
   </div>
-</footer>
 
-<button id="toTop" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
+  <!-- MODAL: Live Score Customizer -->
+  <div class="modal-backdrop" id="liveScoreModalBackdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="closeLiveScoreModalBtn">&times;</button>
+      <h3 style="color: var(--dark-green); margin-bottom: 1.2rem;">Edit Live Scoreboard</h3>
+      <form id="liveScoreForm">
+        <div class="form-group">
+          <label>Tournament</label>
+          <input type="text" id="lsf_tourney" class="form-control" value="TNCA Premier Club Trophy 2026" />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Team 1 Name</label>
+            <input type="text" id="lsf_t1_name" class="form-control" value="Marina Strikers" />
+          </div>
+          <div class="form-group">
+            <label>Team 1 Score</label>
+            <input type="text" id="lsf_t1_score" class="form-control" value="174/8" />
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Team 2 Name</label>
+            <input type="text" id="lsf_t2_name" class="form-control" value="XI Spartans" />
+          </div>
+          <div class="form-group">
+            <label>Team 2 Score</label>
+            <input type="text" id="lsf_t2_score" class="form-control" value="173/4" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Equation / Status Note</label>
+          <input type="text" id="lsf_status" class="form-control" value="XI Spartans need 2 runs in 8 balls to win" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Broadcast to Firestore</button>
+      </form>
+    </div>
+  </div>
 
-<script>
-/* =================================================================
-   XI SPARTANS — MAIN SCRIPT
-   Sections:
-   1. Page loader
-   2. Custom cursor + spotlight
-   3. Navbar scroll state + mobile menu + smooth scroll
-   4. Theme toggle (Day / Night match)
-   5. Hero: canvas stadium bg, ball particles, typing/char reveal
-   6. Intersection Observer scroll reveals
-   7. Counters / count-up animation
-   8. Stat bars animation
-   9. Live scoreboard number roll + RRR bar
-   10. Schedule row reveal
-   11. Gallery lightbox
-   12. Video play button
-   13. Testimonials slider
-   14. Contact + newsletter form handling
-   15. Back to top
-   16. Button ripple + magnetic buttons
-   17. Fireworks on load + confetti on click
-================================================================= */
-(function(){
-  'use strict';
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
-  /* ---------- 1. PAGE LOADER ---------- */
-  const loader = document.getElementById('loader');
-  const loaderPct = document.getElementById('loaderPct');
-  let pct = 0;
-  const loadTimer = setInterval(()=>{
-    pct += Math.floor(Math.random()*12)+4;
-    if(pct >= 100){
-      pct = 100;
-      loaderPct.textContent = pct + '%';
-      clearInterval(loadTimer);
-      setTimeout(()=>{
-        loader.classList.add('hidden');
-        document.body.style.overflow = '';
-        runHeroIntro();
-        launchFireworks();
-      }, 350);
-      return;
+  <!-- FIREBASE SCRIPTS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+    import { getFirestore, collection, doc, setDoc, getDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    // =========================================================================
+    // 1. CONFIGURE YOUR PROJECT KEYS & DESIGNATED ADMIN EMAILS HERE
+    // =========================================================================
+    const firebaseConfig = {
+       apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
+  authDomain: "otp-login-app-2f5d5.firebaseapp.com",
+  projectId: "otp-login-app-2f5d5",
+  storageBucket: "otp-login-app-2f5d5.firebasestorage.app",
+  messagingSenderId: "660933750433",
+  appId: "1:660933750433:web:dacff67b6c6fae6264cae0"
+    };
+
+    // ONLY the email address(es) listed here will get Admin controls to edit, add, or delete!
+    const ADMIN_EMAILS = [
+      "kamaraje831@gmail.com"
+    ];
+
+    // =========================================================================
+    // 2. FIREBASE INITIALIZATION & STATE
+    // =========================================================================
+    let app, auth, db;
+    let isFirebaseReady = false;
+
+    try {
+      if (firebaseConfig.apiKey !== "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk") {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        isFirebaseReady = true;
+      }
+    } catch (e) {
+      console.warn("Firebase not ready. Running in offline preview mode.", e);
     }
-    loaderPct.textContent = pct + '%';
-  }, 140);
 
-  /* ---------- 2. CUSTOM CURSOR + SPOTLIGHT ---------- */
-  const cursorDot = document.getElementById('cursorDot');
-  const cursorRing = document.getElementById('cursorRing');
-  const spotlight = document.getElementById('spotlight');
-  let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
-  let ringX = mouseX, ringY = mouseY;
+    let players = [];
+    let matches = [];
+    let achievements = [];
+    let gallery = [];
+    let currentUser = null;
+    let userRole = "USER";
+    let isEditMode = false;
 
-  window.addEventListener('mousemove', (e)=>{
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%,-50%)`;
-    spotlight.style.setProperty('--sx', mouseX + 'px');
-    spotlight.style.setProperty('--sy', mouseY + 'px');
-  });
+    // Default Fallback Players
+    const defaultPlayers = [
+      { id: "p1", name: "Arun Kumar", jerseyNumber: 7, role: "Captain", subRole: "Top-Order Batsman", team: "XI Spartans First XI", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80", battingStyle: "Right Hand Bat", bowlingStyle: "Right Arm Medium", matches: 88, runs: 3420, wickets: 18 },
+      { id: "p2", name: "K. Vignesh", jerseyNumber: 18, role: "Vice Captain", subRole: "Aggressive Opener", team: "XI Spartans First XI", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80", battingStyle: "Right Hand Bat", bowlingStyle: "Off Break", matches: 76, runs: 2890, wickets: 8 },
+      { id: "p3", name: "Siddharth Raman", jerseyNumber: 24, role: "Bowler", subRole: "Fast Bowler", team: "XI Spartans First XI", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80", battingStyle: "Right Hand Bat", bowlingStyle: "Right Arm Fast", matches: 65, runs: 310, wickets: 112 }
+    ];
 
-  function ringLoop(){
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%,-50%)`;
-    requestAnimationFrame(ringLoop);
-  }
-  ringLoop();
+    const defaultMatches = [
+      { id: "m1", teamA: "XI Spartans", scoreA: "—", teamB: "Royal City CC", scoreB: "—", date: "Oct 12, 2026", venue: "Spartans Arena", result: "Upcoming Match" },
+      { id: "m2", teamA: "XI Spartans", scoreA: "189/6", teamB: "Apex Academy", scoreB: "165/9", date: "Sep 28, 2026", venue: "Spartans Ground", result: "WON BY 24 RUNS" }
+    ];
 
-  document.querySelectorAll('a, button, .glass, input, textarea').forEach(el=>{
-    el.addEventListener('mouseenter', ()=> cursorRing.classList.add('active'));
-    el.addEventListener('mouseleave', ()=> cursorRing.classList.remove('active'));
-  });
+    function showToast(msg, type = "info") {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<i class="fa-solid fa-bell"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = "0"; setTimeout(() => toast.remove(), 300); }, 3500);
+    }
 
-  /* ---------- 3. NAVBAR ---------- */
-  const navbar = document.getElementById('navbar');
-  const navMenu = document.getElementById('navMenu');
-  const hamburger = document.getElementById('hamburger');
+    // =========================================================================
+    // 3. AUTHENTICATION & ROLE VERIFICATION
+    // =========================================================================
+    document.getElementById("googleLoginBtn").onclick = async () => {
+      if (!isFirebaseReady) {
+        // Local evaluation simulation: prompt user for email to test Admin toggle
+        const testEmail = prompt("Enter an email to test login (enter your ADMIN_EMAILS entry to test Admin mode):", "your-actual-email@gmail.com");
+        if (!testEmail) return;
+        currentUser = { email: testEmail.toLowerCase(), displayName: testEmail.split("@")[0], photoURL: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" };
+        evaluateRole(currentUser.email);
+        return;
+      }
 
-  window.addEventListener('scroll', ()=>{
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
-    toTopBtn.classList.toggle('show', window.scrollY > 500);
-  });
+      try {
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+      } catch (err) {
+        showToast("Sign in failed: " + err.message, "error");
+      }
+    };
 
-  hamburger.addEventListener('click', ()=>{
-    hamburger.classList.toggle('open');
-    navMenu.classList.toggle('open');
-  });
-  document.querySelectorAll('.nav-link').forEach(link=>{
-    link.addEventListener('click', ()=>{
-      hamburger.classList.remove('open');
-      navMenu.classList.remove('open');
-    });
-  });
-
-  /* ---------- 4. THEME TOGGLE (Day / Night Match) ---------- */
-  const themeToggle = document.getElementById('themeToggle');
-  const matchLabel = document.getElementById('matchLabel');
-  themeToggle.addEventListener('click', ()=>{
-    const isDay = document.body.getAttribute('data-match') === 'day';
-    document.body.setAttribute('data-match', isDay ? 'night' : 'day');
-    matchLabel.textContent = isDay ? 'Night' : 'Day';
-  });
-
-  /* ---------- 5. HERO CANVAS: STADIUM LIGHTS + PARTICLES ---------- */
-  const canvas = document.getElementById('stadium-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-
-  function resizeCanvas(){
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = document.getElementById('home').offsetHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  // Floating dust / firefly particles
-  function initParticles(){
-    particles = [];
-    const count = Math.min(70, Math.floor(W/18));
-    for(let i=0;i<count;i++){
-      particles.push({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        r: Math.random()*1.8+0.4,
-        vx: (Math.random()-0.5)*0.25,
-        vy: -Math.random()*0.35-0.05,
-        a: Math.random()*0.6+0.2
+    if (isFirebaseReady && auth) {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          currentUser = user;
+          evaluateRole(user.email);
+        } else {
+          currentUser = null;
+          userRole = "USER";
+          applyPermissions();
+        }
       });
     }
-  }
-  initParticles();
-  window.addEventListener('resize', initParticles);
 
-  let lightAngle = 0;
-  function drawStadium(t){
-    ctx.clearRect(0,0,W,H);
-
-    // Deep stadium gradient
-    const g = ctx.createRadialGradient(W*0.5,H*0.15,50, W*0.5,H*0.5, W*0.75);
-    g.addColorStop(0,'#0c1c4a');
-    g.addColorStop(0.55,'#050816');
-    g.addColorStop(1,'#050816');
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,W,H);
-
-    // Sweeping floodlight beams (two towers)
-    lightAngle = t*0.00025;
-    [ -0.18, 1.18 ].forEach((posX, idx)=>{
-      const bx = W*posX;
-      const by = H*0.02;
-      const sweep = Math.sin(lightAngle*3 + idx*2)*0.35;
-      const beamAngle = Math.PI/2 + sweep*(idx===0?1:-1);
-      const length = H*1.3;
-      const spread = 0.30;
-
-      const x1 = bx + Math.cos(beamAngle-spread)*length;
-      const y1 = by + Math.sin(beamAngle-spread)*length;
-      const x2 = bx + Math.cos(beamAngle+spread)*length;
-      const y2 = by + Math.sin(beamAngle+spread)*length;
-
-      const grad = ctx.createLinearGradient(bx,by,(x1+x2)/2,(y1+y2)/2);
-      grad.addColorStop(0,'rgba(0,229,255,0.14)');
-      grad.addColorStop(1,'rgba(0,229,255,0)');
-
-      ctx.beginPath();
-      ctx.moveTo(bx,by);
-      ctx.lineTo(x1,y1);
-      ctx.lineTo(x2,y2);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // light source glow
-      ctx.beginPath();
-      ctx.arc(bx,by,6,0,Math.PI*2);
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
-      ctx.shadowColor = '#00E5FF';
-      ctx.shadowBlur = 20;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    });
-
-    // Stadium tier silhouette
-    ctx.beginPath();
-    ctx.moveTo(0,H*0.78);
-    for(let x=0;x<=W;x+=W/24){
-      const y = H*0.78 + Math.sin(x*0.02)*6;
-      ctx.lineTo(x,y);
-    }
-    ctx.lineTo(W,H);
-    ctx.lineTo(0,H);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(4,7,20,0.85)';
-    ctx.fill();
-
-    // Particles
-    particles.forEach(p=>{
-      p.x += p.vx; p.y += p.vy;
-      if(p.y < -10) p.y = H+10;
-      if(p.x < -10) p.x = W+10;
-      if(p.x > W+10) p.x = -10;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(0,229,255,${p.a})`;
-      ctx.fill();
-    });
-
-    requestAnimationFrame(drawStadium);
-  }
-  requestAnimationFrame(drawStadium);
-
-  /* Hero intro: char-split title, typing sub, fade actions */
-  function runHeroIntro(){
-    const title = document.getElementById('heroTitle');
-    const text = title.textContent;
-    title.textContent = '';
-    [...text].forEach((ch,i)=>{
-      const span = document.createElement('span');
-      span.className = 'char';
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
-      span.style.transitionDelay = (i*45) + 'ms';
-      span.style.transition = 'opacity .7s ' + getComputedStyle(document.documentElement).getPropertyValue('--ease') + ', transform .7s ' + getComputedStyle(document.documentElement).getPropertyValue('--ease');
-      title.appendChild(span);
-    });
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        title.querySelectorAll('.char').forEach(c=>{
-          c.style.opacity = 1;
-          c.style.transform = 'translateY(0) rotateX(0)';
-        });
-      });
-    });
-
-    document.querySelector('.hero-eyebrow').style.transition = 'opacity .8s ease .6s';
-    document.querySelector('.hero-eyebrow').style.opacity = 1;
-    document.querySelector('.hero-sub').style.transition = 'opacity .8s ease 1.1s, transform .8s ease 1.1s';
-    document.querySelector('.hero-sub').style.opacity = 1;
-    document.querySelector('.hero-actions').style.transition = 'opacity .8s ease 1.4s';
-    document.querySelector('.hero-actions').style.opacity = 1;
-    document.querySelector('.scroll-cue').style.transition = 'opacity .8s ease 1.8s';
-    document.querySelector('.scroll-cue').style.opacity = 1;
-  }
-
-  /* ---------- 6. INTERSECTION OBSERVER SCROLL REVEALS ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('in');
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el=> io.observe(el));
-
-  /* Schedule rows */
-  const rows = document.querySelectorAll('table.schedule tbody tr');
-  const rowIo = new IntersectionObserver((entries)=>{
-    entries.forEach((entry,i)=>{
-      if(entry.isIntersecting){
-        setTimeout(()=> entry.target.classList.add('in'), i*90);
-        rowIo.unobserve(entry.target);
-      }
-    });
-  }, { threshold: .2 });
-  rows.forEach(r=> rowIo.observe(r));
-
-  /* ---------- 7. COUNT UP ---------- */
-  const countEls = document.querySelectorAll('.count-up');
-  const countIo = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        animateCount(entry.target);
-        countIo.unobserve(entry.target);
-      }
-    });
-  }, { threshold: .5 });
-  countEls.forEach(el=> countIo.observe(el));
-
-  function animateCount(el){
-    const target = parseFloat(el.dataset.target);
-    const duration = 1600;
-    const start = performance.now();
-    function step(now){
-      const p = Math.min((now-start)/duration, 1);
-      const eased = 1 - Math.pow(1-p, 3);
-      el.textContent = Math.floor(eased*target);
-      if(p < 1) requestAnimationFrame(step);
-      else el.textContent = target;
-    }
-    requestAnimationFrame(step);
-  }
-
-  /* ---------- 8. STAT BARS ---------- */
-  const statRows = document.querySelectorAll('.stat-row');
-  const statIo = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const fill = entry.target.querySelector('.bar-fill');
-        fill.style.width = entry.target.dataset.percent + '%';
-        statIo.unobserve(entry.target);
-      }
-    });
-  }, { threshold: .4 });
-  statRows.forEach(r=> statIo.observe(r));
-
-  /* ---------- 9. LIVE SCOREBOARD ---------- */
-  const boardIo = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        document.querySelectorAll('#livescore [data-count-to]').forEach(el=>{
-          const target = parseFloat(el.dataset.countTo);
-          const decimals = parseInt(el.dataset.decimal || '0');
-          const duration = 1500;
-          const start = performance.now();
-          function step(now){
-            const p = Math.min((now-start)/duration,1);
-            const eased = 1 - Math.pow(1-p,3);
-            const val = eased*target;
-            el.textContent = decimals ? val.toFixed(decimals) : Math.floor(val);
-            if(p<1) requestAnimationFrame(step);
-            else el.textContent = decimals ? target.toFixed(decimals) : target;
-          }
-          requestAnimationFrame(step);
-        });
-        document.getElementById('rrrFill').style.width = '64%';
-        boardIo.unobserve(entry.target);
-      }
-    });
-  }, { threshold: .4 });
-  boardIo.observe(document.querySelector('.board'));
-
-  /* ---------- 11. GALLERY LIGHTBOX ---------- */
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  document.querySelectorAll('.masonry figure').forEach(fig=>{
-    fig.addEventListener('click', ()=>{
-      lightboxImg.src = fig.dataset.full;
-      lightbox.classList.add('open');
-    });
-  });
-  document.getElementById('closeLb').addEventListener('click', ()=> lightbox.classList.remove('open'));
-  lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
-
-  /* ---------- 12. VIDEO PLAY BUTTON ---------- */
-  document.getElementById('playBtn').addEventListener('click', function(){
-    this.style.transform = 'translate(-50%,-50%) scale(0.85)';
-    setTimeout(()=> this.style.transform = 'translate(-50%,-50%) scale(1)', 200);
-  });
-
-  /* ---------- 13. TESTIMONIALS SLIDER ---------- */
-  const testiTrack = document.getElementById('testiTrack');
-  const testiSlides = document.querySelectorAll('.testi-slide');
-  const testiDotsWrap = document.getElementById('testiDots');
-  let testiIndex = 0;
-
-  testiSlides.forEach((_,i)=>{
-    const dot = document.createElement('button');
-    if(i===0) dot.classList.add('active');
-    dot.addEventListener('click', ()=> goToTesti(i));
-    testiDotsWrap.appendChild(dot);
-  });
-
-  function goToTesti(i){
-    testiIndex = i;
-    testiTrack.style.transform = `translateX(-${i*100}%)`;
-    testiDotsWrap.querySelectorAll('button').forEach((d,idx)=> d.classList.toggle('active', idx===i));
-  }
-  setInterval(()=>{
-    testiIndex = (testiIndex+1) % testiSlides.length;
-    goToTesti(testiIndex);
-  }, 5500);
-
-  /* ---------- 14. FORMS ---------- */
-  document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    launchConfetti(window.innerWidth/2, window.innerHeight/2);
-    const btn = this.querySelector('button');
-    const original = btn.textContent;
-    btn.textContent = 'Message Sent ✓';
-    this.reset();
-    setTimeout(()=> btn.textContent = original, 2600);
-  });
-  document.getElementById('newsForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const btn = this.querySelector('button');
-    btn.textContent = 'Joined ✓';
-    this.reset();
-    setTimeout(()=> btn.textContent = 'Join', 2200);
-  });
-
-  /* ---------- 15. BACK TO TOP ---------- */
-  const toTopBtn = document.getElementById('toTop');
-  toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-
-  /* ---------- 16. RIPPLE + MAGNETIC BUTTONS ---------- */
-  document.querySelectorAll('.rippleBtn').forEach(btn=>{
-    btn.addEventListener('click', function(e){
-      const rect = this.getBoundingClientRect();
-      const ripple = document.createElement('span');
-      ripple.className = 'ripple';
-      const size = Math.max(rect.width, rect.height);
-      ripple.style.width = ripple.style.height = size+'px';
-      ripple.style.left = (e.clientX-rect.left-size/2)+'px';
-      ripple.style.top = (e.clientY-rect.top-size/2)+'px';
-      this.appendChild(ripple);
-      setTimeout(()=> ripple.remove(), 650);
-    });
-    btn.addEventListener('mousemove', function(e){
-      const rect = this.getBoundingClientRect();
-      const x = (e.clientX-rect.left-rect.width/2)*0.25;
-      const y = (e.clientY-rect.top-rect.height/2)*0.5;
-      this.style.transform = `translate(${x}px,${y}px)`;
-    });
-    btn.addEventListener('mouseleave', function(){ this.style.transform = 'translate(0,0)'; });
-  });
-
-  document.getElementById('joinBtn').addEventListener('click', function(e){
-    launchConfetti(e.clientX, e.clientY);
-  });
-
-  /* Smooth scroll (native scroll-behavior handles it; this offsets for fixed navbar) */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-    anchor.addEventListener('click', function(e){
-      const targetId = this.getAttribute('href');
-      const target = document.querySelector(targetId);
-      if(target){
-        e.preventDefault();
-        const offset = target.offsetTop - 80;
-        window.scrollTo({ top: offset, behavior: 'smooth' });
-      }
-    });
-  });
-
-  /* Player 3D tilt */
-  document.querySelectorAll('.tiltCard').forEach(card=>{
-    card.addEventListener('mousemove', (e)=>{
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left)/rect.width - 0.5;
-      const y = (e.clientY - rect.top)/rect.height - 0.5;
-      card.style.transform = `rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-6px)`;
-    });
-    card.addEventListener('mouseleave', ()=>{ card.style.transform = 'rotateY(0) rotateX(0) translateY(0)'; });
-  });
-
-  /* ---------- 17. FIREWORKS + CONFETTI ---------- */
-  const fxCanvas = document.getElementById('fx-canvas');
-  const fxCtx = fxCanvas.getContext('2d');
-  function resizeFx(){ fxCanvas.width = window.innerWidth; fxCanvas.height = window.innerHeight; }
-  resizeFx();
-  window.addEventListener('resize', resizeFx);
-
-  let fxParticles = [];
-  function fxLoop(){
-    fxCtx.clearRect(0,0,fxCanvas.width,fxCanvas.height);
-    fxParticles.forEach(p=>{
-      p.x += p.vx; p.y += p.vy; p.vy += p.gravity; p.life -= 1;
-      fxCtx.globalAlpha = Math.max(p.life/p.maxLife, 0);
-      fxCtx.fillStyle = p.color;
-      if(p.shape === 'rect'){
-        fxCtx.save();
-        fxCtx.translate(p.x,p.y);
-        fxCtx.rotate(p.life*0.2);
-        fxCtx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
-        fxCtx.restore();
+    async function evaluateRole(email) {
+      const normalized = (email || "").toLowerCase();
+      // Check hardcoded array first
+      if (ADMIN_EMAILS.map(e => e.toLowerCase()).includes(normalized)) {
+        userRole = "ADMIN";
       } else {
-        fxCtx.beginPath();
-        fxCtx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        fxCtx.fill();
+        userRole = "USER";
       }
-    });
-    fxCtx.globalAlpha = 1;
-    fxParticles = fxParticles.filter(p=> p.life > 0);
-    requestAnimationFrame(fxLoop);
-  }
-  fxLoop();
 
-  const fxColors = ['#00E5FF','#FFC107','#0D47A1','#ffffff','#5ee081'];
+      // Check / sync user document to Firestore
+      if (isFirebaseReady && db && currentUser) {
+        try {
+          const userRef = doc(db, "users", currentUser.uid);
+          const snap = await getDoc(userRef);
+          if (snap.exists() && snap.data().role === "ADMIN") {
+            userRole = "ADMIN";
+          } else {
+            await setDoc(userRef, {
+              email: currentUser.email,
+              name: currentUser.displayName,
+              photoURL: currentUser.photoURL,
+              role: userRole,
+              updatedAt: new Date().toISOString()
+            }, { merge: true });
+          }
+        } catch (e) {
+          console.error("User doc sync error:", e);
+        }
+      }
 
-  function launchFireworks(){
-    for(let burst=0; burst<4; burst++){
-      setTimeout(()=>{
-        const cx = Math.random()*window.innerWidth*0.7 + window.innerWidth*0.15;
-        const cy = Math.random()*window.innerHeight*0.35 + 60;
-        for(let i=0;i<45;i++){
-          const angle = (Math.PI*2)*(i/45);
-          const speed = Math.random()*4+2;
-          fxParticles.push({
-            x:cx, y:cy,
-            vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed,
-            gravity: 0.05, size: Math.random()*2.5+1.5,
-            life: 70, maxLife:70, color: fxColors[Math.floor(Math.random()*fxColors.length)], shape:'circle'
+      applyPermissions();
+      showToast(`Signed in as ${currentUser.displayName} (${userRole})`, "info");
+    }
+
+    function applyPermissions() {
+      const authBox = document.getElementById("authContainer");
+      if (currentUser) {
+        const isAdmin = userRole === "ADMIN";
+        document.body.classList.toggle("is-admin", isAdmin);
+        authBox.innerHTML = `
+          <div class="user-profile-badge">
+            <img src="${currentUser.photoURL || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'}" />
+            <span>${currentUser.displayName ? currentUser.displayName.split(" ")[0] : "Player"}</span>
+            <span class="${isAdmin ? 'admin-pill' : 'user-pill'}">${userRole}</span>
+            <button id="logoutBtn" style="background:none; border:none; color:#f87171; cursor:pointer; margin-left:5px;"><i class="fa-solid fa-right-from-bracket"></i></button>
+          </div>
+        `;
+        document.getElementById("logoutBtn").onclick = () => {
+          if (isFirebaseReady && auth) signOut(auth);
+          currentUser = null;
+          userRole = "USER";
+          applyPermissions();
+          showToast("Signed out", "info");
+        };
+      } else {
+        document.body.classList.remove("is-admin");
+        authBox.innerHTML = `
+          <button class="btn btn-gold btn-sm" id="googleLoginBtn">
+            <i class="fa-brands fa-google"></i> Google Sign In
+          </button>
+        `;
+        document.getElementById("googleLoginBtn").onclick = () => {
+          if (!isFirebaseReady) {
+            const testEmail = prompt("Enter email:", "your-actual-email@gmail.com");
+            if (testEmail) {
+              currentUser = { email: testEmail.toLowerCase(), displayName: testEmail.split("@")[0] };
+              evaluateRole(currentUser.email);
+            }
+          } else {
+            signInWithPopup(auth, new GoogleAuthProvider());
+          }
+        };
+      }
+      renderPlayers();
+      renderMatches();
+    }
+
+    // =========================================================================
+    // 4. RENDERING FUNCTIONS WITH ADMIN GATES
+    // =========================================================================
+    function renderPlayers() {
+      const container = document.getElementById("playersGridContainer");
+      if (!container) return;
+      const data = players.length > 0 ? players : defaultPlayers;
+
+      container.innerHTML = data.map(p => `
+        <div class="player-card">
+          <div class="player-jersey-badge">#${p.jerseyNumber}</div>
+          <div class="player-role-badge">${p.role}</div>
+          <div class="player-img-wrap" onclick="viewPlayer('${p.id}')">
+            <img src="${p.image}" alt="${p.name}" />
+          </div>
+          <div class="player-info-body" onclick="viewPlayer('${p.id}')">
+            <h3 class="player-name">${p.name}</h3>
+            <div class="player-subrole">${p.subRole || p.role}</div>
+            <div class="player-brief-stats">
+              <div><strong>${p.matches || 0}</strong><span>Matches</span></div>
+              <div><strong>${p.runs || 0}</strong><span>Runs</span></div>
+              <div><strong>${p.wickets || 0}</strong><span>Wickets</span></div>
+            </div>
+          </div>
+          <div class="card-admin-action-bar admin-only">
+            <button class="btn btn-outline btn-sm edit-player-btn" data-id="${p.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);">
+              <i class="fa-solid fa-pen"></i> Edit
+            </button>
+            <button class="btn btn-outline btn-sm delete-player-btn" data-id="${p.id}" style="color: var(--danger); border-color: var(--danger);">
+              <i class="fa-solid fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      container.querySelectorAll(".edit-player-btn").forEach(btn => {
+        btn.onclick = () => openPlayerEdit(btn.getAttribute("data-id"));
+      });
+      container.querySelectorAll(".delete-player-btn").forEach(btn => {
+        btn.onclick = () => deletePlayer(btn.getAttribute("data-id"));
+      });
+    }
+
+    window.viewPlayer = (id) => {
+      const p = (players.length > 0 ? players : defaultPlayers).find(x => x.id === id);
+      if (!p) return;
+      document.getElementById("playerModalContent").innerHTML = `
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <img src="${p.image}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--cricket-green);" />
+          <h2 style="color: var(--dark-green); margin-top: 0.5rem;">${p.name} #${p.jerseyNumber}</h2>
+          <p style="color: var(--cricket-green); font-weight: 700;">${p.subRole || p.role} &bull; ${p.team || 'XI Spartans'}</p>
+          <p style="font-size: 0.9rem; color: var(--gray-text);">Batting: ${p.battingStyle || 'Right Hand'} | Bowling: ${p.bowlingStyle || 'Right Arm Fast'}</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center;">
+          <div style="background: var(--light-green); padding: 1rem; border-radius: 8px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: var(--dark-green);">${p.matches || 0}</div>
+            <div style="font-size: 0.75rem; text-transform: uppercase;">Matches</div>
+          </div>
+          <div style="background: var(--light-green); padding: 1rem; border-radius: 8px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: var(--dark-green);">${p.runs || 0}</div>
+            <div style="font-size: 0.75rem; text-transform: uppercase;">Runs</div>
+          </div>
+          <div style="background: var(--light-green); padding: 1rem; border-radius: 8px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: var(--dark-green);">${p.wickets || 0}</div>
+            <div style="font-size: 0.75rem; text-transform: uppercase;">Wickets</div>
+          </div>
+        </div>
+      `;
+      document.getElementById("playerModalBackdrop").classList.add("active");
+    };
+
+    function renderMatches() {
+      const container = document.getElementById("matchesGridContainer");
+      if (!container) return;
+      const data = matches.length > 0 ? matches : defaultMatches;
+
+      container.innerHTML = data.map(m => `
+        <div class="match-card">
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gray-text);">
+            <span>${m.date}</span>
+            <span>${m.venue}</span>
+          </div>
+          <div class="match-teams-box">
+            <div><div class="m-team-name">${m.teamA}</div><div class="m-team-score">${m.scoreA || '—'}</div></div>
+            <div style="font-weight: 800; color: #94a3b8;">VS</div>
+            <div style="text-align: right;"><div class="m-team-name">${m.teamB}</div><div class="m-team-score">${m.scoreB || '—'}</div></div>
+          </div>
+          <div class="match-result-badge">${m.result}</div>
+          <div class="card-admin-action-bar admin-only" style="margin-top: 1rem; border-radius: 6px;">
+            <button class="btn btn-outline btn-sm delete-match-btn" data-id="${m.id}" style="color: var(--danger); border-color: var(--danger); width: 100%;">
+              <i class="fa-solid fa-trash"></i> Delete Match
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      container.querySelectorAll(".delete-match-btn").forEach(btn => {
+        btn.onclick = () => deleteMatch(btn.getAttribute("data-id"));
+      });
+    }
+
+    // =========================================================================
+    // 5. FIRESTORE CRUD OPERATIONS (Admin Protected)
+    // =========================================================================
+    function openPlayerEdit(id) {
+      if (userRole !== "ADMIN") return showToast("Admin access required", "error");
+      const p = (players.length > 0 ? players : defaultPlayers).find(x => x.id === id);
+      if (!p) return;
+      document.getElementById("pf_id").value = p.id;
+      document.getElementById("pf_name").value = p.name;
+      document.getElementById("pf_jersey").value = p.jerseyNumber;
+      document.getElementById("pf_role").value = p.role;
+      document.getElementById("pf_team").value = p.team || "";
+      document.getElementById("pf_image").value = p.image;
+      document.getElementById("pf_batting").value = p.battingStyle || "";
+      document.getElementById("pf_bowling").value = p.bowlingStyle || "";
+      document.getElementById("pf_matches").value = p.matches || 0;
+      document.getElementById("pf_runs").value = p.runs || 0;
+      document.getElementById("pf_wickets").value = p.wickets || 0;
+      document.getElementById("playerEditModalBackdrop").classList.add("active");
+    }
+
+    document.getElementById("playerForm").onsubmit = async (e) => {
+      e.preventDefault();
+      if (userRole !== "ADMIN") return showToast("Permission denied: You are not an admin.", "error");
+
+      const id = document.getElementById("pf_id").value || `p-${Date.now()}`;
+      const playerData = {
+        name: document.getElementById("pf_name").value,
+        jerseyNumber: parseInt(document.getElementById("pf_jersey").value, 10),
+        role: document.getElementById("pf_role").value,
+        subRole: document.getElementById("pf_role").value,
+        team: document.getElementById("pf_team").value,
+        image: document.getElementById("pf_image").value,
+        battingStyle: document.getElementById("pf_batting").value,
+        bowlingStyle: document.getElementById("pf_bowling").value,
+        matches: parseInt(document.getElementById("pf_matches").value, 10),
+        runs: parseInt(document.getElementById("pf_runs").value, 10),
+        wickets: parseInt(document.getElementById("pf_wickets").value, 10)
+      };
+
+      if (isFirebaseReady && db) {
+        try {
+          await setDoc(doc(db, "players", id), playerData, { merge: true });
+          showToast("Player saved to Cloud Firestore!", "success");
+        } catch (err) {
+          showToast("Firestore write error: " + err.message, "error");
+        }
+      } else {
+        const idx = defaultPlayers.findIndex(x => x.id === id);
+        if (idx >= 0) defaultPlayers[idx] = { id, ...playerData };
+        else defaultPlayers.unshift({ id, ...playerData });
+        renderPlayers();
+        showToast("Player saved locally", "success");
+      }
+      document.getElementById("playerEditModalBackdrop").classList.remove("active");
+    };
+
+    async function deletePlayer(id) {
+      if (userRole !== "ADMIN") return showToast("Permission denied: Admin role required.", "error");
+      if (!confirm("Are you sure you want to remove this player?")) return;
+
+      if (isFirebaseReady && db) {
+        try {
+          await deleteDoc(doc(db, "players", id));
+          showToast("Player deleted from Firestore", "info");
+        } catch (err) {
+          showToast("Delete failed: " + err.message, "error");
+        }
+      } else {
+        const idx = defaultPlayers.findIndex(x => x.id === id);
+        if (idx >= 0) defaultPlayers.splice(idx, 1);
+        renderPlayers();
+        showToast("Player removed locally", "info");
+      }
+    }
+
+    // Match Create & Delete
+    document.getElementById("matchForm").onsubmit = async (e) => {
+      e.preventDefault();
+      if (userRole !== "ADMIN") return showToast("Unauthorized", "error");
+
+      const matchData = {
+        teamA: document.getElementById("mf_teamA").value,
+        teamB: document.getElementById("mf_teamB").value,
+        scoreA: document.getElementById("mf_scoreA").value,
+        scoreB: document.getElementById("mf_scoreB").value,
+        date: document.getElementById("mf_date").value,
+        venue: document.getElementById("mf_venue").value,
+        result: document.getElementById("mf_result").value
+      };
+
+      const id = `m-${Date.now()}`;
+      if (isFirebaseReady && db) {
+        await setDoc(doc(db, "matches", id), matchData);
+        showToast("Match saved to Firestore!", "success");
+      } else {
+        defaultMatches.unshift({ id, ...matchData });
+        renderMatches();
+      }
+      document.getElementById("matchEditModalBackdrop").classList.remove("active");
+    };
+
+    async function deleteMatch(id) {
+      if (userRole !== "ADMIN") return showToast("Admin only", "error");
+      if (!confirm("Delete this match?")) return;
+      if (isFirebaseReady && db) {
+        await deleteDoc(doc(db, "matches", id));
+      } else {
+        const idx = defaultMatches.findIndex(x => x.id === id);
+        if (idx >= 0) defaultMatches.splice(idx, 1);
+        renderMatches();
+      }
+    }
+
+    // Live Scoreboard Update
+    document.getElementById("liveScoreForm").onsubmit = async (e) => {
+      e.preventDefault();
+      if (userRole !== "ADMIN") return showToast("Unauthorized", "error");
+
+      const liveData = {
+        tourney: document.getElementById("lsf_tourney").value,
+        t1_name: document.getElementById("lsf_t1_name").value,
+        t1_score: document.getElementById("lsf_t1_score").value,
+        t2_name: document.getElementById("lsf_t2_name").value,
+        t2_score: document.getElementById("lsf_t2_score").value,
+        status: document.getElementById("lsf_status").value
+      };
+
+      if (isFirebaseReady && db) {
+        await setDoc(doc(db, "liveScore", "current"), liveData);
+        showToast("Live scoreboard broadcasted to Firestore!", "success");
+      } else {
+        updateLiveScoreUI(liveData);
+      }
+      document.getElementById("liveScoreModalBackdrop").classList.remove("active");
+    };
+
+    function updateLiveScoreUI(data) {
+      if (!data) return;
+      if (data.tourney) document.getElementById("sb_tourney_text").innerHTML = `<i class="fa-solid fa-trophy"></i> ${data.tourney}`;
+      if (data.t1_name) document.getElementById("sb_t1_name").innerText = data.t1_name;
+      if (data.t1_score) document.getElementById("sb_t1_score").innerText = data.t1_score;
+      if (data.t2_name) document.getElementById("sb_t2_name").innerText = data.t2_name;
+      if (data.t2_score) document.getElementById("sb_t2_score").innerText = data.t2_score;
+      if (data.status) document.getElementById("sb_status_note").innerHTML = `<i class="fa-solid fa-circle-info"></i> ${data.status}`;
+    }
+
+    // Realtime Cloud Listeners
+    if (isFirebaseReady && db) {
+      onSnapshot(collection(db, "players"), (snap) => {
+        players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderPlayers();
+      });
+      onSnapshot(collection(db, "matches"), (snap) => {
+        matches = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderMatches();
+      });
+      onSnapshot(doc(db, "liveScore", "current"), (snap) => {
+        if (snap.exists()) updateLiveScoreUI(snap.data());
+      });
+      onSnapshot(doc(db, "pageContent", "texts"), (snap) => {
+        if (snap.exists()) {
+          const t = snap.data();
+          document.querySelectorAll(".inline-editable").forEach(el => {
+            const k = el.getAttribute("data-edit-key");
+            if (k && t[k]) el.innerText = t[k];
           });
         }
-      }, burst*260);
-    }
-  }
-
-  function launchConfetti(x,y){
-    for(let i=0;i<70;i++){
-      const angle = Math.random()*Math.PI*2;
-      const speed = Math.random()*7+2;
-      fxParticles.push({
-        x, y,
-        vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed - 3,
-        gravity: 0.15, size: Math.random()*6+4,
-        life: 90, maxLife:90, color: fxColors[Math.floor(Math.random()*fxColors.length)], shape:'rect'
       });
     }
-  }
 
-  /* Footer year */
-  document.getElementById('year').textContent = new Date().getFullYear();
+    // =========================================================================
+    // 6. IN-PLACE PAGE TEXT CUSTOMIZER (Admin Protected)
+    // =========================================================================
+    const toggleEditModeBtn = document.getElementById("toggleEditModeBtn");
+    const savePageEditsBtn = document.getElementById("savePageEditsBtn");
 
-  /* Prevent body scroll during loader */
-  document.body.style.overflow = 'hidden';
+    toggleEditModeBtn.onclick = () => {
+      if (userRole !== "ADMIN") return showToast("Only authorized admin can edit page content.", "error");
+      isEditMode = !isEditMode;
+      document.body.classList.toggle("edit-mode-active", isEditMode);
+      document.querySelectorAll(".inline-editable").forEach(el => {
+        el.setAttribute("contenteditable", isEditMode ? "true" : "false");
+      });
+      savePageEditsBtn.style.display = isEditMode ? "inline-flex" : "none";
+      document.getElementById("editModeBtnText").innerText = isEditMode ? "Exit Edit" : "Live On-Page Edit";
+    };
 
-})();
-</script>
+    savePageEditsBtn.onclick = async () => {
+      if (userRole !== "ADMIN") return showToast("Unauthorized", "error");
+      const texts = {};
+      document.querySelectorAll(".inline-editable").forEach(el => {
+        const k = el.getAttribute("data-edit-key");
+        if (k) texts[k] = el.innerText.trim();
+      });
+
+      if (isFirebaseReady && db) {
+        await setDoc(doc(db, "pageContent", "texts"), texts, { merge: true });
+        showToast("Page copy synced to Firestore!", "success");
+      } else {
+        localStorage.setItem("spartans_texts", JSON.stringify(texts));
+        showToast("Page copy saved locally!", "success");
+      }
+    };
+
+    // Modal Triggers
+    document.getElementById("addNewPlayerBtn").onclick = () => {
+      document.getElementById("playerForm").reset();
+      document.getElementById("pf_id").value = "";
+      document.getElementById("playerEditModalTitle").innerText = "Add New Player";
+      document.getElementById("playerEditModalBackdrop").classList.add("active");
+    };
+    document.getElementById("addNewMatchBtn").onclick = () => {
+      document.getElementById("matchForm").reset();
+      document.getElementById("matchEditModalBackdrop").classList.add("active");
+    };
+    document.getElementById("editLiveScoreBtn").onclick = () => {
+      document.getElementById("liveScoreModalBackdrop").classList.add("active");
+    };
+
+    // Close Modals
+    document.getElementById("closePlayerModalBtn").onclick = () => document.getElementById("playerModalBackdrop").classList.remove("active");
+    document.getElementById("closePlayerEditModalBtn").onclick = () => document.getElementById("playerEditModalBackdrop").classList.remove("active");
+    document.getElementById("closeMatchEditModalBtn").onclick = () => document.getElementById("matchEditModalBackdrop").classList.remove("active");
+    document.getElementById("closeLiveScoreModalBtn").onclick = () => document.getElementById("liveScoreModalBackdrop").classList.remove("active");
+
+    // Initialize View
+    window.addEventListener("DOMContentLoaded", () => {
+      applyPermissions();
+    });
+  </script>
 </body>
 </html>
