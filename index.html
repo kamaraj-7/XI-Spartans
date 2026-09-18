@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XI Spartans Cricket Club | Official Club Website</title>
   <meta name="description" content="XI Spartans Cricket Club - Passion. Discipline. Teamwork. Excellence. Fully customizable club portal." />
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="XI Spartans Cricket Club" />
-  <meta property="og:description" content="Official website of XI Spartans Cricket Club. Squads, matches, standings & achievements." />
-  <meta property="og:type" content="website" />
 
-  <!-- Google Fonts & FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -39,1421 +33,274 @@
       --radius-lg: 20px;
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Outfit', sans-serif; color: var(--dark-text); background-color: var(--white); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+    a { text-decoration: none; color: inherit; transition: var(--transition); }
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-padding { padding: 5rem 0; }
+    .section-title-wrap { text-align: center; max-width: 700px; margin: 0 auto 3.5rem auto; position: relative; }
+    .section-subtitle { color: var(--cricket-green); text-transform: uppercase; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.15em; margin-bottom: 0.5rem; display: block; }
+    .section-title { font-size: 2.25rem; color: var(--dark-green); line-height: 1.25; margin-bottom: 1rem; position: relative; }
+    .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: linear-gradient(90deg, var(--cricket-green), var(--gold)); margin: 0.75rem auto 0; border-radius: 2px; }
+    .section-desc { color: var(--gray-text); font-size: 1.05rem; }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-    }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.8rem 1.6rem; font-size: 0.95rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: var(--transition); text-transform: uppercase; letter-spacing: 0.04em; }
+    .btn-primary { background: var(--cricket-green); color: var(--white); box-shadow: 0 4px 14px rgba(8, 122, 75, 0.35); }
+    .btn-primary:hover { background: var(--dark-green); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6, 59, 42, 0.4); color: var(--white); }
+    .btn-gold { background: var(--gold); color: var(--dark-green); font-weight: 700; }
+    .btn-gold:hover { background: #c29e2c; transform: translateY(-2px); box-shadow: var(--shadow-gold); }
+    .btn-outline { border-color: var(--white); color: var(--white); background: transparent; }
+    .btn-outline:hover { background: var(--white); color: var(--dark-green); }
+    .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.825rem; }
 
-    body {
-      font-family: 'Outfit', sans-serif;
-      color: var(--dark-text);
-      background-color: var(--white);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    .inline-editable { position: relative; transition: outline 0.2s ease, background-color 0.2s ease; border-radius: 4px; }
+    body.edit-mode-active .inline-editable { outline: 2px dashed #D4AF37 !important; background-color: rgba(212, 175, 55, 0.1) !important; cursor: text !important; }
+    body.edit-mode-active .inline-editable:hover { outline: 2px solid #087A4B !important; background-color: rgba(8, 122, 75, 0.15) !important; }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
+    .top-bar { background: #04271c; color: #cbd5e1; font-size: 0.825rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+    .top-bar-contact { display: flex; gap: 1.5rem; }
+    .top-bar-social { display: flex; gap: 1rem; }
+    .top-bar-social a:hover { color: var(--gold); }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: var(--transition);
-    }
+    .navbar { position: sticky; top: 0; left: 0; width: 100%; background: var(--dark-green); z-index: 1000; transition: var(--transition); }
+    .navbar.scrolled { padding: 0.3rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.3); background: rgba(6, 59, 42, 0.98); backdrop-filter: blur(10px); }
+    .navbar-container { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1.5rem; }
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; color: var(--white); }
+    .logo-icon { font-size: 1.8rem; color: var(--gold); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+    .logo-text h1 { font-size: 1.4rem; line-height: 1.1; color: var(--white); text-transform: uppercase; font-weight: 800; }
+    .logo-text span { font-size: 0.7rem; letter-spacing: 0.18em; color: var(--gold); display: block; font-weight: 600; }
+    .nav-menu { display: flex; align-items: center; gap: 1.2rem; list-style: none; }
+    .nav-item a { color: #e2e8f0; font-weight: 500; font-size: 0.9rem; position: relative; padding: 0.4rem 0; }
+    .nav-item a:hover, .nav-item a.active { color: var(--white); }
+    .nav-auth { display: flex; align-items: center; gap: 0.8rem; }
+    .user-profile-badge { display: flex; align-items: center; gap: 0.6rem; color: var(--white); background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.85rem; }
+    .admin-pill { background: var(--gold); color: var(--dark-green); font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 10px; text-transform: uppercase; }
+    .hamburger { display: none; background: transparent; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
 
-    .container {
-      width: 100%;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+    .hero { position: relative; min-height: 85vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(6, 59, 42, 0.92) 0%, rgba(4, 39, 28, 0.85) 100%), var(--hero-img-url, url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80')); background-size: cover; background-position: center; color: var(--white); overflow: hidden; }
+    .hero-content { max-width: 760px; position: relative; z-index: 2; }
+    .hero-tagline { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.35); color: var(--gold); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 1.5rem; text-transform: uppercase; }
+    .hero-title { font-size: 3.8rem; line-height: 1.1; font-weight: 900; margin-bottom: 1.2rem; text-transform: uppercase; }
+    .hero-title span { color: var(--gold); }
+    .hero-sub { font-size: 1.3rem; color: #e2e8f0; font-weight: 400; margin-bottom: 1.5rem; }
+    .hero-desc { font-size: 1.05rem; color: #cbd5e1; margin-bottom: 2.2rem; line-height: 1.7; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-edit-btn { position: absolute; bottom: 1.5rem; right: 1.5rem; z-index: 3; }
 
-    .section-padding {
-      padding: 5rem 0;
-    }
+    .live-ticker { background: #021f16; border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 0.75rem 0; color: var(--white); }
+    .ticker-wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .ticker-badge { background: var(--danger); color: var(--white); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.4rem; }
 
-    .section-title-wrap {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 3.5rem auto;
-      position: relative;
-    }
+    .stats-section { background: var(--white); padding: 3.5rem 0; margin-top: -3rem; position: relative; z-index: 5; }
+    .stats-card-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; background: var(--white); padding: 2.5rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); }
+    .stat-item { text-align: center; position: relative; }
+    .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 15%; height: 70%; width: 1px; background: var(--border-color); }
+    .stat-number { font-size: 2.75rem; font-weight: 900; color: var(--dark-green); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-number.gold { color: var(--gold-dark); }
+    .stat-label { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; color: var(--gray-text); }
 
-    .section-subtitle {
-      color: var(--cricket-green);
-      text-transform: uppercase;
-      font-size: 0.875rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+    .about-img-box { position: relative; }
+    .about-img-main { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); object-fit: cover; width: 100%; height: 460px; }
+    .about-experience-badge { position: absolute; bottom: -1.5rem; right: -1.5rem; background: var(--dark-green); color: var(--white); padding: 1.5rem 2rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 2px solid var(--gold); text-align: center; }
+    .badge-years { font-size: 2.4rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .badge-text { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .about-values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+    .value-card { background: var(--light-green); padding: 1.2rem; border-radius: var(--radius); border-left: 4px solid var(--cricket-green); transition: var(--transition); }
+    .value-card h4 { font-size: 1.05rem; color: var(--dark-green); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem; }
+    .value-card p { font-size: 0.88rem; color: var(--gray-text); }
 
-    .section-title {
-      font-size: 2.25rem;
-      color: var(--dark-green);
-      line-height: 1.25;
-      margin-bottom: 1rem;
-      position: relative;
-    }
+    .section-action-header { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; gap: 0.75rem; }
 
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--cricket-green), var(--gold));
-      margin: 0.75rem auto 0;
-      border-radius: 2px;
-    }
+    .teams-section { background: var(--light-gray); }
+    .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .team-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); border: 1px solid var(--border-color); display: flex; flex-direction: column; position: relative; }
+    .team-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .team-img { height: 200px; overflow: hidden; position: relative; }
+    .team-img img { width: 100%; height: 100%; object-fit: cover; }
+    .team-division-tag { position: absolute; top: 1rem; right: 1rem; background: rgba(6, 59, 42, 0.9); color: var(--gold); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+    .team-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .team-body h3 { font-size: 1.35rem; color: var(--dark-green); margin-bottom: 0.5rem; }
+    .team-meta { font-size: 0.9rem; color: var(--gray-text); margin-bottom: 1.25rem; }
+    .team-stats-strip { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--light-green); padding: 0.75rem; border-radius: 8px; text-align: center; margin-top: auto; margin-bottom: 1.25rem; }
+    .team-stat-val { font-weight: 800; color: var(--cricket-green); font-size: 1.1rem; }
+    .team-stat-lbl { font-size: 0.7rem; text-transform: uppercase; color: var(--gray-text); font-weight: 600; }
 
-    .section-desc {
-      color: var(--gray-text);
-      font-size: 1.05rem;
-    }
+    .players-filter-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; background: var(--white); padding: 1rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+    .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .filter-btn { padding: 0.45rem 1rem; background: transparent; border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--gray-text); transition: var(--transition); }
+    .filter-btn.active, .filter-btn:hover { background: var(--cricket-green); color: var(--white); border-color: var(--cricket-green); }
+    .player-search-box { position: relative; min-width: 260px; }
+    .player-search-box input { width: 100%; padding: 0.5rem 1rem 0.5rem 2.2rem; border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.9rem; outline: none; }
+    .player-search-box i { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: #9CA3AF; }
 
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      padding: 0.8rem 1.6rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: var(--transition);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
+    .players-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
+    .player-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); border: 1px solid var(--border-color); position: relative; display: flex; flex-direction: column; }
+    .player-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+    .player-jersey-badge { position: absolute; top: 1rem; left: 1rem; width: 36px; height: 36px; background: var(--dark-green); border: 2px solid var(--gold); color: var(--gold); font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; z-index: 2; }
+    .player-role-badge { position: absolute; top: 1rem; right: 1rem; background: rgba(6, 59, 42, 0.9); color: var(--white); font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 50px; font-weight: 700; z-index: 2; }
+    .player-img-wrap { height: 270px; background: #e2e8f0; position: relative; overflow: hidden; cursor: pointer; }
+    .player-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: var(--transition); }
+    .player-card:hover .player-img-wrap img { transform: scale(1.05); }
+    .player-info-body { padding: 1.25rem; text-align: center; cursor: pointer; }
+    .player-name { font-size: 1.15rem; color: var(--dark-green); font-weight: 700; margin-bottom: 0.25rem; }
+    .player-subrole { font-size: 0.8rem; color: var(--cricket-green); font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; }
+    .player-brief-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; border-top: 1px solid var(--border-color); padding-top: 0.8rem; font-size: 0.8rem; }
+    .pbs-item strong { display: block; color: var(--dark-green); font-size: 1rem; }
+    .pbs-item span { font-size: 0.7rem; color: var(--gray-text); text-transform: uppercase; }
+    .card-admin-action-bar { display: flex; justify-content: space-between; padding: 0.6rem 1rem; background: #f8fafc; border-top: 1px solid var(--border-color); }
 
-    .btn-primary {
-      background: var(--cricket-green);
-      color: var(--white);
-      box-shadow: 0 4px 14px rgba(8, 122, 75, 0.35);
-    }
-    .btn-primary:hover {
-      background: var(--dark-green);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(6, 59, 42, 0.4);
-      color: var(--white);
-    }
+    .scoreboard-section { background: linear-gradient(135deg, #032419 0%, #063B2A 100%); color: var(--white); position: relative; }
+    .live-scoreboard-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); max-width: 960px; margin: 0 auto; }
+    .sb-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+    .sb-tourney { font-size: 0.95rem; color: var(--gold); font-weight: 700; }
+    .sb-teams-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; text-align: center; margin-bottom: 2rem; }
+    .sb-team-name { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .sb-team-score { font-size: 2.8rem; font-weight: 900; color: var(--gold); }
+    .sb-team-overs { font-size: 0.9rem; color: #cbd5e1; }
+    .sb-vs-badge { font-size: 1.2rem; font-weight: 900; background: rgba(255,255,255,0.1); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.4); }
+    .sb-details-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; background: rgba(0,0,0,0.25); padding: 1.25rem; border-radius: var(--radius); }
+    .sb-table { width: 100%; font-size: 0.85rem; border-collapse: collapse; }
+    .sb-table th { text-align: left; color: var(--gold); padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sb-table td { padding: 0.4rem 0; color: #f1f5f9; }
+    .sb-table td:not(:first-child), .sb-table th:not(:first-child) { text-align: right; }
+    .sb-status-footer { margin-top: 1.25rem; text-align: center; font-size: 0.95rem; font-weight: 600; color: var(--white); background: rgba(8, 122, 75, 0.4); padding: 0.6rem; border-radius: 6px; }
 
-    .btn-gold {
-      background: var(--gold);
-      color: var(--dark-green);
-      font-weight: 700;
-    }
-    .btn-gold:hover {
-      background: #c29e2c;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-gold);
-    }
-
-    .btn-outline {
-      border-color: var(--white);
-      color: var(--white);
-      background: transparent;
-    }
-    .btn-outline:hover {
-      background: var(--white);
-      color: var(--dark-green);
-    }
-
-    .btn-sm {
-      padding: 0.4rem 0.85rem;
-      font-size: 0.825rem;
-    }
-
-    /* Live Inline-Editing Styles */
-    .inline-editable {
-      position: relative;
-      transition: outline 0.2s ease, background-color 0.2s ease;
-      border-radius: 4px;
-    }
-    body.edit-mode-active .inline-editable {
-      outline: 2px dashed #D4AF37 !important;
-      background-color: rgba(212, 175, 55, 0.1) !important;
-      cursor: text !important;
-    }
-    body.edit-mode-active .inline-editable:hover {
-      outline: 2px solid #087A4B !important;
-      background-color: rgba(8, 122, 75, 0.15) !important;
-    }
-
-    /* Top Bar & Navbar */
-    .top-bar {
-      background: #04271c;
-      color: #cbd5e1;
-      font-size: 0.825rem;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .top-bar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .top-bar-contact {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .top-bar-social {
-      display: flex;
-      gap: 1rem;
-    }
-    .top-bar-social a:hover {
-      color: var(--gold);
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: var(--dark-green);
-      z-index: 1000;
-      transition: var(--transition);
-    }
-    .navbar.scrolled {
-      padding: 0.3rem 0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      background: rgba(6, 59, 42, 0.98);
-      backdrop-filter: blur(10px);
-    }
-
-    .navbar-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.8rem 1.5rem;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--white);
-    }
-    .logo-icon {
-      font-size: 1.8rem;
-      color: var(--gold);
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-    }
-    .logo-text h1 {
-      font-size: 1.4rem;
-      line-height: 1.1;
-      color: var(--white);
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-    .logo-text span {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      display: block;
-      font-weight: 600;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 1.3rem;
-      list-style: none;
-    }
-    .nav-item a {
-      color: #e2e8f0;
-      font-weight: 500;
-      font-size: 0.92rem;
-      position: relative;
-      padding: 0.4rem 0;
-    }
-    .nav-item a:hover,
-    .nav-item a.active {
-      color: var(--white);
-    }
-
-    .nav-auth {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .user-profile-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: var(--white);
-      background: rgba(255,255,255,0.1);
-      padding: 0.3rem 0.8rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-    }
-    .user-profile-badge img {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-    }
-    .admin-pill {
-      background: var(--gold);
-      color: var(--dark-green);
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 0.15rem 0.45rem;
-      border-radius: 10px;
-      text-transform: uppercase;
-    }
-
-    .hamburger {
-      display: none;
-      background: transparent;
-      border: none;
-      color: var(--white);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      min-height: 85vh;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, rgba(6, 59, 42, 0.92) 0%, rgba(4, 39, 28, 0.85) 100%),
-                  url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-      color: var(--white);
-      overflow: hidden;
-    }
-    .hero-content {
-      max-width: 760px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      color: var(--gold);
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-    .hero-title {
-      font-size: 3.8rem;
-      line-height: 1.1;
-      font-weight: 900;
-      margin-bottom: 1.2rem;
-      text-transform: uppercase;
-    }
-    .hero-title span {
-      color: var(--gold);
-    }
-    .hero-sub {
-      font-size: 1.3rem;
-      color: #e2e8f0;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-    }
-    .hero-desc {
-      font-size: 1.05rem;
-      color: #cbd5e1;
-      margin-bottom: 2.2rem;
-      line-height: 1.7;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* Live Ticker */
-    .live-ticker {
-      background: #021f16;
-      border-top: 1px solid rgba(212, 175, 55, 0.3);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 0.75rem 0;
-      color: var(--white);
-    }
-    .ticker-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .ticker-badge {
-      background: var(--danger);
-      color: var(--white);
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    /* Statistics Bar */
-    .stats-section {
-      background: var(--white);
-      padding: 3.5rem 0;
-      margin-top: -3rem;
-      position: relative;
-      z-index: 5;
-    }
-    .stats-card-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 1.25rem;
-      background: var(--white);
-      padding: 2.5rem 2rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border-color);
-    }
-    .stat-item {
-      text-align: center;
-      position: relative;
-    }
-    .stat-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 15%;
-      height: 70%;
-      width: 1px;
-      background: var(--border-color);
-    }
-    .stat-number {
-      font-size: 2.75rem;
-      font-weight: 900;
-      color: var(--dark-green);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .stat-number.gold {
-      color: var(--gold-dark);
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--gray-text);
-    }
-
-    /* About Section */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
-      align-items: center;
-    }
-    .about-img-box {
-      position: relative;
-    }
-    .about-img-main {
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
-      object-fit: cover;
-      width: 100%;
-      height: 460px;
-    }
-    .about-experience-badge {
-      position: absolute;
-      bottom: -1.5rem;
-      right: -1.5rem;
-      background: var(--dark-green);
-      color: var(--white);
-      padding: 1.5rem 2rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      border: 2px solid var(--gold);
-      text-align: center;
-    }
-    .badge-years {
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .badge-text {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    .about-values-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      margin-top: 2rem;
-    }
-    .value-card {
-      background: var(--light-green);
-      padding: 1.2rem;
-      border-radius: var(--radius);
-      border-left: 4px solid var(--cricket-green);
-      transition: var(--transition);
-    }
-    .value-card h4 {
-      font-size: 1.05rem;
-      color: var(--dark-green);
-      margin-bottom: 0.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .value-card p {
-      font-size: 0.88rem;
-      color: var(--gray-text);
-    }
-
-    /* Team & Section Action Bars */
-    .section-action-header {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 1.5rem;
-      gap: 0.75rem;
-    }
-
-    /* Teams Cards */
-    .teams-section {
-      background: var(--light-gray);
-    }
-    .teams-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    .team-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-      border: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .team-img {
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-    }
-    .team-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .team-division-tag {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(6, 59, 42, 0.9);
-      color: var(--gold);
-      padding: 0.3rem 0.8rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    .team-body {
-      padding: 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .team-body h3 {
-      font-size: 1.35rem;
-      color: var(--dark-green);
-      margin-bottom: 0.5rem;
-    }
-    .team-meta {
-      font-size: 0.9rem;
-      color: var(--gray-text);
-      margin-bottom: 1.25rem;
-    }
-    .team-stats-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: var(--light-green);
-      padding: 0.75rem;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: auto;
-      margin-bottom: 1.25rem;
-    }
-    .team-stat-val {
-      font-weight: 800;
-      color: var(--cricket-green);
-      font-size: 1.1rem;
-    }
-    .team-stat-lbl {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      color: var(--gray-text);
-      font-weight: 600;
-    }
-
-    /* Player Cards & Admin Controls */
-    .players-filter-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-      background: var(--white);
-      padding: 1rem 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-color);
-    }
-    .filter-tabs {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      padding: 0.45rem 1rem;
-      background: transparent;
-      border: 1px solid var(--border-color);
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      color: var(--gray-text);
-      transition: var(--transition);
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--cricket-green);
-      color: var(--white);
-      border-color: var(--cricket-green);
-    }
-    .player-search-box {
-      position: relative;
-      min-width: 260px;
-    }
-    .player-search-box input {
-      width: 100%;
-      padding: 0.5rem 1rem 0.5rem 2.2rem;
-      border: 1px solid var(--border-color);
-      border-radius: 50px;
-      font-size: 0.9rem;
-      outline: none;
-    }
-    .player-search-box i {
-      position: absolute;
-      left: 0.8rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #9CA3AF;
-    }
-
-    .players-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.8rem;
-    }
-    .player-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-      border: 1px solid var(--border-color);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .player-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--gold);
-    }
-    .player-jersey-badge {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      width: 36px;
-      height: 36px;
-      background: var(--dark-green);
-      border: 2px solid var(--gold);
-      color: var(--gold);
-      font-weight: 800;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.95rem;
-      z-index: 2;
-    }
-    .player-role-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(6, 59, 42, 0.9);
-      color: var(--white);
-      font-size: 0.72rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 50px;
-      font-weight: 700;
-      z-index: 2;
-    }
-    .player-img-wrap {
-      height: 270px;
-      background: #e2e8f0;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .player-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      transition: var(--transition);
-    }
-    .player-card:hover .player-img-wrap img {
-      transform: scale(1.05);
-    }
-    .player-info-body {
-      padding: 1.25rem;
-      text-align: center;
-      cursor: pointer;
-    }
-    .player-name {
-      font-size: 1.15rem;
-      color: var(--dark-green);
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    .player-subrole {
-      font-size: 0.8rem;
-      color: var(--cricket-green);
-      font-weight: 600;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-    .player-brief-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-      border-top: 1px solid var(--border-color);
-      padding-top: 0.8rem;
-      font-size: 0.8rem;
-    }
-    .pbs-item strong {
-      display: block;
-      color: var(--dark-green);
-      font-size: 1rem;
-    }
-    .pbs-item span {
-      font-size: 0.7rem;
-      color: var(--gray-text);
-      text-transform: uppercase;
-    }
-    .card-admin-action-bar {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.6rem 1rem;
-      background: #f8fafc;
-      border-top: 1px solid var(--border-color);
-    }
-
-    /* Live Scoreboard */
-    .scoreboard-section {
-      background: linear-gradient(135deg, #032419 0%, #063B2A 100%);
-      color: var(--white);
-      position: relative;
-    }
-    .live-scoreboard-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .sb-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      padding-bottom: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .sb-tourney {
-      font-size: 0.95rem;
-      color: var(--gold);
-      font-weight: 700;
-    }
-    .sb-teams-row {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 1.5rem;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .sb-team-name {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-    }
-    .sb-team-score {
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--gold);
-    }
-    .sb-team-overs {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-    }
-    .sb-vs-badge {
-      font-size: 1.2rem;
-      font-weight: 900;
-      background: rgba(255,255,255,0.1);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-    }
-    .sb-details-tables {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      background: rgba(0,0,0,0.25);
-      padding: 1.25rem;
-      border-radius: var(--radius);
-    }
-    .sb-table {
-      width: 100%;
-      font-size: 0.85rem;
-      border-collapse: collapse;
-    }
-    .sb-table th {
-      text-align: left;
-      color: var(--gold);
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .sb-table td {
-      padding: 0.4rem 0;
-      color: #f1f5f9;
-    }
-    .sb-table td:not(:first-child), .sb-table th:not(:first-child) {
-      text-align: right;
-    }
-    .sb-status-footer {
-      margin-top: 1.25rem;
-      text-align: center;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--white);
-      background: rgba(8, 122, 75, 0.4);
-      padding: 0.6rem;
-      border-radius: 6px;
-    }
-
-    /* Match Cards */
-    .matches-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .match-tab-btn {
-      padding: 0.7rem 1.8rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      border-radius: 50px;
-      border: 2px solid var(--cricket-green);
-      background: transparent;
-      color: var(--cricket-green);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .match-tab-btn.active {
-      background: var(--cricket-green);
-      color: var(--white);
-    }
-    .matches-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.8rem;
-    }
-    .match-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 1.8rem;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border-color);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .match-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.25rem;
-      font-size: 0.8rem;
-      color: var(--gray-text);
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.6rem;
-    }
-    .match-tag {
-      font-weight: 700;
-      color: var(--cricket-green);
-      text-transform: uppercase;
-    }
-    .match-teams-box {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.25rem;
-    }
+    .matches-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+    .match-tab-btn { padding: 0.7rem 1.8rem; font-size: 0.95rem; font-weight: 700; border-radius: 50px; border: 2px solid var(--cricket-green); background: transparent; color: var(--cricket-green); cursor: pointer; transition: var(--transition); }
+    .match-tab-btn.active { background: var(--cricket-green); color: var(--white); }
+    .matches-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; }
+    .match-card { background: var(--white); border-radius: var(--radius-lg); padding: 1.8rem; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); position: relative; display: flex; flex-direction: column; }
+    .match-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-size: 0.8rem; color: var(--gray-text); border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem; }
+    .match-tag { font-weight: 700; color: var(--cricket-green); text-transform: uppercase; }
+    .match-teams-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
     .m-team { flex: 1; }
     .m-team.left { text-align: left; }
     .m-team.right { text-align: right; }
-    .m-team-name {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--dark-green);
-    }
-    .m-team-score {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--cricket-green);
-    }
-    .m-vs {
-      padding: 0 1rem;
-      font-weight: 800;
-      color: #9CA3AF;
-      font-size: 0.9rem;
-    }
-    .match-result-badge {
-      display: block;
-      text-align: center;
-      padding: 0.5rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-top: auto;
-    }
-    .match-result-badge.win {
-      background: #def7ec;
-      color: #03543f;
-    }
-    .match-result-badge.loss {
-      background: #fde8e8;
-      color: #9b1c1c;
-    }
-    .match-result-badge.upcoming {
-      background: #fef08a;
-      color: #854d0e;
-    }
+    .m-team-name { font-size: 1.15rem; font-weight: 800; color: var(--dark-green); }
+    .m-team-score { font-size: 1.3rem; font-weight: 900; color: var(--cricket-green); }
+    .m-vs { padding: 0 1rem; font-weight: 800; color: #9CA3AF; font-size: 0.9rem; }
+    .match-result-badge { display: block; text-align: center; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; margin-top: auto; }
+    .match-result-badge.win { background: #def7ec; color: #03543f; }
+    .match-result-badge.loss { background: #fde8e8; color: #9b1c1c; }
+    .match-result-badge.upcoming { background: #fef08a; color: #854d0e; }
 
-    /* Standings Table */
-    .table-responsive {
-      overflow-x: auto;
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border-color);
-    }
-    .custom-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.95rem;
-    }
-    .custom-table thead {
-      background: var(--dark-green);
-      color: var(--white);
-    }
-    .custom-table th, .custom-table td {
-      padding: 1rem 1.25rem;
-    }
-    .custom-table tbody tr {
-      border-bottom: 1px solid var(--border-color);
-      transition: var(--transition);
-    }
-    .custom-table tr.highlight-team {
-      background-color: #f0fdf4;
-      font-weight: 700;
-      border-left: 4px solid var(--cricket-green);
-    }
+    .table-responsive { overflow-x: auto; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
+    .custom-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+    .custom-table thead { background: var(--dark-green); color: var(--white); }
+    .custom-table th, .custom-table td { padding: 1rem 1.25rem; }
+    .custom-table tbody tr { border-bottom: 1px solid var(--border-color); transition: var(--transition); }
+    .custom-table tr.highlight-team { background-color: #f0fdf4; font-weight: 700; border-left: 4px solid var(--cricket-green); }
 
-    /* Achievements */
-    .achievements-section {
-      background: var(--light-gray);
-    }
-    .achievements-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .achievement-card {
-      background: var(--white);
-      padding: 2rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border-color);
-      text-align: center;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .trophy-icon-wrap {
-      width: 65px;
-      height: 65px;
-      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-      color: var(--gold-dark);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      margin: 0 auto 1.2rem;
-    }
-    .achievement-year {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--cricket-green);
-      background: var(--light-green);
-      padding: 0.2rem 0.65rem;
-      border-radius: 50px;
-      margin-bottom: 0.6rem;
-    }
+    .achievements-section { background: var(--light-gray); }
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .achievement-card { background: var(--white); padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-color); text-align: center; position: relative; display: flex; flex-direction: column; }
+    .trophy-icon-wrap { width: 65px; height: 65px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); color: var(--gold-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 1.2rem; }
+    .achievement-year { display: inline-block; font-size: 0.8rem; font-weight: 800; color: var(--cricket-green); background: var(--light-green); padding: 0.2rem 0.65rem; border-radius: 50px; margin-bottom: 0.6rem; }
 
-    /* Gallery */
-    .gallery-filter-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .gallery-item {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 240px;
-      box-shadow: var(--shadow-sm);
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-      cursor: pointer;
-    }
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(6, 59, 42, 0.85) 0%, transparent 60%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.2rem;
-      color: var(--white);
-      opacity: 0;
-      transition: var(--transition);
-      pointer-events: none;
-    }
-    .gallery-item:hover img {
-      transform: scale(1.08);
-    }
-    .gallery-item:hover .gallery-overlay {
-      opacity: 1;
-    }
-    .gallery-admin-delete {
-      position: absolute;
-      top: 0.8rem;
-      right: 0.8rem;
-      background: rgba(220, 38, 38, 0.85);
-      color: #fff;
-      border: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .events-section { background: var(--white); }
+    .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; }
+    .event-card { display: flex; gap: 1.2rem; background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.4rem; box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .event-card:hover { box-shadow: var(--shadow-md); border-color: var(--gold); }
+    .event-date-block { flex-shrink: 0; width: 68px; height: 68px; background: var(--dark-green); color: var(--white); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .event-date-block .ed-day { font-size: 1.4rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .event-date-block .ed-mon { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .event-body { flex: 1; min-width: 0; }
+    .event-type-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--cricket-green); background: var(--light-green); padding: 0.15rem 0.55rem; border-radius: 50px; margin-bottom: 0.4rem; }
+    .event-title { font-size: 1.05rem; color: var(--dark-green); margin-bottom: 0.3rem; }
+    .event-meta-line { font-size: 0.82rem; color: var(--gray-text); margin-bottom: 0.4rem; }
+    .event-desc { font-size: 0.88rem; color: var(--gray-text); margin-bottom: 0.8rem; }
 
-    /* Contact Section */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 3rem;
-    }
-    .contact-info-card {
-      background: var(--dark-green);
-      color: var(--white);
-      padding: 2.5rem;
-      border-radius: var(--radius-lg);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .contact-info-item {
-      display: flex;
-      gap: 1.2rem;
-      margin-bottom: 1.8rem;
-    }
-    .contact-icon {
-      width: 45px;
-      height: 45px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    .contact-form {
-      background: var(--white);
-      padding: 2.5rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border-color);
-    }
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--dark-text);
-    }
-    .form-control {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      outline: none;
-      transition: var(--transition);
-    }
-    .form-control:focus {
-      border-color: var(--cricket-green);
-      box-shadow: 0 0 0 3px rgba(8, 122, 75, 0.15);
-    }
-    textarea.form-control {
-      resize: vertical;
-      min-height: 110px;
-    }
+    .gallery-filter-tabs { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; height: 240px; box-shadow: var(--shadow-sm); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; cursor: pointer; }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6, 59, 42, 0.85) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem; color: var(--white); opacity: 0; transition: var(--transition); pointer-events: none; }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-admin-delete { position: absolute; top: 0.8rem; right: 0.8rem; background: rgba(220, 38, 38, 0.85); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 
-    /* Footer */
-    .footer {
-      background: #04241a;
-      color: #cbd5e1;
-      padding: 4rem 0 1.5rem;
-      border-top: 4px solid var(--gold);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2.5rem;
-      margin-bottom: 3rem;
-    }
-    .footer-title {
-      font-size: 1.1rem;
-      color: var(--white);
-      margin-bottom: 1.25rem;
-    }
-    .footer-links {
-      list-style: none;
-    }
-    .footer-links li {
-      margin-bottom: 0.6rem;
-    }
-    .footer-links a {
-      color: #94a3b8;
-      font-size: 0.9rem;
-    }
-    .footer-links a:hover {
-      color: var(--gold);
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+    .sponsors-section { background: var(--light-gray); padding: 3rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .sponsors-strip { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .sponsors-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; color: var(--gray-text); text-align: center; margin-bottom: 1.5rem; }
+    .sponsor-logo-item { height: 46px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .sponsor-logo-item img { max-height: 100%; max-width: 140px; object-fit: contain; filter: grayscale(100%); opacity: 0.65; transition: var(--transition); }
+    .sponsor-logo-item:hover img { filter: grayscale(0%); opacity: 1; }
+    .sponsor-remove-btn { position: absolute; top: -10px; right: -10px; background: var(--danger); color: #fff; border: none; width: 20px; height: 20px; border-radius: 50%; font-size: 0.7rem; cursor: pointer; display: none; align-items: center; justify-content: center; }
+    body.edit-mode-active .sponsor-remove-btn { display: flex; }
 
-    /* Modals & Popups */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: var(--transition);
-      padding: 1.5rem;
-    }
-    .modal-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-box {
-      background: var(--white);
-      width: 100%;
-      max-width: 720px;
-      max-height: 90vh;
-      overflow-y: auto;
-      border-radius: var(--radius-lg);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      position: relative;
-    }
-    .modal-close-btn {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.2rem;
-      background: rgba(0,0,0,0.06);
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--dark-text);
-      z-index: 10;
-    }
-    .modal-header {
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .modal-body {
-      padding: 2rem;
-    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+    .contact-info-card { background: var(--dark-green); color: var(--white); padding: 2.5rem; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; }
+    .contact-info-item { display: flex; gap: 1.2rem; margin-bottom: 1.8rem; }
+    .contact-icon { width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; flex-shrink: 0; }
+    .contact-form { background: var(--white); padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--dark-text); }
+    .form-control { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.95rem; outline: none; transition: var(--transition); }
+    .form-control:focus { border-color: var(--cricket-green); box-shadow: 0 0 0 3px rgba(8, 122, 75, 0.15); }
+    textarea.form-control { resize: vertical; min-height: 110px; }
 
-    /* Player Profile Modal */
-    .player-modal-header {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 1.5rem;
-    }
-    .pm-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--cricket-green);
-    }
-    .pm-title h2 {
-      color: var(--dark-green);
-      font-size: 1.8rem;
-    }
-    .pm-title p {
-      color: var(--gold-dark);
-      font-weight: 700;
-    }
-    .stats-tab-nav {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid var(--border-color);
-    }
-    .stats-tab-btn {
-      padding: 0.6rem 1.2rem;
-      background: none;
-      border: none;
-      font-weight: 700;
-      color: var(--gray-text);
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-    }
-    .stats-tab-btn.active {
-      color: var(--cricket-green);
-      border-color: var(--cricket-green);
-    }
-    .stats-grid-modal {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .stat-box-modal {
-      background: var(--light-green);
-      padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .stat-box-modal .s-val {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: var(--dark-green);
-    }
-    .stat-box-modal .s-label {
-      font-size: 0.75rem;
-      color: var(--gray-text);
-      text-transform: uppercase;
-    }
+    .photo-upload-box { border: 2px dashed var(--border-color); border-radius: var(--radius); padding: 1rem; text-align: center; cursor: pointer; transition: var(--transition); background: var(--light-gray); position: relative; overflow: hidden; }
+    .photo-upload-box:hover { border-color: var(--cricket-green); background: var(--light-green); }
+    .photo-upload-box.has-image { padding: 0; border-style: solid; }
+    .photo-upload-box img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .photo-upload-box .puz-placeholder { padding: 1.4rem 0; color: var(--gray-text); font-size: 0.88rem; }
+    .photo-upload-box .puz-placeholder i { font-size: 1.6rem; color: var(--cricket-green); display: block; margin-bottom: 0.4rem; }
+    .photo-upload-box .puz-change-badge { position: absolute; bottom: 0.5rem; right: 0.5rem; background: rgba(6,59,42,0.85); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 50px; }
 
-    /* Floating Admin Dock */
-    .admin-dock-bar {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 1.5rem;
-      background: var(--dark-green);
-      color: var(--white);
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 2px solid var(--gold);
-      z-index: 1500;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+    .footer { background: #04241a; color: #cbd5e1; padding: 4rem 0 1.5rem; border-top: 4px solid var(--gold); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+    .footer-title { font-size: 1.1rem; color: var(--white); margin-bottom: 1.25rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.6rem; }
+    .footer-links a { color: #94a3b8; font-size: 0.9rem; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.85rem; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom a { color: #94a3b8; }
+    .footer-bottom a:hover { color: var(--gold); }
 
-    /* Lightbox */
-    .lightbox-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 2500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: var(--transition);
-    }
-    .lightbox-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .lightbox-content {
-      position: relative;
-      max-width: 85vw;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .lightbox-img {
-      max-width: 100%;
-      max-height: 80vh;
-      border-radius: 8px;
-    }
-    .lightbox-nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.2);
-      color: var(--white);
-      border: none;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      font-size: 1.3rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition); padding: 1.5rem; }
+    .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+    .modal-box { background: var(--white); width: 100%; max-width: 720px; max-height: 90vh; overflow-y: auto; border-radius: var(--radius-lg); box-shadow: 0 20px 60px rgba(0,0,0,0.4); position: relative; }
+    .modal-box.modal-sm { max-width: 440px; }
+    .modal-close-btn { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(0,0,0,0.06); border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; color: var(--dark-text); z-index: 10; }
+    .modal-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-color); }
+    .modal-body { padding: 2rem; }
+
+    .player-modal-header { display: flex; gap: 2rem; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; }
+    .pm-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--cricket-green); }
+    .pm-title h2 { color: var(--dark-green); font-size: 1.8rem; }
+    .pm-title p { color: var(--gold-dark); font-weight: 700; }
+    .stats-grid-modal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .stat-box-modal { background: var(--light-green); padding: 1rem; border-radius: 8px; text-align: center; }
+    .stat-box-modal .s-val { font-size: 1.6rem; font-weight: 900; color: var(--dark-green); }
+    .stat-box-modal .s-label { font-size: 0.75rem; color: var(--gray-text); text-transform: uppercase; }
+
+    .admin-dock-bar { position: fixed; bottom: 1.5rem; left: 1.5rem; background: var(--dark-green); color: var(--white); padding: 0.5rem 1rem; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 2px solid var(--gold); z-index: 1500; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; max-width: calc(100vw - 3rem); }
+
+    .lightbox-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2500; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition); }
+    .lightbox-backdrop.active { opacity: 1; pointer-events: auto; }
+    .lightbox-content { position: relative; max-width: 85vw; max-height: 85vh; display: flex; flex-direction: column; align-items: center; }
+    .lightbox-img { max-width: 100%; max-height: 80vh; border-radius: 8px; }
+    .lightbox-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); color: var(--white); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .lightbox-prev { left: -60px; }
     .lightbox-next { right: -60px; }
 
-    /* Toast System */
-    .toast-container {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-    .toast {
-      background: var(--dark-green);
-      color: var(--white);
-      padding: 0.9rem 1.4rem;
-      border-radius: 8px;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 0.92rem;
-      border-left: 4px solid var(--gold);
-      min-width: 280px;
-    }
+    .toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.8rem; }
+    .toast { background: var(--dark-green); color: var(--white); padding: 0.9rem 1.4rem; border-radius: 8px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 0.8rem; font-size: 0.92rem; border-left: 4px solid var(--gold); min-width: 280px; transition: opacity 0.3s ease; }
     .toast.success { border-color: #10B981; }
     .toast.error { border-color: #EF4444; }
     .toast.info { border-color: var(--gold); }
 
-    /* Responsive */
     @media (max-width: 992px) {
       .stats-card-grid { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .about-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 280px;
-        height: 100vh;
-        background: var(--dark-green);
-        flex-direction: column;
-        padding: 5rem 2rem 2rem;
-        transition: var(--transition);
-      }
+      .nav-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--dark-green); flex-direction: column; padding: 5rem 2rem 2rem; transition: var(--transition); }
       .nav-menu.open { right: 0; }
       .hamburger { display: block; }
       .hero-title { font-size: 2.5rem; }
@@ -1462,12 +309,13 @@
       .sb-teams-row { grid-template-columns: 1fr; }
       .sb-details-tables { grid-template-columns: 1fr; }
       .lightbox-nav-btn { display: none; }
+      .admin-dock-bar { left: 1rem; bottom: 1rem; }
+      .stats-grid-modal { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar -->
   <header class="top-bar">
     <div class="container">
       <div class="top-bar-contact">
@@ -1483,7 +331,6 @@
     </div>
   </header>
 
-  <!-- Sticky Navbar -->
   <nav class="navbar" id="navbar">
     <div class="navbar-container container">
       <a href="#home" class="logo-area">
@@ -1504,6 +351,7 @@
         <li class="nav-item"><a href="#teams">Teams</a></li>
         <li class="nav-item"><a href="#players">Players</a></li>
         <li class="nav-item"><a href="#matches">Fixtures</a></li>
+        <li class="nav-item"><a href="#events">Events</a></li>
         <li class="nav-item"><a href="#points">Standings</a></li>
         <li class="nav-item"><a href="#achievements">Trophies</a></li>
         <li class="nav-item"><a href="#gallery">Gallery</a></li>
@@ -1512,15 +360,14 @@
 
       <div class="nav-auth">
         <div id="authContainer">
-          <button class="btn btn-gold btn-sm" id="googleLoginBtn">
-            <i class="fa-brands fa-google"></i> Sign In
+          <button class="btn btn-gold btn-sm" id="adminLoginBtn">
+            <i class="fa-solid fa-user-shield"></i> Admin Sign In
           </button>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Live Mini Score Ticker -->
   <div class="live-ticker">
     <div class="container ticker-wrap">
       <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -1537,7 +384,6 @@
     </div>
   </div>
 
-  <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
@@ -1561,9 +407,12 @@
         </div>
       </div>
     </div>
+    <button class="btn btn-gold btn-sm hero-edit-btn admin-only-control" id="changeHeroBgBtn" style="display:none;">
+      <i class="fa-solid fa-image"></i> Change Cover Photo
+    </button>
+    <input type="file" id="heroBgFileInput" accept="image/*" style="display:none;" />
   </section>
 
-  <!-- Animated Statistics Bar -->
   <section class="stats-section">
     <div class="container">
       <div class="stats-card-grid">
@@ -1595,12 +444,11 @@
     </div>
   </section>
 
-  <!-- About Section -->
   <section class="section-padding" id="about">
     <div class="container">
       <div class="about-grid">
         <div class="about-img-box">
-          <img src="https://images.unsplash.com/photo-1531415074868-036b107e775a?auto=format&fit=crop&w=1000&q=80" alt="About Spartans" class="about-img-main" />
+          <img src="https://images.unsplash.com/photo-1531415074868-036b107e775a?auto=format&fit=crop&w=1000&q=80" alt="About Spartans" class="about-img-main" id="about_main_img" />
           <div class="about-experience-badge">
             <div class="badge-years" id="txt_about_badge_yrs" class="inline-editable" data-edit-key="about_badge_yrs">12+</div>
             <div class="badge-text">Years of Dominance</div>
@@ -1624,19 +472,19 @@
 
           <div class="about-values-grid">
             <div class="value-card">
-              <h4><i class="fa-solid fa-handshake-angle text-cricket"></i> Teamwork</h4>
+              <h4><i class="fa-solid fa-handshake-angle"></i> Teamwork</h4>
               <p>Every individual milestone serves the team's victory.</p>
             </div>
             <div class="value-card">
-              <h4><i class="fa-solid fa-bullseye text-cricket"></i> Discipline</h4>
+              <h4><i class="fa-solid fa-bullseye"></i> Discipline</h4>
               <p>Relentless fitness drills, punctuality, and sharp focus.</p>
             </div>
             <div class="value-card">
-              <h4><i class="fa-solid fa-medal text-cricket"></i> Excellence</h4>
+              <h4><i class="fa-solid fa-medal"></i> Excellence</h4>
               <p>Match-winning execution under high-pressure overs.</p>
             </div>
             <div class="value-card">
-              <h4><i class="fa-solid fa-heart text-cricket"></i> Respect</h4>
+              <h4><i class="fa-solid fa-heart"></i> Respect</h4>
               <p>Upholding the legendary spirit and honour of cricket.</p>
             </div>
           </div>
@@ -1645,7 +493,6 @@
     </div>
   </section>
 
-  <!-- Teams Division -->
   <section class="section-padding teams-section" id="teams">
     <div class="container">
       <div class="section-title-wrap">
@@ -1654,7 +501,7 @@
         <p class="section-desc">Manage first XI, developmental squads, and academy leagues.</p>
       </div>
 
-      <div class="section-action-header">
+      <div class="section-action-header admin-only-control" style="display:none;">
         <button class="btn btn-primary btn-sm" id="addNewTeamBtn">
           <i class="fa-solid fa-plus"></i> Add Team Division
         </button>
@@ -1664,7 +511,6 @@
     </div>
   </section>
 
-  <!-- Live Scoreboard -->
   <section class="section-padding scoreboard-section" id="liveScoreSection">
     <div class="container">
       <div class="section-title-wrap">
@@ -1672,7 +518,7 @@
         <h2 class="section-title" style="color: var(--white);">Premier League Live Fixture</h2>
       </div>
 
-      <div class="section-action-header" style="justify-content: center; margin-bottom: 1rem;">
+      <div class="section-action-header admin-only-control" style="justify-content: center; margin-bottom: 1rem; display:none;">
         <button class="btn btn-gold btn-sm" id="editLiveScoreBtn">
           <i class="fa-solid fa-pen-to-square"></i> Edit Live Scoreboard
         </button>
@@ -1701,9 +547,7 @@
         <div class="sb-details-tables">
           <div>
             <table class="sb-table">
-              <thead>
-                <tr><th>Batters</th><th>R</th><th>B</th><th>4s</th><th>6s</th></tr>
-              </thead>
+              <thead><tr><th>Batters</th><th>R</th><th>B</th><th>4s</th><th>6s</th></tr></thead>
               <tbody id="sb_batters_body">
                 <tr><td>K. Rahul *</td><td>68</td><td>42</td><td>7</td><td>3</td></tr>
                 <tr><td>V. Ashwin</td><td>24</td><td>14</td><td>2</td><td>1</td></tr>
@@ -1712,9 +556,7 @@
           </div>
           <div>
             <table class="sb-table">
-              <thead>
-                <tr><th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th></tr>
-              </thead>
+              <thead><tr><th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th></tr></thead>
               <tbody id="sb_bowlers_body">
                 <tr><td>D. Karthik</td><td>3.4</td><td>0</td><td>29</td><td>2</td></tr>
                 <tr><td>S. Gopal</td><td>4.0</td><td>0</td><td>36</td><td>1</td></tr>
@@ -1730,7 +572,6 @@
     </div>
   </section>
 
-  <!-- Squad / Players Section -->
   <section class="section-padding" id="players">
     <div class="container">
       <div class="section-title-wrap">
@@ -1739,7 +580,7 @@
         <p class="section-desc">Click on any player to view their complete stats profile, or click "Edit" on their card to modify details.</p>
       </div>
 
-      <div class="section-action-header">
+      <div class="section-action-header admin-only-control" style="display:none;">
         <button class="btn btn-primary btn-sm" id="addNewPlayerBtn">
           <i class="fa-solid fa-user-plus"></i> Add New Player
         </button>
@@ -1763,7 +604,6 @@
     </div>
   </section>
 
-  <!-- Matches Section -->
   <section class="section-padding teams-section" id="matches">
     <div class="container">
       <div class="section-title-wrap">
@@ -1772,7 +612,7 @@
         <p class="section-desc">Upcoming tournaments and completed match records.</p>
       </div>
 
-      <div class="section-action-header">
+      <div class="section-action-header admin-only-control" style="display:none;">
         <button class="btn btn-primary btn-sm" id="addNewMatchBtn">
           <i class="fa-solid fa-calendar-plus"></i> Add Match Event
         </button>
@@ -1787,7 +627,24 @@
     </div>
   </section>
 
-  <!-- Standings / Points Table -->
+  <section class="section-padding events-section" id="events">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Club Calendar</span>
+        <h2 class="section-title">Trials, Camps & Club Events</h2>
+        <p class="section-desc">Training camps, trials, award nights and everything beyond match day.</p>
+      </div>
+
+      <div class="section-action-header admin-only-control" style="display:none;">
+        <button class="btn btn-primary btn-sm" id="addNewEventBtn">
+          <i class="fa-solid fa-calendar-plus"></i> Add Club Event
+        </button>
+      </div>
+
+      <div class="events-grid" id="eventsGridContainer"></div>
+    </div>
+  </section>
+
   <section class="section-padding" id="points">
     <div class="container">
       <div class="section-title-wrap">
@@ -1799,15 +656,7 @@
       <div class="table-responsive">
         <table class="custom-table" id="pointsTable">
           <thead>
-            <tr>
-              <th>POS</th>
-              <th>CLUB</th>
-              <th>P</th>
-              <th>W</th>
-              <th>L</th>
-              <th>NRR</th>
-              <th>PTS</th>
-            </tr>
+            <tr><th>POS</th><th>CLUB</th><th>P</th><th>W</th><th>L</th><th>NRR</th><th>PTS</th></tr>
           </thead>
           <tbody id="pointsTableBody"></tbody>
         </table>
@@ -1815,7 +664,6 @@
     </div>
   </section>
 
-  <!-- Achievements Section -->
   <section class="section-padding achievements-section" id="achievements">
     <div class="container">
       <div class="section-title-wrap">
@@ -1824,7 +672,7 @@
         <p class="section-desc">Honours and trophies earned by XI Spartans.</p>
       </div>
 
-      <div class="section-action-header">
+      <div class="section-action-header admin-only-control" style="display:none;">
         <button class="btn btn-gold btn-sm" id="addNewAchievementBtn">
           <i class="fa-solid fa-trophy"></i> Add Trophy / Milestone
         </button>
@@ -1834,7 +682,6 @@
     </div>
   </section>
 
-  <!-- Photo Gallery -->
   <section class="section-padding" id="gallery">
     <div class="container">
       <div class="section-title-wrap">
@@ -1843,7 +690,7 @@
         <p class="section-desc">Action shots, net practice, and title celebrations.</p>
       </div>
 
-      <div class="section-action-header">
+      <div class="section-action-header admin-only-control" style="display:none;">
         <button class="btn btn-primary btn-sm" id="addNewGalleryBtn">
           <i class="fa-solid fa-camera"></i> Add Image to Gallery
         </button>
@@ -1860,7 +707,19 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <section class="sponsors-section" id="sponsors">
+    <div class="container">
+      <div class="sponsors-label">Proudly Supported By</div>
+      <div class="sponsors-strip" id="sponsorsStrip"></div>
+      <div class="admin-only-control" style="display:none; text-align:center; margin-top:1.5rem;">
+        <button class="btn btn-outline btn-sm" id="addSponsorBtn" style="color: var(--dark-green); border-color: var(--dark-green);">
+          <i class="fa-solid fa-plus"></i> Add Sponsor Logo
+        </button>
+        <input type="file" id="sponsorFileInput" accept="image/*" style="display:none;" />
+      </div>
+    </div>
+  </section>
+
   <section class="section-padding" id="contact">
     <div class="container">
       <div class="section-title-wrap">
@@ -1934,7 +793,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -1978,22 +836,59 @@
       </div>
       <div class="footer-bottom">
         <div>&copy; 2026 XI Spartans Cricket Club. All Rights Reserved.</div>
-        <div>Completely customizable via the UI Admin Tools.</div>
+        <div>Customizable via the UI Admin Tools. <a href="#" id="footerBackupLink">Backup / Restore Data</a></div>
       </div>
     </div>
   </footer>
 
-  <!-- FLOATING ADMIN CONTROL DOCK -->
-  <div class="admin-dock-bar" id="adminDockBar">
+  <div class="admin-dock-bar" id="adminDockBar" style="display:none;">
     <button class="btn btn-gold btn-sm" id="toggleEditModeBtn">
       <i class="fa-solid fa-pencil"></i> <span id="editModeBtnText">Live Edit (On Page)</span>
     </button>
     <button class="btn btn-primary btn-sm" id="savePageEditsBtn" style="display: none;">
       <i class="fa-solid fa-floppy-disk"></i> Save Page Text
     </button>
+    <button class="btn btn-outline btn-sm" id="backupDataBtn" style="color:#fff; border-color: rgba(255,255,255,0.4);">
+      <i class="fa-solid fa-download"></i> Export
+    </button>
+    <button class="btn btn-outline btn-sm" id="restoreDataBtn" style="color:#fff; border-color: rgba(255,255,255,0.4);">
+      <i class="fa-solid fa-upload"></i> Import
+    </button>
+    <input type="file" id="restoreFileInput" accept="application/json" style="display:none;" />
   </div>
 
-  <!-- MODAL: Player Details Profile -->
+  <div class="modal-backdrop" id="adminLoginModalBackdrop">
+    <div class="modal-box modal-sm">
+      <button class="modal-close-btn" id="closeAdminLoginModalBtn">&times;</button>
+      <div class="modal-header">
+        <h3 style="color: var(--dark-green);"><i class="fa-solid fa-user-shield"></i> Club Admin Sign In</h3>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: var(--gray-text); margin-bottom: 1.2rem;">
+          Sign in with your authorized Google Account or enter your admin passcode to unlock club management tools.
+        </p>
+        <button type="button" class="btn btn-primary" id="googleAdminLoginBtn" style="width: 100%; margin-bottom: 1rem;">
+          <i class="fa-brands fa-google"></i> Sign in with Google
+        </button>
+        <div style="text-align: center; color: var(--gray-text); margin-bottom: 1rem; font-size: 0.8rem; position: relative;">
+          <span>— OR PASSCODE —</span>
+        </div>
+        <form id="adminLoginForm">
+          <div class="form-group">
+            <label>Admin Passcode</label>
+            <input type="password" id="adminPasscodeInput" class="form-control" placeholder="Enter passcode" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn btn-outline" style="width: 100%; color: var(--dark-green); border-color: var(--dark-green);">
+            <i class="fa-solid fa-right-to-bracket"></i> Unlock via Passcode
+          </button>
+        </form>
+        <p style="font-size: 0.78rem; color: var(--gray-text); margin-top: 1rem;">
+          Default passcode: <strong>spartans2026</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="playerModalBackdrop">
     <div class="modal-box">
       <button class="modal-close-btn" id="closePlayerModalBtn">&times;</button>
@@ -2001,7 +896,6 @@
     </div>
   </div>
 
-  <!-- MODAL: Player Editor Form -->
   <div class="modal-backdrop" id="playerEditModalBackdrop">
     <div class="modal-box">
       <button class="modal-close-btn" id="closePlayerEditModalBtn">&times;</button>
@@ -2011,6 +905,14 @@
       <div class="modal-body">
         <form id="playerForm">
           <input type="hidden" id="pf_id" />
+          <div class="form-group">
+            <label>Player Photo *</label>
+            <div class="photo-upload-box" id="pf_photo_box">
+              <div class="puz-placeholder"><i class="fa-solid fa-camera"></i>Click to upload a photo from your device</div>
+            </div>
+            <input type="file" id="pf_image_file" accept="image/*" style="display:none;" />
+            <input type="hidden" id="pf_image" required />
+          </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
               <label>Player Name *</label>
@@ -2021,7 +923,6 @@
               <input type="number" id="pf_jersey" class="form-control" required />
             </div>
           </div>
-
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
               <label>Primary Role</label>
@@ -2039,12 +940,6 @@
               <input type="text" id="pf_team" class="form-control" placeholder="XI Spartans Senior XI" />
             </div>
           </div>
-
-          <div class="form-group">
-            <label>Player Photo (Direct URL) *</label>
-            <input type="url" id="pf_image" class="form-control" required />
-          </div>
-
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
               <label>Batting Style</label>
@@ -2055,26 +950,12 @@
               <input type="text" id="pf_bowling" class="form-control" placeholder="Right Arm Fast" />
             </div>
           </div>
-
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;">
-            <div class="form-group">
-              <label>Matches</label>
-              <input type="number" id="pf_matches" class="form-control" value="0" />
-            </div>
-            <div class="form-group">
-              <label>Runs</label>
-              <input type="number" id="pf_runs" class="form-control" value="0" />
-            </div>
-            <div class="form-group">
-              <label>Wickets</label>
-              <input type="number" id="pf_wickets" class="form-control" value="0" />
-            </div>
-            <div class="form-group">
-              <label>Catches</label>
-              <input type="number" id="pf_catches" class="form-control" value="0" />
-            </div>
+            <div class="form-group"><label>Matches</label><input type="number" id="pf_matches" class="form-control" value="0" /></div>
+            <div class="form-group"><label>Runs</label><input type="number" id="pf_runs" class="form-control" value="0" /></div>
+            <div class="form-group"><label>Wickets</label><input type="number" id="pf_wickets" class="form-control" value="0" /></div>
+            <div class="form-group"><label>Catches</label><input type="number" id="pf_catches" class="form-control" value="0" /></div>
           </div>
-
           <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
             <i class="fa-solid fa-floppy-disk"></i> Save Player Details
           </button>
@@ -2083,7 +964,51 @@
     </div>
   </div>
 
-  <!-- MODAL: Match Event Editor -->
+  <div class="modal-backdrop" id="teamEditModalBackdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="closeTeamEditModalBtn">&times;</button>
+      <div class="modal-header">
+        <h3 id="teamEditModalTitle" style="color: var(--dark-green);">Add Team Division</h3>
+      </div>
+      <div class="modal-body">
+        <form id="teamForm">
+          <input type="hidden" id="tf_id" />
+          <div class="form-group">
+            <label>Team Photo *</label>
+            <div class="photo-upload-box" id="tf_photo_box">
+              <div class="puz-placeholder"><i class="fa-solid fa-camera"></i>Click to upload a team photo from your device</div>
+            </div>
+            <input type="file" id="tf_image_file" accept="image/*" style="display:none;" />
+            <input type="hidden" id="tf_image" required />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label>Team Name *</label>
+              <input type="text" id="tf_name" class="form-control" placeholder="e.g. Senior Spartans XI" required />
+            </div>
+            <div class="form-group">
+              <label>Division / League *</label>
+              <input type="text" id="tf_division" class="form-control" placeholder="e.g. Division 1 League" required />
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group"><label>Captain</label><input type="text" id="tf_captain" class="form-control" placeholder="Captain name" /></div>
+            <div class="form-group"><label>Coach</label><input type="text" id="tf_coach" class="form-control" placeholder="Coach name" /></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;">
+            <div class="form-group"><label>Squad Size</label><input type="number" id="tf_playerscount" class="form-control" value="0" /></div>
+            <div class="form-group"><label>Played</label><input type="number" id="tf_played" class="form-control" value="0" /></div>
+            <div class="form-group"><label>Won</label><input type="number" id="tf_won" class="form-control" value="0" /></div>
+            <div class="form-group"><label>Lost</label><input type="number" id="tf_lost" class="form-control" value="0" /></div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+            <i class="fa-solid fa-floppy-disk"></i> Save Team
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="matchEditModalBackdrop">
     <div class="modal-box">
       <button class="modal-close-btn" id="closeMatchEditModalBtn">&times;</button>
@@ -2094,38 +1019,17 @@
         <form id="matchForm">
           <input type="hidden" id="mf_id" />
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label>Team A (Spartans)</label>
-              <input type="text" id="mf_teamA" class="form-control" value="XI Spartans" required />
-            </div>
-            <div class="form-group">
-              <label>Team B (Opponent)</label>
-              <input type="text" id="mf_teamB" class="form-control" placeholder="e.g. Marina Strikers" required />
-            </div>
+            <div class="form-group"><label>Team A (Spartans)</label><input type="text" id="mf_teamA" class="form-control" value="XI Spartans" required /></div>
+            <div class="form-group"><label>Team B (Opponent)</label><input type="text" id="mf_teamB" class="form-control" placeholder="e.g. Marina Strikers" required /></div>
           </div>
-
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label>Team A Score</label>
-              <input type="text" id="mf_scoreA" class="form-control" placeholder="189/6 (20 ov)" />
-            </div>
-            <div class="form-group">
-              <label>Team B Score</label>
-              <input type="text" id="mf_scoreB" class="form-control" placeholder="165/9 (20 ov)" />
-            </div>
+            <div class="form-group"><label>Team A Score</label><input type="text" id="mf_scoreA" class="form-control" placeholder="189/6 (20 ov)" /></div>
+            <div class="form-group"><label>Team B Score</label><input type="text" id="mf_scoreB" class="form-control" placeholder="165/9 (20 ov)" /></div>
           </div>
-
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label>Date & Time</label>
-              <input type="text" id="mf_date" class="form-control" placeholder="Oct 24, 2026 - 3:00 PM" required />
-            </div>
-            <div class="form-group">
-              <label>Venue</label>
-              <input type="text" id="mf_venue" class="form-control" placeholder="Spartans Ground" required />
-            </div>
+            <div class="form-group"><label>Date & Time</label><input type="text" id="mf_date" class="form-control" placeholder="Oct 24, 2026 - 3:00 PM" required /></div>
+            <div class="form-group"><label>Venue</label><input type="text" id="mf_venue" class="form-control" placeholder="Spartans Ground" required /></div>
           </div>
-
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
               <label>Status</label>
@@ -2134,17 +1038,9 @@
                 <option value="completed">Completed Result</option>
               </select>
             </div>
-            <div class="form-group">
-              <label>Tournament Tag</label>
-              <input type="text" id="mf_tourney" class="form-control" placeholder="CCL Division Trophy" />
-            </div>
+            <div class="form-group"><label>Tournament Tag</label><input type="text" id="mf_tourney" class="form-control" placeholder="CCL Division Trophy" /></div>
           </div>
-
-          <div class="form-group">
-            <label>Result Summary Text</label>
-            <input type="text" id="mf_result" class="form-control" placeholder="WON BY 24 RUNS" />
-          </div>
-
+          <div class="form-group"><label>Result Summary Text</label><input type="text" id="mf_result" class="form-control" placeholder="WON BY 24 RUNS" /></div>
           <button type="submit" class="btn btn-primary" style="width: 100%;">
             <i class="fa-solid fa-floppy-disk"></i> Save Match
           </button>
@@ -2153,34 +1049,56 @@
     </div>
   </div>
 
-  <!-- MODAL: Achievement Editor -->
-  <div class="modal-backdrop" id="achievementModalBackdrop">
+  <div class="modal-backdrop" id="eventEditModalBackdrop">
     <div class="modal-box">
-      <button class="modal-close-btn" id="closeAchievementModalBtn">&times;</button>
+      <button class="modal-close-btn" id="closeEventEditModalBtn">&times;</button>
       <div class="modal-header">
-        <h3 style="color: var(--dark-green);">Add Trophy / Milestone</h3>
+        <h3 id="eventEditModalTitle" style="color: var(--dark-green);">Add Club Event</h3>
       </div>
       <div class="modal-body">
-        <form id="achievementForm">
-          <input type="hidden" id="af_id" />
+        <form id="eventForm">
+          <input type="hidden" id="ef_id" />
           <div class="form-group">
-            <label>Trophy Title *</label>
-            <input type="text" id="af_title" class="form-control" placeholder="e.g. State T20 Championship" required />
+            <label>Event Title *</label>
+            <input type="text" id="ef_title" class="form-control" placeholder="e.g. Open Trials — Under 19 Category" required />
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
-              <label>Year *</label>
-              <input type="text" id="af_year" class="form-control" placeholder="2025" required />
+              <label>Event Type</label>
+              <select id="ef_type" class="form-control">
+                <option value="Trial">Trial</option>
+                <option value="Training Camp">Training Camp</option>
+                <option value="Tournament">Tournament</option>
+                <option value="Awards Night">Awards Night</option>
+                <option value="Meeting">Meeting</option>
+                <option value="Fundraiser">Fundraiser</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label>Category *</label>
-              <input type="text" id="af_cat" class="form-control" placeholder="Champions / Shield" required />
-            </div>
+            <div class="form-group"><label>Date *</label><input type="date" id="ef_date" class="form-control" required /></div>
           </div>
-          <div class="form-group">
-            <label>Description Note</label>
-            <textarea id="af_desc" class="form-control" placeholder="Match details and winning moment..." required></textarea>
+          <div class="form-group"><label>Venue *</label><input type="text" id="ef_venue" class="form-control" placeholder="e.g. Spartans Ground, Chennai" required /></div>
+          <div class="form-group"><label>Description</label><textarea id="ef_desc" class="form-control" placeholder="Details, eligibility, timing..." required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <i class="fa-solid fa-floppy-disk"></i> Save Event
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="achievementModalBackdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="closeAchievementModalBtn">&times;</button>
+      <div class="modal-header"><h3 style="color: var(--dark-green);">Add Trophy / Milestone</h3></div>
+      <div class="modal-body">
+        <form id="achievementForm">
+          <input type="hidden" id="af_id" />
+          <div class="form-group"><label>Trophy Title *</label><input type="text" id="af_title" class="form-control" placeholder="e.g. State T20 Championship" required /></div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group"><label>Year *</label><input type="text" id="af_year" class="form-control" placeholder="2025" required /></div>
+            <div class="form-group"><label>Category *</label><input type="text" id="af_cat" class="form-control" placeholder="Champions / Shield" required /></div>
           </div>
+          <div class="form-group"><label>Description Note</label><textarea id="af_desc" class="form-control" placeholder="Match details and winning moment..." required></textarea></div>
           <button type="submit" class="btn btn-gold" style="width: 100%;">
             <i class="fa-solid fa-trophy"></i> Save Trophy
           </button>
@@ -2189,32 +1107,28 @@
     </div>
   </div>
 
-  <!-- MODAL: Gallery Image Editor -->
   <div class="modal-backdrop" id="galleryModalBackdrop">
     <div class="modal-box">
       <button class="modal-close-btn" id="closeGalleryModalBtn">&times;</button>
-      <div class="modal-header">
-        <h3 style="color: var(--dark-green);">Add Photo to Gallery</h3>
-      </div>
+      <div class="modal-header"><h3 style="color: var(--dark-green);">Add Photo to Gallery</h3></div>
       <div class="modal-body">
         <form id="galleryForm">
           <div class="form-group">
-            <label>Photo Caption *</label>
-            <input type="text" id="gf_caption" class="form-control" placeholder="e.g. Final Over Wicket Celebration" required />
+            <label>Photo *</label>
+            <div class="photo-upload-box" id="gf_photo_box">
+              <div class="puz-placeholder"><i class="fa-solid fa-camera"></i>Click to upload a photo from your device</div>
+            </div>
+            <input type="file" id="gf_image_file" accept="image/*" style="display:none;" />
+            <input type="hidden" id="gf_url" required />
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label>Category</label>
-              <select id="gf_category" class="form-control">
-                <option value="Matches">Matches</option>
-                <option value="Training">Training</option>
-                <option value="Celebrations">Celebrations</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Image Direct URL *</label>
-              <input type="url" id="gf_url" class="form-control" placeholder="https://images.unsplash.com/..." required />
-            </div>
+          <div class="form-group"><label>Photo Caption *</label><input type="text" id="gf_caption" class="form-control" placeholder="e.g. Final Over Wicket Celebration" required /></div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="gf_category" class="form-control">
+              <option value="Matches">Matches</option>
+              <option value="Training">Training</option>
+              <option value="Celebrations">Celebrations</option>
+            </select>
           </div>
           <button type="submit" class="btn btn-primary" style="width: 100%;">
             <i class="fa-solid fa-image"></i> Add Photograph
@@ -2224,43 +1138,22 @@
     </div>
   </div>
 
-  <!-- MODAL: Live Scoreboard Editor -->
   <div class="modal-backdrop" id="liveScoreModalBackdrop">
     <div class="modal-box">
       <button class="modal-close-btn" id="closeLiveScoreModalBtn">&times;</button>
-      <div class="modal-header">
-        <h3 style="color: var(--dark-green);">Live Scoreboard Quick Customizer</h3>
-      </div>
+      <div class="modal-header"><h3 style="color: var(--dark-green);">Live Scoreboard Quick Customizer</h3></div>
       <div class="modal-body">
         <form id="liveScoreForm">
-          <div class="form-group">
-            <label>Tournament Header</label>
-            <input type="text" id="lsf_tourney" class="form-control" value="TNCA Premier Club Trophy 2026" />
+          <div class="form-group"><label>Tournament Header</label><input type="text" id="lsf_tourney" class="form-control" value="TNCA Premier Club Trophy 2026" /></div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group"><label>Team 1 Name</label><input type="text" id="lsf_t1_name" class="form-control" value="Marina Strikers" /></div>
+            <div class="form-group"><label>Team 1 Score & Overs</label><input type="text" id="lsf_t1_score" class="form-control" value="174/8 (20.0 ov)" /></div>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label>Team 1 Name</label>
-              <input type="text" id="lsf_t1_name" class="form-control" value="Marina Strikers" />
-            </div>
-            <div class="form-group">
-              <label>Team 1 Score & Overs</label>
-              <input type="text" id="lsf_t1_score" class="form-control" value="174/8 (20.0 ov)" />
-            </div>
+            <div class="form-group"><label>Team 2 (XI Spartans) Name</label><input type="text" id="lsf_t2_name" class="form-control" value="XI Spartans" /></div>
+            <div class="form-group"><label>Team 2 Score & Overs</label><input type="text" id="lsf_t2_score" class="form-control" value="173/4 (18.4 ov)" /></div>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label>Team 2 (XI Spartans) Name</label>
-              <input type="text" id="lsf_t2_name" class="form-control" value="XI Spartans" />
-            </div>
-            <div class="form-group">
-              <label>Team 2 Score & Overs</label>
-              <input type="text" id="lsf_t2_score" class="form-control" value="173/4 (18.4 ov)" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Match Status / Equation</label>
-            <input type="text" id="lsf_status" class="form-control" value="XI Spartans need 2 runs in 8 balls to win" />
-          </div>
+          <div class="form-group"><label>Match Status / Equation</label><input type="text" id="lsf_status" class="form-control" value="XI Spartans need 2 runs in 8 balls to win" /></div>
           <button type="submit" class="btn btn-primary" style="width: 100%;">
             <i class="fa-solid fa-tower-broadcast"></i> Update Live Center
           </button>
@@ -2269,7 +1162,6 @@
     </div>
   </div>
 
-  <!-- Lightbox -->
   <div class="lightbox-backdrop" id="lightboxBackdrop">
     <div class="lightbox-content">
       <button class="modal-close-btn" id="closeLightboxBtn" style="color:#fff; background: rgba(255,255,255,0.2); top:-45px; right:0;">&times;</button>
@@ -2280,187 +1172,98 @@
     </div>
   </div>
 
-  <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- APPLICATION LOGIC & FIREBASE SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-    import { getFirestore, collection, doc, setDoc, getDoc, addDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-    // Firebase Web Configuration Placeholder
+    // -------------------------------------------------------------
+    // FIREBASE DATA CONFIGURATION & AUTHORIZED ADMINS
+    // -------------------------------------------------------------
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+ apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
+  authDomain: "otp-login-app-2f5d5.firebaseapp.com",
+  projectId: "otp-login-app-2f5d5",
+  storageBucket: "otp-login-app-2f5d5.firebasestorage.app",
+  messagingSenderId: "660933750433",
+  appId: "1:660933750433:web:dacff67b6c6fae6264cae0"
     };
 
-    let app, auth, db;
+    // Add your authorized admin email addresses here:
+    const ADMIN_EMAILS = [
+      "kamaraje831@gmail.com"
+    ];
+
+    let app = null, auth = null, db = null;
     let isFirebaseReady = false;
 
     try {
-      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+      if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY") {
         app = initializeApp(firebaseConfig);
         auth = getAuth(app);
         db = getFirestore(app);
         isFirebaseReady = true;
       }
-    } catch(err) {
-      console.warn("Firebase not configured, working with LocalStorage state.");
+    } catch (err) {
+      console.warn("Firebase initialization skipped or keys missing. Operating in offline/local storage fallback mode.", err);
     }
 
-    // Default Starting Datasets
     const defaultPlayers = [
-      {
-        id: "p1",
-        name: "Arun Kumar",
-        jerseyNumber: 7,
-        role: "Captain",
-        subRole: "Top-Order Batsman",
-        team: "Senior Spartans XI",
+      { id: "p1", name: "Arun Kumar", jerseyNumber: 7, role: "Captain", subRole: "Top-Order Batsman", team: "Senior Spartans XI",
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-        battingStyle: "Right Hand Bat",
-        bowlingStyle: "Right Arm Medium",
-        matches: 88,
-        runs: 3420,
-        wickets: 18,
-        catches: 42
-      },
-      {
-        id: "p2",
-        name: "K. Vignesh",
-        jerseyNumber: 18,
-        role: "Vice Captain",
-        subRole: "Aggressive Opener",
-        team: "Senior Spartans XI",
+        battingStyle: "Right Hand Bat", bowlingStyle: "Right Arm Medium", matches: 88, runs: 3420, wickets: 18, catches: 42 },
+      { id: "p2", name: "K. Vignesh", jerseyNumber: 18, role: "Vice Captain", subRole: "Aggressive Opener", team: "Senior Spartans XI",
         image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
-        battingStyle: "Right Hand Bat",
-        bowlingStyle: "Off Break",
-        matches: 76,
-        runs: 2890,
-        wickets: 8,
-        catches: 31
-      },
-      {
-        id: "p3",
-        name: "Siddharth Raman",
-        jerseyNumber: 24,
-        role: "Bowler",
-        subRole: "Pace Spearhead",
-        team: "Senior Spartans XI",
+        battingStyle: "Right Hand Bat", bowlingStyle: "Off Break", matches: 76, runs: 2890, wickets: 8, catches: 31 },
+      { id: "p3", name: "Siddharth Raman", jerseyNumber: 24, role: "Bowler", subRole: "Pace Spearhead", team: "Senior Spartans XI",
         image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-        battingStyle: "Right Hand Bat",
-        bowlingStyle: "Right Arm Fast",
-        matches: 65,
-        runs: 310,
-        wickets: 112,
-        catches: 19
-      },
-      {
-        id: "p4",
-        name: "M. Dinesh Karthik",
-        jerseyNumber: 99,
-        role: "Wicket Keeper",
-        subRole: "Wicket Keeper / Finisher",
-        team: "Senior Spartans XI",
+        battingStyle: "Right Hand Bat", bowlingStyle: "Right Arm Fast", matches: 65, runs: 310, wickets: 112, catches: 19 },
+      { id: "p4", name: "M. Dinesh Karthik", jerseyNumber: 99, role: "Wicket Keeper", subRole: "Wicket Keeper / Finisher", team: "Senior Spartans XI",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-        battingStyle: "Right Hand Bat",
-        bowlingStyle: "None",
-        matches: 82,
-        runs: 2640,
-        wickets: 0,
-        catches: 74
-      }
+        battingStyle: "Right Hand Bat", bowlingStyle: "None", matches: 82, runs: 2640, wickets: 0, catches: 74 }
     ];
 
     const defaultTeams = [
-      {
-        id: "t1",
-        name: "Senior Spartans XI",
-        division: "Division 1 League",
-        captain: "Arun Kumar",
-        coach: "M. Jayawardene",
-        playersCount: 16,
-        played: 24,
-        won: 19,
-        lost: 5,
-        image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: "t2",
-        name: "Spartans T20 Kings",
-        division: "State League T20",
-        captain: "K. Vignesh",
-        coach: "R. Srinivas",
-        playersCount: 15,
-        played: 18,
-        won: 14,
-        lost: 4,
-        image: "https://images.unsplash.com/photo-1531415074868-036b107e775a?auto=format&fit=crop&w=800&q=80"
-      }
+      { id: "t1", name: "Senior Spartans XI", division: "Division 1 League", captain: "Arun Kumar", coach: "M. Jayawardene",
+        playersCount: 16, played: 24, won: 19, lost: 5,
+        image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80" },
+      { id: "t2", name: "Spartans T20 Kings", division: "State League T20", captain: "K. Vignesh", coach: "R. Srinivas",
+        playersCount: 15, played: 18, won: 14, lost: 4,
+        image: "https://images.unsplash.com/photo-1531415074868-036b107e775a?auto=format&fit=crop&w=800&q=80" }
     ];
 
     const defaultMatches = [
-      {
-        id: "m1",
-        teamA: "XI Spartans",
-        scoreA: "—",
-        teamB: "Royal City CC",
-        scoreB: "—",
-        date: "Oct 12, 2026 - 9:30 AM",
-        venue: "Spartans Arena, Chennai",
-        status: "upcoming",
-        tournament: "CCL Division Championship",
-        result: "Fixture Scheduled"
-      },
-      {
-        id: "m2",
-        teamA: "XI Spartans",
-        scoreA: "189/6 (20 ov)",
-        teamB: "Apex Academy",
-        scoreB: "165/9 (20 ov)",
-        date: "Sep 28, 2026",
-        venue: "Spartans Ground, Chennai",
-        status: "completed",
-        tournament: "Super T20 League",
-        result: "WON BY 24 RUNS"
-      }
+      { id: "m1", teamA: "XI Spartans", scoreA: "—", teamB: "Royal City CC", scoreB: "—",
+        date: "Oct 12, 2026 - 9:30 AM", venue: "Spartans Arena, Chennai", status: "upcoming",
+        tournament: "CCL Division Championship", result: "Fixture Scheduled" },
+      { id: "m2", teamA: "XI Spartans", scoreA: "189/6 (20 ov)", teamB: "Apex Academy", scoreB: "165/9 (20 ov)",
+        date: "Sep 28, 2026", venue: "Spartans Ground, Chennai", status: "completed",
+        tournament: "Super T20 League", result: "WON BY 24 RUNS" }
+    ];
+
+    const defaultEvents = [
+      { id: "e1", title: "Open Trials — Under 19 Category", type: "Trial", date: "2026-10-05",
+        venue: "Spartans Ground, Chennai", desc: "Open trials for aspiring under-19 players. Bring your own kit; nets and equipment provided for bowling assessments." },
+      { id: "e2", title: "Pre-Season Fitness Camp", type: "Training Camp", date: "2026-10-18",
+        venue: "Spartans Cricket Arena, OMR", desc: "Five-day conditioning and fielding camp for all squad members ahead of the Champions League." },
+      { id: "e3", title: "Annual Awards Night", type: "Awards Night", date: "2026-11-30",
+        venue: "Spartans Fortress Clubhouse", desc: "Celebrating the season's top performers, milestones, and club volunteers." }
     ];
 
     const defaultAchievements = [
-      {
-        id: "a1",
-        year: "2025",
-        title: "State Club T20 Champions",
-        category: "Gold Cup",
-        desc: "Defeated Marina CC in the grand final with 8 wickets in hand."
-      },
-      {
-        id: "a2",
-        year: "2024",
-        title: "Southern Premier Shield",
-        category: "League Winner",
-        desc: "Top of the league table across 14 matches with a net run rate of +1.84."
-      }
+      { id: "a1", year: "2025", title: "State Club T20 Champions", category: "Gold Cup",
+        desc: "Defeated Marina CC in the grand final with 8 wickets in hand." },
+      { id: "a2", year: "2024", title: "Southern Premier Shield", category: "League Winner",
+        desc: "Top of the league table across 14 matches with a net run rate of +1.84." }
     ];
 
     const defaultGallery = [
-      {
-        id: "g1",
-        url: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
-        caption: "Floodlit Victory Moment at Spartans Arena",
-        category: "Celebrations"
-      },
-      {
-        id: "g2",
-        url: "https://images.unsplash.com/photo-1531415074868-036b107e775a?auto=format&fit=crop&w=800&q=80",
-        caption: "Morning Net Practice & Bowling Drills",
-        category: "Training"
-      }
+      { id: "g1", url: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+        caption: "Floodlit Victory Moment at Spartans Arena", category: "Celebrations" },
+      { id: "g2", url: "https://images.unsplash.com/photo-1531415074868-036b107e775a?auto=format&fit=crop&w=800&q=80",
+        caption: "Morning Net Practice & Bowling Drills", category: "Training" }
     ];
 
     const defaultPoints = [
@@ -2470,102 +1273,219 @@
       { pos: 4, team: "Royal City CC", p: 10, w: 5, l: 5, nrr: "+0.050", pts: 10, isSpartans: false }
     ];
 
-    // Reactive State with LocalStorage Persistence
+    const defaultSponsors = [];
+
     function loadStorage(key, fallback) {
-      const data = localStorage.getItem(`spartans_${key}`);
-      return data ? JSON.parse(data) : fallback;
+      try {
+        const data = localStorage.getItem(`spartans_${key}`);
+        return data ? JSON.parse(data) : fallback;
+      } catch (e) { return fallback; }
     }
     function saveStorage(key, val) {
-      localStorage.setItem(`spartans_${key}`, JSON.stringify(val));
+      try {
+        localStorage.setItem(`spartans_${key}`, JSON.stringify(val));
+        return true;
+      } catch (e) {
+        showToast("Could not save — your browser storage may be full. Try smaller photos.", "error");
+        return false;
+      }
     }
 
     let players = loadStorage("players", defaultPlayers);
     let teams = loadStorage("teams", defaultTeams);
     let matches = loadStorage("matches", defaultMatches);
+    let events = loadStorage("events", defaultEvents);
     let achievements = loadStorage("achievements", defaultAchievements);
     let gallery = loadStorage("gallery", defaultGallery);
-    let currentUser = null;
-    let isEditMode = false;
+    let sponsors = loadStorage("sponsors", defaultSponsors);
+    let adminPasscode = loadStorage("admin_passcode", "spartans2026");
 
-    // Toast Function
-    window.showToast = function(message, type = "info") {
+    let isAdmin = false;
+    let isEditMode = false;
+    let currentUser = null;
+
+    window.showToast = function (message, type) {
+      type = type || "info";
       const container = document.getElementById("toastContainer");
       const toast = document.createElement("div");
       toast.className = `toast ${type}`;
-      toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${message}</span>`;
+      const icon = type === "success" ? "fa-circle-check" : type === "error" ? "fa-circle-exclamation" : "fa-circle-info";
+      toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${escapeHtml(message)}</span>`;
       container.appendChild(toast);
-      setTimeout(() => {
-        toast.style.opacity = "0";
-        setTimeout(() => toast.remove(), 300);
-      }, 3500);
+      setTimeout(() => { toast.style.opacity = "0"; setTimeout(() => toast.remove(), 300); }, 3500);
     };
 
-    // Render Players
-    function renderPlayers(dataToRender = players) {
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.innerText = str == null ? "" : String(str);
+      return div.innerHTML;
+    }
+
+    function readAndCompressImage(file, maxDim, quality) {
+      return new Promise((resolve, reject) => {
+        if (!file) return reject(new Error("No file"));
+        if (!file.type.startsWith("image/")) return reject(new Error("Not an image file"));
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error("Could not read file"));
+        reader.onload = () => {
+          const img = new Image();
+          img.onerror = () => reject(new Error("Could not decode image"));
+          img.onload = () => {
+            let { width, height } = img;
+            if (width > maxDim || height > maxDim) {
+              if (width > height) { height = Math.round(height * (maxDim / width)); width = maxDim; }
+              else { width = Math.round(width * (maxDim / height)); height = maxDim; }
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = width; canvas.height = height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL("image/jpeg", quality));
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function wirePhotoUpload(boxEl, fileInputEl, hiddenValueEl, opts) {
+      const maxDim = (opts && opts.maxDim) || 900;
+      const quality = (opts && opts.quality) || 0.82;
+      boxEl.onclick = () => fileInputEl.click();
+      fileInputEl.onchange = async () => {
+        const file = fileInputEl.files && fileInputEl.files[0];
+        if (!file) return;
+        try {
+          const dataUrl = await readAndCompressImage(file, maxDim, quality);
+          hiddenValueEl.value = dataUrl;
+          renderPhotoBoxPreview(boxEl, dataUrl);
+        } catch (err) {
+          showToast(err.message || "Could not process that image", "error");
+        }
+        fileInputEl.value = "";
+      };
+    }
+
+    function renderPhotoBoxPreview(boxEl, dataUrl) {
+      if (dataUrl) {
+        boxEl.classList.add("has-image");
+        boxEl.innerHTML = `<img src="${dataUrl}" alt="Preview" /><span class="puz-change-badge"><i class="fa-solid fa-camera-retro"></i> Change Photo</span>`;
+      } else {
+        boxEl.classList.remove("has-image");
+        boxEl.innerHTML = `<div class="puz-placeholder"><i class="fa-solid fa-camera"></i>Click to upload a photo from your device</div>`;
+      }
+    }
+
+    function applyAdminVisibility() {
+      document.querySelectorAll(".admin-only-control").forEach(el => { el.style.display = isAdmin ? "" : "none"; });
+      document.getElementById("adminDockBar").style.display = isAdmin ? "flex" : "none";
+    }
+
+    function requireAdmin(actionLabel) {
+      if (!isAdmin) { showToast(`Sign in as admin to ${actionLabel}`, "info"); return false; }
+      return true;
+    }
+
+    // ---------------- Realtime Firestore sync ----------------
+    function initFirestoreSync() {
+      if (!isFirebaseReady || !db) return;
+      onSnapshot(collection(db, "players"), snapshot => {
+        if (!snapshot.empty) {
+          players = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          saveStorage("players", players);
+          renderPlayers();
+        }
+      });
+      onSnapshot(collection(db, "teams"), snapshot => {
+        if (!snapshot.empty) {
+          teams = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          saveStorage("teams", teams);
+          renderTeams();
+        }
+      });
+      onSnapshot(collection(db, "matches"), snapshot => {
+        if (!snapshot.empty) {
+          matches = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          saveStorage("matches", matches);
+          renderMatches(document.getElementById("tabUpcomingBtn").classList.contains("active") ? "upcoming" : "completed");
+        }
+      });
+      onSnapshot(collection(db, "events"), snapshot => {
+        if (!snapshot.empty) {
+          events = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          saveStorage("events", events);
+          renderEvents();
+        }
+      });
+      onSnapshot(collection(db, "achievements"), snapshot => {
+        if (!snapshot.empty) {
+          achievements = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          saveStorage("achievements", achievements);
+          renderAchievements();
+        }
+      });
+      onSnapshot(collection(db, "gallery"), snapshot => {
+        if (!snapshot.empty) {
+          gallery = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          saveStorage("gallery", gallery);
+          renderGallery();
+        }
+      });
+    }
+
+    // ---------------- Players ----------------
+    function renderPlayers(dataToRender) {
+      dataToRender = dataToRender || players;
       const container = document.getElementById("playersGridContainer");
       if (!container) return;
-
       if (dataToRender.length === 0) {
         container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No players found.</p>`;
         return;
       }
-
       container.innerHTML = dataToRender.map(p => `
         <div class="player-card">
-          <div class="player-jersey-badge">#${p.jerseyNumber}</div>
-          <div class="player-role-badge">${p.role}</div>
+          <div class="player-jersey-badge">#${escapeHtml(p.jerseyNumber)}</div>
+          <div class="player-role-badge">${escapeHtml(p.role)}</div>
           <div class="player-img-wrap" onclick="viewPlayerModal('${p.id}')">
-            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'" />
+            <img src="${p.image}" alt="${escapeHtml(p.name)}" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'" />
           </div>
           <div class="player-info-body" onclick="viewPlayerModal('${p.id}')">
-            <h3 class="player-name">${p.name}</h3>
-            <div class="player-subrole">${p.subRole || p.role}</div>
+            <h3 class="player-name">${escapeHtml(p.name)}</h3>
+            <div class="player-subrole">${escapeHtml(p.subRole || p.role)}</div>
             <div class="player-brief-stats">
               <div class="pbs-item"><strong>${p.matches || 0}</strong><span>Matches</span></div>
               <div class="pbs-item"><strong>${p.runs || 0}</strong><span>Runs</span></div>
               <div class="pbs-item"><strong>${p.wickets || 0}</strong><span>Wickets</span></div>
             </div>
           </div>
-          <div class="card-admin-action-bar">
-            <button class="btn btn-outline btn-sm edit-player-btn" data-id="${p.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);">
-              <i class="fa-solid fa-pen"></i> Edit
-            </button>
-            <button class="btn btn-outline btn-sm delete-player-btn" data-id="${p.id}" style="color: var(--danger); border-color: var(--danger);">
-              <i class="fa-solid fa-trash"></i> Delete
-            </button>
+          <div class="card-admin-action-bar" style="display:${isAdmin ? 'flex' : 'none'};">
+            <button class="btn btn-outline btn-sm edit-player-btn" data-id="${p.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn btn-outline btn-sm delete-player-btn" data-id="${p.id}" style="color: var(--danger); border-color: var(--danger);"><i class="fa-solid fa-trash"></i> Delete</button>
           </div>
         </div>
       `).join("");
 
-      // Bind Card Actions
       container.querySelectorAll(".edit-player-btn").forEach(btn => {
-        btn.onclick = (e) => {
-          e.stopPropagation();
-          editPlayer(btn.getAttribute("data-id"));
-        };
+        btn.onclick = (e) => { e.stopPropagation(); if (requireAdmin("edit players")) editPlayer(btn.getAttribute("data-id")); };
       });
       container.querySelectorAll(".delete-player-btn").forEach(btn => {
-        btn.onclick = (e) => {
-          e.stopPropagation();
-          deletePlayer(btn.getAttribute("data-id"));
-        };
+        btn.onclick = (e) => { e.stopPropagation(); if (requireAdmin("delete players")) deletePlayer(btn.getAttribute("data-id")); };
       });
     }
 
-    // View Player Profile Modal
-    window.viewPlayerModal = function(id) {
+    window.viewPlayerModal = function (id) {
       const p = players.find(x => x.id === id);
       if (!p) return;
       const content = document.getElementById("playerModalContent");
       content.innerHTML = `
         <div class="player-modal-header">
-          <img src="${p.image}" alt="${p.name}" class="pm-img" />
+          <img src="${p.image}" alt="${escapeHtml(p.name)}" class="pm-img" />
           <div class="pm-title">
-            <h2>${p.name} <span style="color: var(--cricket-green); font-size: 1.2rem;">#${p.jerseyNumber}</span></h2>
-            <p>${p.subRole || p.role} &bull; ${p.team || 'XI Spartans'}</p>
+            <h2>${escapeHtml(p.name)} <span style="color: var(--cricket-green); font-size: 1.2rem;">#${escapeHtml(p.jerseyNumber)}</span></h2>
+            <p>${escapeHtml(p.subRole || p.role)} &bull; ${escapeHtml(p.team || 'XI Spartans')}</p>
             <div style="font-size: 0.85rem; color: var(--gray-text); margin-top: 0.3rem;">
-              <span>Batting: <strong>${p.battingStyle || 'Right Hand'}</strong></span> |
-              <span>Bowling: <strong>${p.bowlingStyle || 'Right Arm Fast'}</strong></span>
+              <span>Batting: <strong>${escapeHtml(p.battingStyle || 'Right Hand')}</strong></span> |
+              <span>Bowling: <strong>${escapeHtml(p.bowlingStyle || 'Right Arm Fast')}</strong></span>
             </div>
           </div>
         </div>
@@ -2573,12 +1493,17 @@
           <div class="stat-box-modal"><div class="s-val">${p.matches || 0}</div><div class="s-label">Matches</div></div>
           <div class="stat-box-modal"><div class="s-val">${p.runs || 0}</div><div class="s-label">Runs</div></div>
           <div class="stat-box-modal"><div class="s-val">${p.wickets || 0}</div><div class="s-label">Wickets</div></div>
+          <div class="stat-box-modal"><div class="s-val">${p.catches || 0}</div><div class="s-label">Catches</div></div>
         </div>
       `;
       document.getElementById("playerModalBackdrop").classList.add("active");
     };
 
-    // Edit Player Form Modal
+    const pfPhotoBox = document.getElementById("pf_photo_box");
+    const pfImageFile = document.getElementById("pf_image_file");
+    const pfImageHidden = document.getElementById("pf_image");
+    wirePhotoUpload(pfPhotoBox, pfImageFile, pfImageHidden, { maxDim: 700, quality: 0.82 });
+
     function editPlayer(id) {
       const p = players.find(x => x.id === id);
       if (!p) return;
@@ -2588,7 +1513,8 @@
       document.getElementById("pf_jersey").value = p.jerseyNumber;
       document.getElementById("pf_role").value = p.role;
       document.getElementById("pf_team").value = p.team || "";
-      document.getElementById("pf_image").value = p.image;
+      pfImageHidden.value = p.image || "";
+      renderPhotoBoxPreview(pfPhotoBox, p.image || "");
       document.getElementById("pf_batting").value = p.battingStyle || "";
       document.getElementById("pf_bowling").value = p.bowlingStyle || "";
       document.getElementById("pf_matches").value = p.matches || 0;
@@ -2598,18 +1524,20 @@
       document.getElementById("playerEditModalBackdrop").classList.add("active");
     }
 
-    function deletePlayer(id) {
+    async function deletePlayer(id) {
       if (!confirm("Are you sure you want to remove this player?")) return;
       players = players.filter(x => x.id !== id);
       saveStorage("players", players);
+      if (isFirebaseReady && db) {
+        try { await deleteDoc(doc(db, "players", id)); } catch(e) { console.error(e); }
+      }
       renderPlayers();
-      if (isFirebaseReady) deleteDoc(doc(db, "players", id)).catch(console.error);
       showToast("Player removed successfully", "info");
     }
 
-    // Save Player Form
     document.getElementById("playerForm").onsubmit = async (e) => {
       e.preventDefault();
+      if (!pfImageHidden.value) { showToast("Please upload a player photo", "error"); return; }
       const id = document.getElementById("pf_id").value || `p-${Date.now()}`;
       const newObj = {
         id,
@@ -2618,7 +1546,7 @@
         role: document.getElementById("pf_role").value,
         subRole: document.getElementById("pf_role").value,
         team: document.getElementById("pf_team").value,
-        image: document.getElementById("pf_image").value,
+        image: pfImageHidden.value,
         battingStyle: document.getElementById("pf_batting").value,
         bowlingStyle: document.getElementById("pf_bowling").value,
         matches: parseInt(document.getElementById("pf_matches").value || 0, 10),
@@ -2626,91 +1554,157 @@
         wickets: parseInt(document.getElementById("pf_wickets").value || 0, 10),
         catches: parseInt(document.getElementById("pf_catches").value || 0, 10)
       };
-
       const idx = players.findIndex(x => x.id === id);
-      if (idx >= 0) players[idx] = newObj;
-      else players.unshift(newObj);
-
+      if (idx >= 0) players[idx] = newObj; else players.unshift(newObj);
       saveStorage("players", players);
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(db, "players", id), newObj); } catch(e) { console.error(e); }
+      }
       renderPlayers();
-      if (isFirebaseReady) await setDoc(doc(db, "players", id), newObj);
-
       document.getElementById("playerEditModalBackdrop").classList.remove("active");
-      showToast("Player customized successfully!", "success");
+      showToast("Player saved successfully!", "success");
     };
 
-    // Render Teams
+    // ---------------- Teams ----------------
     function renderTeams() {
       const container = document.getElementById("teamsContainer");
       if (!container) return;
+      if (teams.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No team divisions added yet.</p>`;
+        return;
+      }
       container.innerHTML = teams.map(t => `
         <div class="team-card">
-          <div class="team-img">
-            <img src="${t.image}" alt="${t.name}" />
-            <div class="team-division-tag">${t.division}</div>
-          </div>
+          <div class="team-img"><img src="${t.image}" alt="${escapeHtml(t.name)}" /><div class="team-division-tag">${escapeHtml(t.division)}</div></div>
           <div class="team-body">
-            <h3>${t.name}</h3>
+            <h3>${escapeHtml(t.name)}</h3>
             <div class="team-meta">
-              <div><strong>Captain:</strong> ${t.captain}</div>
-              <div><strong>Coach:</strong> ${t.coach}</div>
-              <div><strong>Athletes:</strong> ${t.playersCount} Players</div>
+              <div><strong>Captain:</strong> ${escapeHtml(t.captain || '—')}</div>
+              <div><strong>Coach:</strong> ${escapeHtml(t.coach || '—')}</div>
+              <div><strong>Athletes:</strong> ${t.playersCount || 0} Players</div>
             </div>
             <div class="team-stats-strip">
-              <div><div class="team-stat-val">${t.played}</div><div class="team-stat-lbl">Played</div></div>
-              <div><div class="team-stat-val">${t.won}</div><div class="team-stat-lbl">Won</div></div>
-              <div><div class="team-stat-val" style="color:var(--danger);">${t.lost}</div><div class="team-stat-lbl">Lost</div></div>
+              <div><div class="team-stat-val">${t.played || 0}</div><div class="team-stat-lbl">Played</div></div>
+              <div><div class="team-stat-val">${t.won || 0}</div><div class="team-stat-lbl">Won</div></div>
+              <div><div class="team-stat-val" style="color:var(--danger);">${t.lost || 0}</div><div class="team-stat-lbl">Lost</div></div>
             </div>
+          </div>
+          <div class="card-admin-action-bar" style="display:${isAdmin ? 'flex' : 'none'};">
+            <button class="btn btn-outline btn-sm edit-team-btn" data-id="${t.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn btn-outline btn-sm delete-team-btn" data-id="${t.id}" style="color: var(--danger); border-color: var(--danger);"><i class="fa-solid fa-trash"></i> Delete</button>
           </div>
         </div>
       `).join("");
+
+      container.querySelectorAll(".edit-team-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("edit teams")) editTeam(btn.getAttribute("data-id")); }; });
+      container.querySelectorAll(".delete-team-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("delete teams")) deleteTeam(btn.getAttribute("data-id")); }; });
     }
 
-    // Render Matches
-    function renderMatches(type = "upcoming") {
+    const tfPhotoBox = document.getElementById("tf_photo_box");
+    const tfImageFile = document.getElementById("tf_image_file");
+    const tfImageHidden = document.getElementById("tf_image");
+    wirePhotoUpload(tfPhotoBox, tfImageFile, tfImageHidden, { maxDim: 1000, quality: 0.82 });
+
+    function editTeam(id) {
+      const t = teams.find(x => x.id === id);
+      if (!t) return;
+      document.getElementById("teamEditModalTitle").innerText = "Edit Team: " + t.name;
+      document.getElementById("tf_id").value = t.id;
+      document.getElementById("tf_name").value = t.name;
+      document.getElementById("tf_division").value = t.division;
+      document.getElementById("tf_captain").value = t.captain || "";
+      document.getElementById("tf_coach").value = t.coach || "";
+      document.getElementById("tf_playerscount").value = t.playersCount || 0;
+      document.getElementById("tf_played").value = t.played || 0;
+      document.getElementById("tf_won").value = t.won || 0;
+      document.getElementById("tf_lost").value = t.lost || 0;
+      tfImageHidden.value = t.image || "";
+      renderPhotoBoxPreview(tfPhotoBox, t.image || "");
+      document.getElementById("teamEditModalBackdrop").classList.add("active");
+    }
+
+    async function deleteTeam(id) {
+      if (!confirm("Delete this team division?")) return;
+      teams = teams.filter(x => x.id !== id);
+      saveStorage("teams", teams);
+      if (isFirebaseReady && db) {
+        try { await deleteDoc(doc(db, "teams", id)); } catch(e) { console.error(e); }
+      }
+      renderTeams();
+      showToast("Team division removed", "info");
+    }
+
+    document.getElementById("teamForm").onsubmit = async (e) => {
+      e.preventDefault();
+      if (!tfImageHidden.value) { showToast("Please upload a team photo", "error"); return; }
+      const id = document.getElementById("tf_id").value || `t-${Date.now()}`;
+      const newT = {
+        id,
+        name: document.getElementById("tf_name").value,
+        division: document.getElementById("tf_division").value,
+        captain: document.getElementById("tf_captain").value,
+        coach: document.getElementById("tf_coach").value,
+        playersCount: parseInt(document.getElementById("tf_playerscount").value || 0, 10),
+        played: parseInt(document.getElementById("tf_played").value || 0, 10),
+        won: parseInt(document.getElementById("tf_won").value || 0, 10),
+        lost: parseInt(document.getElementById("tf_lost").value || 0, 10),
+        image: tfImageHidden.value
+      };
+      const idx = teams.findIndex(x => x.id === id);
+      if (idx >= 0) teams[idx] = newT; else teams.unshift(newT);
+      saveStorage("teams", teams);
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(db, "teams", id), newT); } catch(e) { console.error(e); }
+      }
+      renderTeams();
+      document.getElementById("teamEditModalBackdrop").classList.remove("active");
+      showToast("Team saved successfully!", "success");
+    };
+
+    document.getElementById("addNewTeamBtn").onclick = () => {
+      if (!requireAdmin("add a team division")) return;
+      document.getElementById("teamForm").reset();
+      document.getElementById("tf_id").value = "";
+      tfImageHidden.value = "";
+      renderPhotoBoxPreview(tfPhotoBox, "");
+      document.getElementById("teamEditModalTitle").innerText = "Add Team Division";
+      document.getElementById("teamEditModalBackdrop").classList.add("active");
+    };
+
+    // ---------------- Matches ----------------
+    function renderMatches(type) {
+      type = type || "upcoming";
       const container = document.getElementById("matchesGridContainer");
       if (!container) return;
       const filtered = matches.filter(m => m.status === type);
-
       if (filtered.length === 0) {
         container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No ${type} matches found.</p>`;
         return;
       }
-
       container.innerHTML = filtered.map(m => `
         <div class="match-card">
           <div class="match-card-header">
-            <span class="match-tag"><i class="fa-solid fa-trophy"></i> ${m.tournament || 'League Cup'}</span>
-            <span><i class="fa-regular fa-clock"></i> ${m.date}</span>
+            <span class="match-tag"><i class="fa-solid fa-trophy"></i> ${escapeHtml(m.tournament || 'League Cup')}</span>
+            <span><i class="fa-regular fa-clock"></i> ${escapeHtml(m.date)}</span>
           </div>
           <div class="match-teams-box">
-            <div class="m-team left"><div class="m-team-name">${m.teamA}</div><div class="m-team-score">${m.scoreA || '—'}</div></div>
+            <div class="m-team left"><div class="m-team-name">${escapeHtml(m.teamA)}</div><div class="m-team-score">${escapeHtml(m.scoreA || '—')}</div></div>
             <div class="m-vs">VS</div>
-            <div class="m-team right"><div class="m-team-name">${m.teamB}</div><div class="m-team-score">${m.scoreB || '—'}</div></div>
+            <div class="m-team right"><div class="m-team-name">${escapeHtml(m.teamB)}</div><div class="m-team-score">${escapeHtml(m.scoreB || '—')}</div></div>
           </div>
           <div style="font-size: 0.85rem; color: var(--gray-text); margin-bottom: 0.6rem;">
-            <i class="fa-solid fa-location-dot" style="color: var(--cricket-green);"></i> ${m.venue}
+            <i class="fa-solid fa-location-dot" style="color: var(--cricket-green);"></i> ${escapeHtml(m.venue)}
           </div>
-          <div class="match-result-badge ${m.status === 'completed' ? 'win' : 'upcoming'}">
-            ${m.result || (m.status === 'completed' ? 'Completed' : 'Upcoming')}
-          </div>
-          <div class="card-admin-action-bar" style="margin-top: 1rem; border-radius: 6px;">
-            <button class="btn btn-outline btn-sm edit-match-btn" data-id="${m.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);">
-              <i class="fa-solid fa-pen"></i> Edit Match
-            </button>
-            <button class="btn btn-outline btn-sm delete-match-btn" data-id="${m.id}" style="color: var(--danger); border-color: var(--danger);">
-              <i class="fa-solid fa-trash"></i>
-            </button>
+          <div class="match-result-badge ${m.status === 'completed' ? 'win' : 'upcoming'}">${escapeHtml(m.result || (m.status === 'completed' ? 'Completed' : 'Upcoming'))}</div>
+          <div class="card-admin-action-bar" style="display:${isAdmin ? 'flex' : 'none'}; margin-top: 1rem; border-radius: 6px;">
+            <button class="btn btn-outline btn-sm edit-match-btn" data-id="${m.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);"><i class="fa-solid fa-pen"></i> Edit Match</button>
+            <button class="btn btn-outline btn-sm delete-match-btn" data-id="${m.id}" style="color: var(--danger); border-color: var(--danger);"><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
       `).join("");
 
-      container.querySelectorAll(".edit-match-btn").forEach(btn => {
-        btn.onclick = () => editMatch(btn.getAttribute("data-id"));
-      });
-      container.querySelectorAll(".delete-match-btn").forEach(btn => {
-        btn.onclick = () => deleteMatch(btn.getAttribute("data-id"));
-      });
+      container.querySelectorAll(".edit-match-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("edit matches")) editMatch(btn.getAttribute("data-id")); }; });
+      container.querySelectorAll(".delete-match-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("delete matches")) deleteMatch(btn.getAttribute("data-id")); }; });
     }
 
     function editMatch(id) {
@@ -2730,15 +1724,18 @@
       document.getElementById("matchEditModalBackdrop").classList.add("active");
     }
 
-    function deleteMatch(id) {
+    async function deleteMatch(id) {
       if (!confirm("Delete match entry?")) return;
       matches = matches.filter(x => x.id !== id);
       saveStorage("matches", matches);
+      if (isFirebaseReady && db) {
+        try { await deleteDoc(doc(db, "matches", id)); } catch(e) { console.error(e); }
+      }
       renderMatches(document.getElementById("tabUpcomingBtn").classList.contains("active") ? "upcoming" : "completed");
       showToast("Match removed", "info");
     }
 
-    document.getElementById("matchForm").onsubmit = (e) => {
+    document.getElementById("matchForm").onsubmit = async (e) => {
       e.preventDefault();
       const id = document.getElementById("mf_id").value || `m-${Date.now()}`;
       const newM = {
@@ -2753,50 +1750,150 @@
         tournament: document.getElementById("mf_tourney").value,
         result: document.getElementById("mf_result").value
       };
-
       const idx = matches.findIndex(x => x.id === id);
-      if (idx >= 0) matches[idx] = newM;
-      else matches.unshift(newM);
-
+      if (idx >= 0) matches[idx] = newM; else matches.unshift(newM);
       saveStorage("matches", matches);
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(db, "matches", id), newM); } catch(e) { console.error(e); }
+      }
       renderMatches(newM.status);
       document.getElementById("matchEditModalBackdrop").classList.remove("active");
       showToast("Match updated successfully!", "success");
     };
 
-    // Render Achievements
+    // ---------------- Club Events ----------------
+    const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+    function formatEventDate(iso) {
+      if (!iso) return { day: "--", mon: "---", full: "Date TBC" };
+      const d = new Date(iso + "T00:00:00");
+      if (isNaN(d.getTime())) return { day: "--", mon: "---", full: iso };
+      return {
+        day: String(d.getDate()).padStart(2, "0"),
+        mon: MONTHS[d.getMonth()],
+        full: d.toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "long", day: "numeric" })
+      };
+    }
+
+    function renderEvents() {
+      const container = document.getElementById("eventsGridContainer");
+      if (!container) return;
+      const sorted = events.slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+      if (sorted.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No upcoming events scheduled yet.</p>`;
+        return;
+      }
+      container.innerHTML = sorted.map(ev => {
+        const d = formatEventDate(ev.date);
+        return `
+        <div class="event-card">
+          <div class="event-date-block"><div class="ed-day">${d.day}</div><div class="ed-mon">${d.mon}</div></div>
+          <div class="event-body">
+            <span class="event-type-tag">${escapeHtml(ev.type || 'Event')}</span>
+            <h3 class="event-title">${escapeHtml(ev.title)}</h3>
+            <div class="event-meta-line"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(ev.venue)} &nbsp;&bull;&nbsp; ${d.full}</div>
+            <div class="event-desc">${escapeHtml(ev.desc || '')}</div>
+            <div class="card-admin-action-bar" style="display:${isAdmin ? 'flex' : 'none'}; background:transparent; border:none; padding:0;">
+              <button class="btn btn-outline btn-sm edit-event-btn" data-id="${ev.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);"><i class="fa-solid fa-pen"></i> Edit</button>
+              <button class="btn btn-outline btn-sm delete-event-btn" data-id="${ev.id}" style="color: var(--danger); border-color: var(--danger);"><i class="fa-solid fa-trash"></i> Delete</button>
+            </div>
+          </div>
+        </div>`;
+      }).join("");
+
+      container.querySelectorAll(".edit-event-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("edit events")) editEvent(btn.getAttribute("data-id")); }; });
+      container.querySelectorAll(".delete-event-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("delete events")) deleteEvent(btn.getAttribute("data-id")); }; });
+    }
+
+    function editEvent(id) {
+      const ev = events.find(x => x.id === id);
+      if (!ev) return;
+      document.getElementById("eventEditModalTitle").innerText = "Edit Club Event";
+      document.getElementById("ef_id").value = ev.id;
+      document.getElementById("ef_title").value = ev.title;
+      document.getElementById("ef_type").value = ev.type || "Trial";
+      document.getElementById("ef_date").value = ev.date || "";
+      document.getElementById("ef_venue").value = ev.venue;
+      document.getElementById("ef_desc").value = ev.desc || "";
+      document.getElementById("eventEditModalBackdrop").classList.add("active");
+    }
+
+    async function deleteEvent(id) {
+      if (!confirm("Delete this event?")) return;
+      events = events.filter(x => x.id !== id);
+      saveStorage("events", events);
+      if (isFirebaseReady && db) {
+        try { await deleteDoc(doc(db, "events", id)); } catch(e) { console.error(e); }
+      }
+      renderEvents();
+      showToast("Event removed", "info");
+    }
+
+    document.getElementById("eventForm").onsubmit = async (e) => {
+      e.preventDefault();
+      const id = document.getElementById("ef_id").value || `e-${Date.now()}`;
+      const newE = {
+        id,
+        title: document.getElementById("ef_title").value,
+        type: document.getElementById("ef_type").value,
+        date: document.getElementById("ef_date").value,
+        venue: document.getElementById("ef_venue").value,
+        desc: document.getElementById("ef_desc").value
+      };
+      const idx = events.findIndex(x => x.id === id);
+      if (idx >= 0) events[idx] = newE; else events.unshift(newE);
+      saveStorage("events", events);
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(db, "events", id), newE); } catch(e) { console.error(e); }
+      }
+      renderEvents();
+      document.getElementById("eventEditModalBackdrop").classList.remove("active");
+      showToast("Event saved successfully!", "success");
+    };
+
+    document.getElementById("addNewEventBtn").onclick = () => {
+      if (!requireAdmin("add a club event")) return;
+      document.getElementById("eventForm").reset();
+      document.getElementById("ef_id").value = "";
+      document.getElementById("eventEditModalTitle").innerText = "Add Club Event";
+      document.getElementById("eventEditModalBackdrop").classList.add("active");
+    };
+
+    // ---------------- Achievements ----------------
     function renderAchievements() {
       const container = document.getElementById("achievementsContainer");
       if (!container) return;
       container.innerHTML = achievements.map(a => `
         <div class="achievement-card">
           <div class="trophy-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
-          <span class="achievement-year">${a.year}</span>
-          <h3 style="color: var(--dark-green); margin-bottom: 0.4rem;">${a.title}</h3>
-          <p style="font-size: 0.9rem; color: var(--gray-text); margin-bottom: 1rem;">${a.desc}</p>
+          <span class="achievement-year">${escapeHtml(a.year)}</span>
+          <h3 style="color: var(--dark-green); margin-bottom: 0.4rem;">${escapeHtml(a.title)}</h3>
+          <p style="font-size: 0.9rem; color: var(--gray-text); margin-bottom: 1rem;">${escapeHtml(a.desc)}</p>
           <div style="margin-top: auto;">
-            <button class="btn btn-outline btn-sm delete-ach-btn" data-id="${a.id}" style="color: var(--danger); border-color: var(--danger);">
-              <i class="fa-solid fa-trash"></i> Delete
-            </button>
+            <button class="btn btn-outline btn-sm delete-ach-btn" data-id="${a.id}" style="display:${isAdmin ? 'inline-flex' : 'none'}; color: var(--danger); border-color: var(--danger);"><i class="fa-solid fa-trash"></i> Delete</button>
           </div>
         </div>
       `).join("");
 
       container.querySelectorAll(".delete-ach-btn").forEach(btn => {
-        btn.onclick = () => {
+        btn.onclick = async () => {
+          if (!requireAdmin("delete trophies")) return;
           const id = btn.getAttribute("data-id");
           achievements = achievements.filter(x => x.id !== id);
           saveStorage("achievements", achievements);
+          if (isFirebaseReady && db) {
+            try { await deleteDoc(doc(db, "achievements", id)); } catch(e) { console.error(e); }
+          }
           renderAchievements();
           showToast("Trophy removed", "info");
         };
       });
     }
 
-    document.getElementById("achievementForm").onsubmit = (e) => {
+    document.getElementById("achievementForm").onsubmit = async (e) => {
       e.preventDefault();
+      const id = `a-${Date.now()}`;
       const newAch = {
-        id: `a-${Date.now()}`,
+        id,
         title: document.getElementById("af_title").value,
         year: document.getElementById("af_year").value,
         category: document.getElementById("af_cat").value,
@@ -2804,148 +1901,213 @@
       };
       achievements.unshift(newAch);
       saveStorage("achievements", achievements);
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(db, "achievements", id), newAch); } catch(e) { console.error(e); }
+      }
       renderAchievements();
       document.getElementById("achievementModalBackdrop").classList.remove("active");
       showToast("Trophy added to cabinet!", "success");
     };
 
-    // Render Gallery
-    function renderGallery(category = "all") {
+    document.getElementById("addNewAchievementBtn").onclick = () => {
+      if (!requireAdmin("add a trophy")) return;
+      document.getElementById("achievementForm").reset();
+      document.getElementById("achievementModalBackdrop").classList.add("active");
+    };
+
+    // ---------------- Gallery ----------------
+    let lightboxList = [];
+    let lightboxIndex = 0;
+
+    function renderGallery(category) {
+      category = category || "all";
       const grid = document.getElementById("galleryGrid");
       if (!grid) return;
       const filtered = category === "all" ? gallery : gallery.filter(x => x.category === category);
-
-      grid.innerHTML = filtered.map(g => `
+      lightboxList = filtered;
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No photos in this category yet.</p>`;
+        return;
+      }
+      grid.innerHTML = filtered.map((g, i) => `
         <div class="gallery-item">
-          <button class="gallery-admin-delete" data-id="${g.id}"><i class="fa-solid fa-trash"></i></button>
-          <img src="${g.url}" alt="${g.caption}" onclick="openLightbox('${g.url}', '${g.caption}')" />
+          <button class="gallery-admin-delete" data-id="${g.id}" style="display:${isAdmin ? 'flex' : 'none'};"><i class="fa-solid fa-trash"></i></button>
+          <img src="${g.url}" alt="${escapeHtml(g.caption)}" onclick="openLightbox(${i})" />
           <div class="gallery-overlay">
-            <div style="font-weight: 700;">${g.caption}</div>
-            <div style="font-size: 0.75rem; color: var(--gold);">${g.category}</div>
+            <div style="font-weight: 700;">${escapeHtml(g.caption)}</div>
+            <div style="font-size: 0.75rem; color: var(--gold);">${escapeHtml(g.category)}</div>
           </div>
         </div>
       `).join("");
 
       grid.querySelectorAll(".gallery-admin-delete").forEach(btn => {
-        btn.onclick = (e) => {
+        btn.onclick = async (e) => {
           e.stopPropagation();
+          if (!requireAdmin("delete gallery photos")) return;
           const id = btn.getAttribute("data-id");
           gallery = gallery.filter(x => x.id !== id);
           saveStorage("gallery", gallery);
-          renderGallery();
+          if (isFirebaseReady && db) {
+            try { await deleteDoc(doc(db, "gallery", id)); } catch(err) { console.error(err); }
+          }
+          renderGallery(category);
           showToast("Photo removed from gallery", "info");
         };
       });
     }
 
-    window.openLightbox = (url, caption) => {
-      document.getElementById("lightboxImg").src = url;
-      document.getElementById("lightboxCaption").innerText = caption;
+    window.openLightbox = (index) => {
+      lightboxIndex = index;
+      showLightboxItem();
       document.getElementById("lightboxBackdrop").classList.add("active");
     };
+    function showLightboxItem() {
+      const item = lightboxList[lightboxIndex];
+      if (!item) return;
+      document.getElementById("lightboxImg").src = item.url;
+      document.getElementById("lightboxCaption").innerText = item.caption;
+    }
+    document.getElementById("lightboxPrevBtn").onclick = () => {
+      lightboxIndex = (lightboxIndex - 1 + lightboxList.length) % lightboxList.length;
+      showLightboxItem();
+    };
+    document.getElementById("lightboxNextBtn").onclick = () => {
+      lightboxIndex = (lightboxIndex + 1) % lightboxList.length;
+      showLightboxItem();
+    };
 
-    document.getElementById("galleryForm").onsubmit = (e) => {
+    const gfPhotoBox = document.getElementById("gf_photo_box");
+    const gfImageFile = document.getElementById("gf_image_file");
+    const gfImageHidden = document.getElementById("gf_url");
+    wirePhotoUpload(gfPhotoBox, gfImageFile, gfImageHidden, { maxDim: 1100, quality: 0.8 });
+
+    document.getElementById("galleryForm").onsubmit = async (e) => {
       e.preventDefault();
+      if (!gfImageHidden.value) { showToast("Please upload a photo", "error"); return; }
+      const id = `g-${Date.now()}`;
       const newG = {
-        id: `g-${Date.now()}`,
+        id,
         caption: document.getElementById("gf_caption").value,
         category: document.getElementById("gf_category").value,
-        url: document.getElementById("gf_url").value
+        url: gfImageHidden.value
       };
       gallery.unshift(newG);
       saveStorage("gallery", gallery);
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(db, "gallery", id), newG); } catch(err) { console.error(err); }
+      }
       renderGallery();
       document.getElementById("galleryModalBackdrop").classList.remove("active");
       showToast("Photograph added to gallery!", "success");
     };
 
-    // Render Standings
+    document.getElementById("addNewGalleryBtn").onclick = () => {
+      if (!requireAdmin("add gallery photos")) return;
+      document.getElementById("galleryForm").reset();
+      gfImageHidden.value = "";
+      renderPhotoBoxPreview(gfPhotoBox, "");
+      document.getElementById("galleryModalBackdrop").classList.add("active");
+    };
+
+    // ---------------- Sponsors ----------------
+    function renderSponsors() {
+      const strip = document.getElementById("sponsorsStrip");
+      if (!strip) return;
+      if (sponsors.length === 0) {
+        strip.innerHTML = `<span style="color: var(--gray-text); font-size: 0.9rem;">${isAdmin ? 'No sponsor logos yet — add one below.' : 'Sponsor logos coming soon.'}</span>`;
+        return;
+      }
+      strip.innerHTML = sponsors.map(s => `
+        <div class="sponsor-logo-item">
+          <img src="${s.url}" alt="${escapeHtml(s.name || 'Sponsor')}" />
+          <button class="sponsor-remove-btn" data-id="${s.id}" style="display:${isAdmin ? 'flex' : 'none'};"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      `).join("");
+      strip.querySelectorAll(".sponsor-remove-btn").forEach(btn => {
+        btn.onclick = () => {
+          if (!requireAdmin("remove sponsors")) return;
+          sponsors = sponsors.filter(x => x.id !== btn.getAttribute("data-id"));
+          saveStorage("sponsors", sponsors);
+          renderSponsors();
+        };
+      });
+    }
+
+    const sponsorFileInput = document.getElementById("sponsorFileInput");
+    document.getElementById("addSponsorBtn").onclick = () => {
+      if (!requireAdmin("add sponsor logos")) return;
+      sponsorFileInput.click();
+    };
+    sponsorFileInput.onchange = async () => {
+      const file = sponsorFileInput.files && sponsorFileInput.files[0];
+      if (!file) return;
+      try {
+        const dataUrl = await readAndCompressImage(file, 400, 0.9);
+        sponsors.push({ id: `s-${Date.now()}`, name: file.name.replace(/\.[a-z0-9]+$/i, ""), url: dataUrl });
+        saveStorage("sponsors", sponsors);
+        renderSponsors();
+        showToast("Sponsor logo added", "success");
+      } catch (err) {
+        showToast(err.message || "Could not process that image", "error");
+      }
+      sponsorFileInput.value = "";
+    };
+
+    // ---------------- Standings ----------------
     function renderPoints() {
       const tbody = document.getElementById("pointsTableBody");
       if (!tbody) return;
       tbody.innerHTML = defaultPoints.map(r => `
         <tr class="${r.isSpartans ? 'highlight-team' : ''}">
           <td><strong>${r.pos}</strong></td>
-          <td>${r.team} ${r.isSpartans ? '(Our Club)' : ''}</td>
-          <td>${r.p}</td>
-          <td>${r.w}</td>
-          <td>${r.l}</td>
-          <td>${r.nrr}</td>
-          <td><strong>${r.pts}</strong></td>
+          <td>${escapeHtml(r.team)} ${r.isSpartans ? '(Our Club)' : ''}</td>
+          <td>${r.p}</td><td>${r.w}</td><td>${r.l}</td><td>${r.nrr}</td><td><strong>${r.pts}</strong></td>
         </tr>
       `).join("");
     }
 
-    // Modal Triggers
-    document.getElementById("addNewPlayerBtn").onclick = () => {
-      document.getElementById("playerForm").reset();
-      document.getElementById("pf_id").value = "";
-      document.getElementById("playerEditModalTitle").innerText = "Add New Player";
-      document.getElementById("playerEditModalBackdrop").classList.add("active");
+    // ---------------- Hero background upload ----------------
+    const heroSection = document.getElementById("home");
+    const heroBgFileInput = document.getElementById("heroBgFileInput");
+    document.getElementById("changeHeroBgBtn").onclick = () => {
+      if (!requireAdmin("change the cover photo")) return;
+      heroBgFileInput.click();
     };
-    document.getElementById("addNewMatchBtn").onclick = () => {
-      document.getElementById("matchForm").reset();
-      document.getElementById("mf_id").value = "";
-      document.getElementById("matchEditModalTitle").innerText = "Add Match Fixture";
-      document.getElementById("matchEditModalBackdrop").classList.add("active");
+    heroBgFileInput.onchange = async () => {
+      const file = heroBgFileInput.files && heroBgFileInput.files[0];
+      if (!file) return;
+      try {
+        const dataUrl = await readAndCompressImage(file, 1600, 0.8);
+        saveStorage("hero_bg", dataUrl);
+        applyHeroBg(dataUrl);
+        showToast("Cover photo updated!", "success");
+      } catch (err) {
+        showToast(err.message || "Could not process that image", "error");
+      }
+      heroBgFileInput.value = "";
     };
-    document.getElementById("addNewAchievementBtn").onclick = () => {
-      document.getElementById("achievementForm").reset();
-      document.getElementById("achievementModalBackdrop").classList.add("active");
-    };
-    document.getElementById("addNewGalleryBtn").onclick = () => {
-      document.getElementById("galleryForm").reset();
-      document.getElementById("galleryModalBackdrop").classList.add("active");
-    };
-    document.getElementById("editLiveScoreBtn").onclick = () => {
-      document.getElementById("liveScoreModalBackdrop").classList.add("active");
-    };
+    function applyHeroBg(dataUrl) {
+      if (!dataUrl) return;
+      heroSection.style.setProperty("--hero-img-url", `url('${dataUrl}')`);
+    }
+    const savedHeroBg = loadStorage("hero_bg", null);
+    if (savedHeroBg) applyHeroBg(savedHeroBg);
 
-    // Modal Closers
-    document.getElementById("closePlayerModalBtn").onclick = () => document.getElementById("playerModalBackdrop").classList.remove("active");
-    document.getElementById("closePlayerEditModalBtn").onclick = () => document.getElementById("playerEditModalBackdrop").classList.remove("active");
-    document.getElementById("closeMatchEditModalBtn").onclick = () => document.getElementById("matchEditModalBackdrop").classList.remove("active");
-    document.getElementById("closeAchievementModalBtn").onclick = () => document.getElementById("achievementModalBackdrop").classList.remove("active");
-    document.getElementById("closeGalleryModalBtn").onclick = () => document.getElementById("galleryModalBackdrop").classList.remove("active");
-    document.getElementById("closeLiveScoreModalBtn").onclick = () => document.getElementById("liveScoreModalBackdrop").classList.remove("active");
-    document.getElementById("closeLightboxBtn").onclick = () => document.getElementById("lightboxBackdrop").classList.remove("active");
-
-    // Live Score Customizer Submit
-    document.getElementById("liveScoreForm").onsubmit = (e) => {
-      e.preventDefault();
-      document.getElementById("sb_tourney_text").innerHTML = `<i class="fa-solid fa-trophy"></i> ${document.getElementById("lsf_tourney").value}`;
-      document.getElementById("sb_t1_name").innerText = document.getElementById("lsf_t1_name").value;
-      document.getElementById("sb_t1_score").innerText = document.getElementById("lsf_t1_score").value;
-      document.getElementById("sb_t2_name").innerText = document.getElementById("lsf_t2_name").value;
-      document.getElementById("sb_t2_score").innerText = document.getElementById("lsf_t2_score").value;
-      document.getElementById("sb_status_note").innerHTML = `<i class="fa-solid fa-circle-info"></i> ${document.getElementById("lsf_status").value}`;
-      document.getElementById("liveScoreModalBackdrop").classList.remove("active");
-      showToast("Live scoreboard updated!", "success");
-    };
-
-    // ====================================================================================
-    // INLINE ON-PAGE TEXT CUSTOMIZER (LIVE EDITING)
-    // ====================================================================================
+    // ---------------- Inline text editing ----------------
     const toggleEditModeBtn = document.getElementById("toggleEditModeBtn");
     const savePageEditsBtn = document.getElementById("savePageEditsBtn");
     const editModeBtnText = document.getElementById("editModeBtnText");
 
-    // Restore saved page texts
     const savedCustomTexts = loadStorage("page_custom_texts", {});
     document.querySelectorAll(".inline-editable").forEach(el => {
       const key = el.getAttribute("data-edit-key");
-      if (key && savedCustomTexts[key]) {
-        el.innerText = savedCustomTexts[key];
-      }
+      if (key && savedCustomTexts[key]) el.innerText = savedCustomTexts[key];
     });
 
     toggleEditModeBtn.onclick = () => {
       isEditMode = !isEditMode;
       document.body.classList.toggle("edit-mode-active", isEditMode);
-      document.querySelectorAll(".inline-editable").forEach(el => {
-        el.setAttribute("contenteditable", isEditMode ? "true" : "false");
-      });
-
+      document.querySelectorAll(".inline-editable").forEach(el => { el.setAttribute("contenteditable", isEditMode ? "true" : "false"); });
       if (isEditMode) {
         editModeBtnText.innerText = "Exit Edit Mode";
         savePageEditsBtn.style.display = "inline-flex";
@@ -2966,7 +2128,176 @@
       showToast("All on-page custom text changes saved permanently!", "success");
     };
 
-    // Filter Listeners
+    // ---------------- Authentication & Admin Mode ----------------
+    const adminLoginModal = document.getElementById("adminLoginModalBackdrop");
+    document.getElementById("adminLoginBtn").onclick = () => {
+      if (isAdmin) return;
+      adminLoginModal.classList.add("active");
+    };
+    document.getElementById("closeAdminLoginModalBtn").onclick = () => adminLoginModal.classList.remove("active");
+
+    function setAdminState(userOrEmail) {
+      isAdmin = true;
+      const displayName = (userOrEmail && userOrEmail.displayName) || (typeof userOrEmail === "string" ? userOrEmail.split("@")[0] : "Club Admin");
+      const photoURL = userOrEmail && userOrEmail.photoURL;
+
+      document.getElementById("authContainer").innerHTML = `
+        <div class="user-profile-badge">
+          ${photoURL ? `<img src="${photoURL}" style="width:26px; height:26px; border-radius:50%; border:1px solid var(--gold);" />` : '<i class="fa-solid fa-user-shield" style="color: var(--gold);"></i>'}
+          <span>${escapeHtml(displayName)}</span>
+          <span class="admin-pill">ADMIN</span>
+        </div>
+        <button class="btn btn-outline btn-sm" id="adminSignOutBtn" style="color:#fff; border-color: rgba(255,255,255,0.3); margin-left:0.5rem;">Sign Out</button>
+      `;
+
+      document.getElementById("adminSignOutBtn").onclick = async () => {
+        if (isFirebaseReady && auth) {
+          try { await signOut(auth); } catch (e) { console.error(e); }
+        }
+        location.reload();
+      };
+
+      adminLoginModal.classList.remove("active");
+      applyAdminVisibility();
+      renderPlayers();
+      renderTeams();
+      renderMatches(document.getElementById("tabUpcomingBtn").classList.contains("active") ? "upcoming" : "completed");
+      renderEvents();
+      renderAchievements();
+      renderGallery();
+      renderSponsors();
+      showToast("Admin tools unlocked — you can now customize club data.", "success");
+    }
+
+    // Google Sign-In with Authorized Email Checking
+    document.getElementById("googleAdminLoginBtn").onclick = async () => {
+      if (!isFirebaseReady || !auth) {
+        showToast("Firebase keys not entered yet. Configure firebaseConfig in the script to enable Google Sign-In.", "info");
+        return;
+      }
+      try {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        const email = (user.email || "").toLowerCase();
+        
+        if (ADMIN_EMAILS.map(e => e.toLowerCase()).includes(email)) {
+          currentUser = user;
+          setAdminState(user);
+        } else {
+          await signOut(auth);
+          showToast(`Access Denied: ${email} is not on the authorized admin list.`, "error");
+        }
+      } catch (err) {
+        showToast(err.message || "Google Sign-In failed.", "error");
+      }
+    };
+
+    if (isFirebaseReady && auth) {
+      onAuthStateChanged(auth, (user) => {
+        if (user && user.email) {
+          const email = user.email.toLowerCase();
+          if (ADMIN_EMAILS.map(e => e.toLowerCase()).includes(email)) {
+            currentUser = user;
+            setAdminState(user);
+          }
+        }
+      });
+    }
+
+    // Passcode Sign-In
+    document.getElementById("adminLoginForm").onsubmit = (e) => {
+      e.preventDefault();
+      const entered = document.getElementById("adminPasscodeInput").value;
+      if (entered === adminPasscode) {
+        document.getElementById("adminPasscodeInput").value = "";
+        setAdminState("Club Admin");
+      } else {
+        showToast("Incorrect passcode. Try again.", "error");
+      }
+    };
+
+    document.getElementById("editLiveScoreBtn").onclick = () => {
+      if (!requireAdmin("edit the live scoreboard")) return;
+      document.getElementById("liveScoreModalBackdrop").classList.add("active");
+    };
+
+    document.getElementById("addNewPlayerBtn").onclick = () => {
+      if (!requireAdmin("add players")) return;
+      document.getElementById("playerForm").reset();
+      document.getElementById("pf_id").value = "";
+      pfImageHidden.value = "";
+      renderPhotoBoxPreview(pfPhotoBox, "");
+      document.getElementById("playerEditModalTitle").innerText = "Add New Player";
+      document.getElementById("playerEditModalBackdrop").classList.add("active");
+    };
+    document.getElementById("addNewMatchBtn").onclick = () => {
+      if (!requireAdmin("add matches")) return;
+      document.getElementById("matchForm").reset();
+      document.getElementById("mf_id").value = "";
+      document.getElementById("matchEditModalTitle").innerText = "Add Match Fixture";
+      document.getElementById("matchEditModalBackdrop").classList.add("active");
+    };
+
+    // ---------------- Backup / Restore ----------------
+    function collectAllData() {
+      return {
+        players, teams, matches, events, achievements, gallery, sponsors,
+        page_custom_texts: loadStorage("page_custom_texts", {}),
+        hero_bg: loadStorage("hero_bg", null),
+        exportedAt: new Date().toISOString()
+      };
+    }
+    function downloadJson(obj, filename) {
+      const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+    document.getElementById("backupDataBtn").onclick = () => {
+      if (!requireAdmin("export site data")) return;
+      downloadJson(collectAllData(), `xi-spartans-backup-${Date.now()}.json`);
+      showToast("Backup file downloaded", "success");
+    };
+    document.getElementById("footerBackupLink").onclick = (e) => {
+      e.preventDefault();
+      if (isAdmin) { downloadJson(collectAllData(), `xi-spartans-backup-${Date.now()}.json`); showToast("Backup file downloaded", "success"); }
+      else showToast("Sign in as admin to back up or restore site data", "info");
+    };
+    const restoreFileInput = document.getElementById("restoreFileInput");
+    document.getElementById("restoreDataBtn").onclick = () => {
+      if (!requireAdmin("import site data")) return;
+      restoreFileInput.click();
+    };
+    restoreFileInput.onchange = () => {
+      const file = restoreFileInput.files && restoreFileInput.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          if (data.players) { players = data.players; saveStorage("players", players); }
+          if (data.teams) { teams = data.teams; saveStorage("teams", teams); }
+          if (data.matches) { matches = data.matches; saveStorage("matches", matches); }
+          if (data.events) { events = data.events; saveStorage("events", events); }
+          if (data.achievements) { achievements = data.achievements; saveStorage("achievements", achievements); }
+          if (data.gallery) { gallery = data.gallery; saveStorage("gallery", gallery); }
+          if (data.sponsors) { sponsors = data.sponsors; saveStorage("sponsors", sponsors); }
+          if (data.page_custom_texts) saveStorage("page_custom_texts", data.page_custom_texts);
+          if (data.hero_bg) saveStorage("hero_bg", data.hero_bg);
+          showToast("Data restored — reloading page...", "success");
+          setTimeout(() => location.reload(), 900);
+        } catch (err) {
+          showToast("That file could not be read as a valid backup", "error");
+        }
+      };
+      reader.readAsText(file);
+      restoreFileInput.value = "";
+    };
+
+    // ---------------- Filters, tabs, misc wiring ----------------
     const playerRoleBtns = document.querySelectorAll("#playerRoleFilters .filter-btn");
     playerRoleBtns.forEach(btn => {
       btn.onclick = () => {
@@ -3013,39 +2344,79 @@
       };
     });
 
-    // Mobile Hamburger
     const hamburgerBtn = document.getElementById("hamburgerBtn");
     const navMenu = document.getElementById("navMenu");
     hamburgerBtn.onclick = () => navMenu.classList.toggle("open");
     navMenu.querySelectorAll("a").forEach(a => a.onclick = () => navMenu.classList.remove("open"));
 
-    // Google Sign-In Demo/Live Handler
-    document.getElementById("googleLoginBtn").onclick = async () => {
-      if (!isFirebaseReady) {
-        currentUser = { displayName: "Spartan Admin", photoURL: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" };
-        document.getElementById("authContainer").innerHTML = `
-          <div class="user-profile-badge">
-            <img src="${currentUser.photoURL}" alt="${currentUser.displayName}" />
-            <span>${currentUser.displayName}</span>
-            <span class="admin-pill">ADMIN</span>
-          </div>
-        `;
-        showToast("Logged in as Admin (UI Customization Fully Unlocked)", "success");
-      } else {
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
+    const navbarEl = document.getElementById("navbar");
+    window.addEventListener("scroll", () => { navbarEl.classList.toggle("scrolled", window.scrollY > 40); });
+
+    document.getElementById("closePlayerModalBtn").onclick = () => document.getElementById("playerModalBackdrop").classList.remove("active");
+    document.getElementById("closePlayerEditModalBtn").onclick = () => document.getElementById("playerEditModalBackdrop").classList.remove("active");
+    document.getElementById("closeTeamEditModalBtn").onclick = () => document.getElementById("teamEditModalBackdrop").classList.remove("active");
+    document.getElementById("closeMatchEditModalBtn").onclick = () => document.getElementById("matchEditModalBackdrop").classList.remove("active");
+    document.getElementById("closeEventEditModalBtn").onclick = () => document.getElementById("eventEditModalBackdrop").classList.remove("active");
+    document.getElementById("closeAchievementModalBtn").onclick = () => document.getElementById("achievementModalBackdrop").classList.remove("active");
+    document.getElementById("closeGalleryModalBtn").onclick = () => document.getElementById("galleryModalBackdrop").classList.remove("active");
+    document.getElementById("closeLiveScoreModalBtn").onclick = () => document.getElementById("liveScoreModalBackdrop").classList.remove("active");
+    document.getElementById("closeLightboxBtn").onclick = () => document.getElementById("lightboxBackdrop").classList.remove("active");
+
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+      backdrop.addEventListener("click", (e) => { if (e.target === backdrop) backdrop.classList.remove("active"); });
+    });
+
+    document.getElementById("liveScoreForm").onsubmit = async (e) => {
+      e.preventDefault();
+      const liveData = {
+        tournament: document.getElementById("lsf_tourney").value,
+        t1_name: document.getElementById("lsf_t1_name").value,
+        t1_score: document.getElementById("lsf_t1_score").value,
+        t2_name: document.getElementById("lsf_t2_name").value,
+        t2_score: document.getElementById("lsf_t2_score").value,
+        status: document.getElementById("lsf_status").value
+      };
+      document.getElementById("sb_tourney_text").innerHTML = `<i class="fa-solid fa-trophy"></i> ${escapeHtml(liveData.tournament)}`;
+      document.getElementById("sb_t1_name").innerText = liveData.t1_name;
+      document.getElementById("sb_t1_score").innerText = liveData.t1_score;
+      document.getElementById("sb_t2_name").innerText = liveData.t2_name;
+      document.getElementById("sb_t2_score").innerText = liveData.t2_score;
+      document.getElementById("sb_status_note").innerHTML = `<i class="fa-solid fa-circle-info"></i> ${escapeHtml(liveData.status)}`;
+      
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(db, "liveScore", "current"), liveData); } catch(err) { console.error(err); }
       }
+      document.getElementById("liveScoreModalBackdrop").classList.remove("active");
+      showToast("Live scoreboard updated!", "success");
     };
 
-    // Initialization
-    window.addEventListener("DOMContentLoaded", () => {
-      renderPlayers();
-      renderTeams();
-      renderMatches("upcoming");
-      renderAchievements();
-      renderGallery();
-      renderPoints();
-    });
+    document.getElementById("contactForm").onsubmit = async (e) => {
+      e.preventDefault();
+      const contactMsg = {
+        name: document.getElementById("contactName").value,
+        email: document.getElementById("contactEmail").value,
+        phone: document.getElementById("contactPhone").value,
+        message: document.getElementById("contactMessage").value,
+        createdAt: new Date().toISOString()
+      };
+      if (isFirebaseReady && db) {
+        try { await setDoc(doc(collection(db, "contactMessages")), contactMsg); } catch(err) { console.error(err); }
+      }
+      showToast("Message sent! The Spartans management team will reach out soon.", "success");
+      e.target.reset();
+    };
+
+    // ---------------- Initial render ----------------
+    applyAdminVisibility();
+    renderPlayers();
+    renderTeams();
+    renderMatches("upcoming");
+    renderEvents();
+    renderAchievements();
+    renderGallery();
+    renderSponsors();
+    renderPoints();
+    initFirestoreSync();
   </script>
 </body>
 </html>
