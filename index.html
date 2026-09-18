@@ -27,14 +27,16 @@
       --border-color: #D1FAE5;
       --border-subtle: #E2E8F0;
       --danger: #EF4444;
-      --shadow-sm: 0 1px 3px rgba(6, 78, 59, 0.05);
-      --shadow-md: 0 4px 14px rgba(6, 78, 59, 0.08);
-      --shadow-lg: 0 12px 30px rgba(6, 78, 59, 0.12);
+      --shadow-sm: 0 2px 6px rgba(6, 78, 59, 0.04);
+      --shadow-md: 0 6px 18px rgba(6, 78, 59, 0.08);
+      --shadow-lg: 0 16px 36px rgba(6, 78, 59, 0.12);
+      --shadow-hover: 0 20px 40px rgba(5, 150, 105, 0.18);
       --radius: 12px;
       --radius-lg: 20px;
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
     body { font-family: 'Outfit', sans-serif; color: var(--dark-text); background-color: var(--white); line-height: 1.6; overflow-x: hidden; }
     h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
     a { text-decoration: none; color: inherit; transition: var(--transition); }
@@ -46,14 +48,36 @@
     .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: linear-gradient(90deg, var(--cricket-green), var(--gold)); margin: 0.75rem auto 0; border-radius: 2px; }
     .section-desc { color: var(--gray-text); font-size: 1.05rem; }
 
+    /* Buttons */
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.75rem 1.4rem; font-size: 0.92rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: var(--transition); text-transform: uppercase; letter-spacing: 0.04em; }
     .btn-primary { background: var(--cricket-green); color: var(--white); box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3); }
-    .btn-primary:hover { background: var(--dark-green); color: var(--white); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-primary:hover { background: var(--dark-green); color: var(--white); transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow-hover); }
     .btn-gold { background: var(--gold); color: var(--dark-green); font-weight: 700; }
-    .btn-gold:hover { background: #c29e2c; transform: translateY(-2px); }
+    .btn-gold:hover { background: #c29e2c; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
     .btn-outline { border-color: var(--white); color: var(--white); background: transparent; }
-    .btn-outline:hover { background: var(--white); color: var(--dark-green); }
+    .btn-outline:hover { background: var(--white); color: var(--dark-green); transform: translateY(-3px); }
     .btn-sm { padding: 0.45rem 0.9rem; font-size: 0.825rem; }
+
+    /* Scroll Animations Core */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     /* Top Bar & Fixed Aligned Navigation */
     .top-bar { background: #033226; color: #D1FAE5; font-size: 0.825rem; padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -63,7 +87,7 @@
     .top-bar-social a:hover { color: var(--gold); }
 
     .navbar { position: sticky; top: 0; left: 0; width: 100%; background: var(--dark-green); z-index: 1000; transition: var(--transition); }
-    .navbar.scrolled { padding: 0.2rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+    .navbar.scrolled { padding: 0.2rem 0; box-shadow: 0 8px 24px rgba(6, 78, 59, 0.25); }
     .navbar-container { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1.5rem; gap: 1rem; }
     .logo-area { display: flex; align-items: center; gap: 0.75rem; color: var(--white); flex-shrink: 0; }
     .logo-icon { font-size: 1.8rem; color: var(--gold); }
@@ -74,7 +98,6 @@
     .nav-item a { color: #E2E8F0; font-weight: 500; font-size: 0.9rem; padding: 0.4rem 0; }
     .nav-item a:hover, .nav-item a.active { color: var(--gold); }
 
-    /* Auth container alignment fix */
     .nav-auth { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
     .auth-wrapper-flex { display: inline-flex; align-items: center; gap: 0.6rem; }
     .user-profile-badge { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--white); background: rgba(255,255,255,0.12); padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.15); }
@@ -97,31 +120,34 @@
     /* Live Ticker */
     .live-ticker { background: #033226; border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 0.75rem 0; color: var(--white); }
     .ticker-wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
-    .ticker-badge { background: var(--danger); color: var(--white); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .ticker-badge { background: var(--danger); color: var(--white); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.4rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
     /* Statistics Bar */
     .stats-section { background: var(--white); padding: 3.5rem 0; margin-top: -3rem; position: relative; z-index: 5; }
     .stats-card-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; background: var(--white); padding: 2.5rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); }
     .stat-item { text-align: center; position: relative; }
     .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 15%; height: 70%; width: 1px; background: var(--border-color); }
-    .stat-number { font-size: 2.75rem; font-weight: 900; color: var(--dark-green); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-number { font-size: 2.75rem; font-weight: 900; color: var(--dark-green); line-height: 1; margin-bottom: 0.4rem; font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
     .stat-number.gold { color: var(--gold-dark); }
     .stat-label { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; color: var(--gray-text); }
 
-    /* About Section (Fixed Photo, Layout & Light-Green Styling) */
+    /* About Section */
     .about-section-wrap { background: var(--bg-light); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
     .about-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3.5rem; align-items: center; }
     .about-img-box { position: relative; border-radius: var(--radius-lg); overflow: visible; }
-    .about-img-main { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); object-fit: cover; width: 100%; height: 470px; display: block; border: 2px solid var(--border-color); background: #CBD5E1; }
+    .about-img-main { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); object-fit: cover; width: 100%; height: 470px; display: block; border: 2px solid var(--border-color); background: #CBD5E1; transition: var(--transition); }
+    .about-img-box:hover .about-img-main { transform: scale(1.02); }
     .about-photo-change-btn { position: absolute; top: 1rem; left: 1rem; background: rgba(6, 78, 59, 0.9); color: #fff; border: 1px solid var(--gold); padding: 0.45rem 0.9rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: none; align-items: center; gap: 0.4rem; box-shadow: var(--shadow-md); z-index: 4; }
-    .about-photo-change-btn:hover { background: var(--dark-green); }
+    .about-photo-change-btn:hover { background: var(--dark-green); transform: translateY(-2px); }
 
-    .about-experience-badge { position: absolute; bottom: 1.5rem; right: -1.5rem; background: var(--dark-green); color: var(--white); padding: 1.4rem 2rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 2px solid var(--gold); text-align: center; z-index: 3; }
+    .about-experience-badge { position: absolute; bottom: 1.5rem; right: -1.5rem; background: var(--dark-green); color: var(--white); padding: 1.4rem 2rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 2px solid var(--gold); text-align: center; z-index: 3; transition: var(--transition); }
+    .about-experience-badge:hover { transform: scale(1.05); }
     .badge-years { font-size: 2.4rem; font-weight: 900; color: var(--gold); line-height: 1; }
     .badge-text { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: #A7F3D0; font-weight: 600; }
     .about-values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
     .value-card { background: var(--mint-card); padding: 1.25rem; border-radius: var(--radius); border-left: 4px solid var(--cricket-green); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); transition: var(--transition); }
-    .value-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-left-color: var(--gold); }
     .value-card h4 { font-size: 1.05rem; color: var(--dark-green); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
     .value-card p { font-size: 0.88rem; color: var(--gray-text); }
 
@@ -132,9 +158,10 @@
     .teams-section { background: var(--white); }
     .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
     .team-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--border-color); display: flex; flex-direction: column; position: relative; }
-    .team-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .team-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-6px); }
     .team-img { height: 200px; overflow: hidden; position: relative; }
-    .team-img img { width: 100%; height: 100%; object-fit: cover; }
+    .team-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .team-card:hover .team-img img { transform: scale(1.08); }
     .team-division-tag { position: absolute; top: 1rem; right: 1rem; background: rgba(6, 78, 59, 0.9); color: var(--gold); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
     .team-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
     .team-body h3 { font-size: 1.35rem; color: var(--dark-green); margin-bottom: 0.5rem; }
@@ -143,25 +170,127 @@
     .team-stat-val { font-weight: 800; color: var(--cricket-green); font-size: 1.1rem; }
     .team-stat-lbl { font-size: 0.7rem; text-transform: uppercase; color: var(--gray-text); font-weight: 600; }
 
-    /* Players */
+    /* Players - Enhanced Animations & Photo Hover Effects */
     .players-filter-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; background: var(--bg-light); padding: 1rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
     .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .filter-btn { padding: 0.45rem 1rem; background: transparent; border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--gray-text); transition: var(--transition); }
-    .filter-btn.active, .filter-btn:hover { background: var(--cricket-green); color: var(--white); border-color: var(--cricket-green); }
+    .filter-btn.active, .filter-btn:hover { background: var(--cricket-green); color: var(--white); border-color: var(--cricket-green); transform: translateY(-2px); }
     .player-search-box { position: relative; min-width: 260px; }
-    .player-search-box input { width: 100%; padding: 0.5rem 1rem 0.5rem 2.2rem; border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.9rem; outline: none; background: #fff; }
+    .player-search-box input { width: 100%; padding: 0.5rem 1rem 0.5rem 2.2rem; border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.9rem; outline: none; background: #fff; transition: var(--transition); }
+    .player-search-box input:focus { border-color: var(--cricket-green); box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); }
     .player-search-box i { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: #9CA3AF; }
 
     .players-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
-    .player-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--border-color); position: relative; display: flex; flex-direction: column; }
-    .player-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--cricket-green); }
-    .player-jersey-badge { position: absolute; top: 1rem; left: 1rem; width: 36px; height: 36px; background: var(--dark-green); border: 2px solid var(--gold); color: var(--gold); font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; z-index: 2; }
-    .player-role-badge { position: absolute; top: 1rem; right: 1rem; background: rgba(6, 78, 59, 0.9); color: var(--white); font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 50px; font-weight: 700; z-index: 2; }
-    .player-img-wrap { height: 270px; background: #E2E8F0; position: relative; overflow: hidden; cursor: pointer; }
-    .player-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: var(--transition); }
-    .player-card:hover .player-img-wrap img { transform: scale(1.04); }
-    .player-info-body { padding: 1.25rem; text-align: center; cursor: pointer; }
-    .player-name { font-size: 1.15rem; color: var(--dark-green); font-weight: 700; margin-bottom: 0.25rem; }
+    .player-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .player-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--cricket-green);
+    }
+    .player-jersey-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 38px;
+      height: 38px;
+      background: var(--dark-green);
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      z-index: 3;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .player-card:hover .player-jersey-badge {
+      transform: scale(1.1) rotate(5deg);
+      background: #042419;
+      box-shadow: 0 6px 14px rgba(212, 175, 55, 0.4);
+    }
+    .player-role-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(6, 78, 59, 0.9);
+      color: var(--white);
+      font-size: 0.72rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 50px;
+      font-weight: 700;
+      z-index: 3;
+      backdrop-filter: blur(4px);
+    }
+    .player-img-wrap {
+      height: 280px;
+      background: #E2E8F0;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .player-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+    }
+    /* Shimmer Light Reflection on Hover */
+    .player-img-wrap::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 20%;
+      height: 200%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+      transform: rotate(30deg);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .player-card:hover .player-img-wrap::after {
+      animation: lightShine 0.9s ease forwards;
+    }
+    @keyframes lightShine {
+      0% { left: -60%; opacity: 0; }
+      20% { opacity: 1; }
+      100% { left: 140%; opacity: 0; }
+    }
+    .player-card:hover .player-img-wrap img {
+      transform: scale(1.08);
+      filter: contrast(1.04) brightness(1.02);
+    }
+    .player-info-body {
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      background: var(--white);
+    }
+    .player-name {
+      font-size: 1.15rem;
+      color: var(--dark-green);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      transition: color 0.3s ease;
+    }
+    .player-card:hover .player-name {
+      color: var(--cricket-green);
+    }
     .player-subrole { font-size: 0.8rem; color: var(--cricket-green); font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; }
     .player-brief-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; border-top: 1px solid var(--border-color); padding-top: 0.8rem; font-size: 0.8rem; }
     .pbs-item strong { display: block; color: var(--dark-green); font-size: 1rem; }
@@ -170,7 +299,8 @@
 
     /* Live Scoreboard */
     .scoreboard-section { background: linear-gradient(135deg, #033226 0%, #064E3B 100%); color: var(--white); position: relative; }
-    .live-scoreboard-card { background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); max-width: 960px; margin: 0 auto; }
+    .live-scoreboard-card { background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); max-width: 960px; margin: 0 auto; transition: var(--transition); }
+    .live-scoreboard-card:hover { border-color: var(--gold); }
     .sb-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 1rem; margin-bottom: 1.5rem; }
     .sb-tourney { font-size: 0.95rem; color: var(--gold); font-weight: 700; }
     .sb-teams-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; text-align: center; margin-bottom: 2rem; }
@@ -190,7 +320,8 @@
     .match-tab-btn { padding: 0.7rem 1.8rem; font-size: 0.95rem; font-weight: 700; border-radius: 50px; border: 2px solid var(--cricket-green); background: transparent; color: var(--cricket-green); cursor: pointer; transition: var(--transition); }
     .match-tab-btn.active { background: var(--cricket-green); color: var(--white); }
     .matches-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; }
-    .match-card { background: var(--white); border-radius: var(--radius-lg); padding: 1.8rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); position: relative; display: flex; flex-direction: column; }
+    .match-card { background: var(--white); border-radius: var(--radius-lg); padding: 1.8rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); position: relative; display: flex; flex-direction: column; transition: var(--transition); }
+    .match-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
     .match-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-size: 0.8rem; color: var(--gray-text); border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem; }
     .match-tag { font-weight: 700; color: var(--cricket-green); text-transform: uppercase; }
     .match-teams-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
@@ -216,15 +347,17 @@
     /* Achievements */
     .achievements-section { background: var(--bg-light); border-top: 1px solid var(--border-color); }
     .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-    .achievement-card { background: var(--white); padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); text-align: center; position: relative; display: flex; flex-direction: column; }
-    .trophy-icon-wrap { width: 65px; height: 65px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); color: var(--gold-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 1.2rem; }
+    .achievement-card { background: var(--white); padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); text-align: center; position: relative; display: flex; flex-direction: column; transition: var(--transition); }
+    .achievement-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--gold); }
+    .trophy-icon-wrap { width: 65px; height: 65px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); color: var(--gold-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 1.2rem; transition: transform 0.4s ease; }
+    .achievement-card:hover .trophy-icon-wrap { transform: rotateY(180deg); }
     .achievement-year { display: inline-block; font-size: 0.8rem; font-weight: 800; color: var(--cricket-green); background: var(--light-green); padding: 0.2rem 0.65rem; border-radius: 50px; margin-bottom: 0.6rem; }
 
     /* Events */
     .events-section { background: var(--white); }
     .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; }
     .event-card { display: flex; gap: 1.2rem; background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.4rem; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .event-card:hover { box-shadow: var(--shadow-md); border-color: var(--cricket-green); }
+    .event-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); border-color: var(--cricket-green); }
     .event-date-block { flex-shrink: 0; width: 68px; height: 68px; background: var(--dark-green); color: var(--white); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
     .event-date-block .ed-day { font-size: 1.4rem; font-weight: 900; color: var(--gold); line-height: 1; }
     .event-date-block .ed-mon { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: #A7F3D0; }
@@ -238,9 +371,9 @@
     .gallery-filter-tabs { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
     .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; height: 240px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; cursor: pointer; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; cursor: pointer; }
     .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6, 78, 59, 0.85) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem; color: var(--white); opacity: 0; transition: var(--transition); pointer-events: none; }
-    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item:hover img { transform: scale(1.08); }
     .gallery-item:hover .gallery-overlay { opacity: 1; }
     .gallery-admin-delete { position: absolute; top: 0.8rem; right: 0.8rem; background: rgba(239, 68, 68, 0.85); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 
@@ -387,10 +520,25 @@
     </div>
   </nav>
 
+  <div class="live-ticker">
+    <div class="container ticker-wrap">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span class="ticker-badge"><i class="fa-solid fa-circle"></i> MATCH DAY LIVE</span>
+        <span id="txt_ticker">
+          XI Spartans 176/4 (18.2 ov) vs Marina Strikers 174/8 — Spartans need 2 runs to win
+        </span>
+      </div>
+      <div>
+        <a href="#liveScoreSection" class="btn btn-outline btn-sm" style="padding: 0.2rem 0.65rem; font-size: 0.75rem;">
+          View Center <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <section class="hero" id="home">
     <div class="container">
-      <div class="hero-content">
+      <div class="hero-content reveal-on-scroll">
         <div class="hero-tagline">
           <i class="fa-solid fa-cricket-bat-ball"></i> <span id="txt_hero_tag">Official Premier Club</span>
         </div>
@@ -415,36 +563,36 @@
 
   <section class="stats-section">
     <div class="container">
-      <div class="stats-card-grid">
+      <div class="stats-card-grid reveal-scale" id="statsCounterGrid">
         <div class="stat-item">
-          <div class="stat-number" id="st_num_years">12</div>
+          <div class="stat-number" id="st_num_years" data-count="12">0</div>
           <div class="stat-label">Years of Glory</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" id="st_num_players">48</div>
+          <div class="stat-number" id="st_num_players" data-count="48">0</div>
           <div class="stat-label">Elite Players</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" id="st_num_matches">210</div>
+          <div class="stat-number" id="st_num_matches" data-count="210">0</div>
           <div class="stat-label">Matches Played</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" id="st_num_won">152</div>
+          <div class="stat-number" id="st_num_won" data-count="152">0</div>
           <div class="stat-label">Matches Won</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number gold" id="st_num_trophies">2</div>
+          <div class="stat-number gold" id="st_num_trophies" data-count="2">0</div>
           <div class="stat-label">Championships</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" id="st_num_winrate">72%</div>
+          <div class="stat-number" id="st_num_winrate" data-count="72" data-suffix="%">0%</div>
           <div class="stat-label">Win Ratio</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section (Updated With Fixed Image, Direct Upload & Edit Modal) -->
+  <!-- About Section -->
   <section class="section-padding about-section-wrap" id="about">
     <div class="container">
       <div class="section-action-header admin-only-control" style="display:none; margin-bottom: 2rem;">
@@ -454,7 +602,7 @@
       </div>
 
       <div class="about-grid">
-        <div class="about-img-box">
+        <div class="about-img-box reveal-on-scroll">
           <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1200&q=80" alt="About XI Spartans Cricket Club" class="about-img-main" id="about_main_img" onerror="this.src='https://images.unsplash.com/photo-1531415074868-036b107e775a?auto=format&fit=crop&w=1200&q=80'" />
           <button class="about-photo-change-btn admin-only-control" id="changeAboutPhotoBtn" title="Upload new photo for About section">
             <i class="fa-solid fa-camera"></i> Change Photo
@@ -465,7 +613,7 @@
             <div class="badge-text" id="txt_about_badge_lbl">Years of Dominance</div>
           </div>
         </div>
-        <div>
+        <div class="reveal-on-scroll">
           <span class="section-subtitle">The Spartan Spirit</span>
           <h2 class="section-title" style="text-align: left;" id="txt_about_title">
             Forged In Battle, United By The Pitch
@@ -502,7 +650,7 @@
 
   <section class="section-padding teams-section" id="teams">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">Our Squad Divisions</span>
         <h2 class="section-title">Official XI Spartans Teams</h2>
         <p class="section-desc">Manage first XI, developmental squads, and academy leagues.</p>
@@ -520,7 +668,7 @@
 
   <section class="section-padding scoreboard-section" id="liveScoreSection">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle" style="color: var(--gold);">Live Match Center</span>
         <h2 class="section-title" style="color: var(--white);">Premier League Live Fixture</h2>
       </div>
@@ -531,7 +679,7 @@
         </button>
       </div>
 
-      <div class="live-scoreboard-card" id="liveScoreboardCard">
+      <div class="live-scoreboard-card reveal-scale" id="liveScoreboardCard">
         <div class="sb-header">
           <span class="sb-tourney" id="sb_tourney_text"><i class="fa-solid fa-trophy"></i> TNCA Premier Club Trophy 2026</span>
           <span class="ticker-badge"><i class="fa-solid fa-satellite-dish"></i> LIVE INNINGS 2</span>
@@ -581,7 +729,7 @@
 
   <section class="section-padding" id="players">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">Meet The Spartans</span>
         <h2 class="section-title">Spartan Squad Directory</h2>
         <p class="section-desc">Click on any player to view their complete stats profile, or click "Edit" on their card to modify details.</p>
@@ -593,7 +741,7 @@
         </button>
       </div>
 
-      <div class="players-filter-bar">
+      <div class="players-filter-bar reveal-on-scroll">
         <div class="filter-tabs" id="playerRoleFilters">
           <button class="filter-btn active" data-role="all">All Squad</button>
           <button class="filter-btn" data-role="Batsman">Batsmen</button>
@@ -613,7 +761,7 @@
 
   <section class="section-padding teams-section" id="matches">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">Fixtures & Results</span>
         <h2 class="section-title">Match Calendar</h2>
         <p class="section-desc">Upcoming tournaments and completed match records.</p>
@@ -625,7 +773,7 @@
         </button>
       </div>
 
-      <div class="matches-tabs">
+      <div class="matches-tabs reveal-on-scroll">
         <button class="match-tab-btn active" id="tabUpcomingBtn">Upcoming Fixtures</button>
         <button class="match-tab-btn" id="tabRecentBtn">Recent Results</button>
       </div>
@@ -636,7 +784,7 @@
 
   <section class="section-padding events-section" id="events">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">Club Calendar</span>
         <h2 class="section-title">Trials, Camps & Club Events</h2>
         <p class="section-desc">Training camps, trials, award nights and everything beyond match day.</p>
@@ -654,13 +802,13 @@
 
   <section class="section-padding" id="points">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">League Standings</span>
         <h2 class="section-title">Tournament Points Table</h2>
         <p class="section-desc">Chennai Champions League 2026 Standings.</p>
       </div>
 
-      <div class="table-responsive">
+      <div class="table-responsive reveal-scale">
         <table class="custom-table" id="pointsTable">
           <thead>
             <tr><th>POS</th><th>CLUB</th><th>P</th><th>W</th><th>L</th><th>NRR</th><th>PTS</th></tr>
@@ -673,7 +821,7 @@
 
   <section class="section-padding achievements-section" id="achievements">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">Trophy Cabinet</span>
         <h2 class="section-title">Club Achievements</h2>
         <p class="section-desc">Honours and trophies earned by XI Spartans.</p>
@@ -691,7 +839,7 @@
 
   <section class="section-padding" id="gallery">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">Captured Moments</span>
         <h2 class="section-title">Spartans Photo Gallery</h2>
         <p class="section-desc">Action shots, net practice, and title celebrations.</p>
@@ -703,7 +851,7 @@
         </button>
       </div>
 
-      <div class="gallery-filter-tabs" id="galleryFilterTabs">
+      <div class="gallery-filter-tabs reveal-on-scroll" id="galleryFilterTabs">
         <button class="filter-btn active" data-cat="all">All Photos</button>
         <button class="filter-btn" data-cat="Matches">Matches</button>
         <button class="filter-btn" data-cat="Training">Training</button>
@@ -716,13 +864,13 @@
 
   <section class="section-padding" id="contact">
     <div class="container">
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal-on-scroll">
         <span class="section-subtitle">Get In Touch</span>
         <h2 class="section-title">Connect With XI Spartans</h2>
       </div>
 
       <div class="contact-grid">
-        <div class="contact-info-card">
+        <div class="contact-info-card reveal-on-scroll">
           <div>
             <h3 style="font-size: 1.6rem; color: var(--gold); margin-bottom: 1.5rem;">Spartans Fortress</h3>
             <div class="contact-info-item">
@@ -758,7 +906,7 @@
           </div>
         </div>
 
-        <div class="contact-form">
+        <div class="contact-form reveal-on-scroll">
           <form id="contactForm">
             <div class="form-group">
               <label for="contactName">Full Name</label>
@@ -1210,12 +1358,12 @@
 
     // Firebase Data Configuration
     const firebaseConfig = {
-   apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
-  authDomain: "otp-login-app-2f5d5.firebaseapp.com",
-  projectId: "otp-login-app-2f5d5",
-  storageBucket: "otp-login-app-2f5d5.firebasestorage.app",
-  messagingSenderId: "660933750433",
-  appId: "1:660933750433:web:dacff67b6c6fae6264cae0"
+      apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
+      authDomain: "otp-login-app-2f5d5.firebaseapp.com",
+      projectId: "otp-login-app-2f5d5",
+      storageBucket: "otp-login-app-2f5d5.firebasestorage.app",
+      messagingSenderId: "660933750433",
+      appId: "1:660933750433:web:dacff67b6c6fae6264cae0"
     };
 
     // Designated Admin Emails
@@ -1432,7 +1580,6 @@
       }
     }
 
-    // Direct About Photo Upload
     const changeAboutPhotoBtn = document.getElementById("changeAboutPhotoBtn");
     const aboutPhotoFileInput = document.getElementById("aboutPhotoFileInput");
     changeAboutPhotoBtn.onclick = () => {
@@ -1457,7 +1604,6 @@
       aboutPhotoFileInput.value = "";
     };
 
-    // About Details Edit Modal
     document.getElementById("editAboutDetailsBtn").onclick = () => {
       if (!requireAdmin("edit About content")) return;
       document.getElementById("af_title").value = aboutData.title;
@@ -1548,8 +1694,8 @@
         container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No players found.</p>`;
         return;
       }
-      container.innerHTML = dataToRender.map(p => `
-        <div class="player-card">
+      container.innerHTML = dataToRender.map((p, idx) => `
+        <div class="player-card reveal-on-scroll" style="transition-delay: ${idx * 0.08}s;">
           <div class="player-jersey-badge">#${escapeHtml(p.jerseyNumber)}</div>
           <div class="player-role-badge">${escapeHtml(p.role)}</div>
           <div class="player-img-wrap" onclick="viewPlayerModal('${p.id}')">
@@ -1570,6 +1716,8 @@
           </div>
         </div>
       `).join("");
+
+      observeNewReveals();
 
       container.querySelectorAll(".edit-player-btn").forEach(btn => {
         btn.onclick = (e) => { e.stopPropagation(); if (requireAdmin("edit players")) editPlayer(btn.getAttribute("data-id")); };
@@ -1679,8 +1827,8 @@
         container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No team divisions added yet.</p>`;
         return;
       }
-      container.innerHTML = teams.map(t => `
-        <div class="team-card">
+      container.innerHTML = teams.map((t, idx) => `
+        <div class="team-card reveal-on-scroll" style="transition-delay: ${idx * 0.1}s;">
           <div class="team-img"><img src="${t.image}" alt="${escapeHtml(t.name)}" /><div class="team-division-tag">${escapeHtml(t.division)}</div></div>
           <div class="team-body">
             <h3>${escapeHtml(t.name)}</h3>
@@ -1701,6 +1849,8 @@
           </div>
         </div>
       `).join("");
+
+      observeNewReveals();
 
       container.querySelectorAll(".edit-team-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("edit teams")) editTeam(btn.getAttribute("data-id")); }; });
       container.querySelectorAll(".delete-team-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("delete teams")) deleteTeam(btn.getAttribute("data-id")); }; });
@@ -1787,8 +1937,8 @@
         container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No ${type} matches found.</p>`;
         return;
       }
-      container.innerHTML = filtered.map(m => `
-        <div class="match-card">
+      container.innerHTML = filtered.map((m, idx) => `
+        <div class="match-card reveal-on-scroll" style="transition-delay: ${idx * 0.08}s;">
           <div class="match-card-header">
             <span class="match-tag"><i class="fa-solid fa-trophy"></i> ${escapeHtml(m.tournament || 'League Cup')}</span>
             <span><i class="fa-regular fa-clock"></i> ${escapeHtml(m.date)}</span>
@@ -1808,6 +1958,8 @@
           </div>
         </div>
       `).join("");
+
+      observeNewReveals();
 
       container.querySelectorAll(".edit-match-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("edit matches")) editMatch(btn.getAttribute("data-id")); }; });
       container.querySelectorAll(".delete-match-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("delete matches")) deleteMatch(btn.getAttribute("data-id")); }; });
@@ -1888,15 +2040,15 @@
         container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No upcoming events scheduled yet.</p>`;
         return;
       }
-      container.innerHTML = sorted.map(ev => {
+      container.innerHTML = sorted.map((ev, idx) => {
         const d = formatEventDate(ev.date);
         return `
-        <div class="event-card">
+        <div class="event-card reveal-on-scroll" style="transition-delay: ${idx * 0.08}s;">
           <div class="event-date-block"><div class="ed-day">${d.day}</div><div class="ed-mon">${d.mon}</div></div>
           <div class="event-body">
             <span class="event-type-tag">${escapeHtml(ev.type || 'Event')}</span>
             <h3 class="event-title">${escapeHtml(ev.title)}</h3>
-            <div class="event-meta-line"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(ev.venue)} &nbsp;&bull;&nbsp; ${d.full}</div>
+            <div class="event-meta-line"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(ev.venue)} &nbspbull;&nbsp ${d.full}</div>
             <div class="event-desc">${escapeHtml(ev.desc || '')}</div>
             <div class="card-admin-action-bar" style="display:${isAdmin ? 'flex' : 'none'}; background:transparent; border:none; padding:0;">
               <button class="btn btn-outline btn-sm edit-event-btn" data-id="${ev.id}" style="color: var(--cricket-green); border-color: var(--cricket-green);"><i class="fa-solid fa-pen"></i> Edit</button>
@@ -1905,6 +2057,8 @@
           </div>
         </div>`;
       }).join("");
+
+      observeNewReveals();
 
       container.querySelectorAll(".edit-event-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("edit events")) editEvent(btn.getAttribute("data-id")); }; });
       container.querySelectorAll(".delete-event-btn").forEach(btn => { btn.onclick = () => { if (requireAdmin("delete events")) deleteEvent(btn.getAttribute("data-id")); }; });
@@ -1968,8 +2122,8 @@
     function renderAchievements() {
       const container = document.getElementById("achievementsContainer");
       if (!container) return;
-      container.innerHTML = achievements.map(a => `
-        <div class="achievement-card">
+      container.innerHTML = achievements.map((a, idx) => `
+        <div class="achievement-card reveal-on-scroll" style="transition-delay: ${idx * 0.1}s;">
           <div class="trophy-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
           <span class="achievement-year">${escapeHtml(a.year)}</span>
           <h3 style="color: var(--dark-green); margin-bottom: 0.4rem;">${escapeHtml(a.title)}</h3>
@@ -1979,6 +2133,8 @@
           </div>
         </div>
       `).join("");
+
+      observeNewReveals();
 
       container.querySelectorAll(".delete-ach-btn").forEach(btn => {
         btn.onclick = async () => {
@@ -2036,7 +2192,7 @@
         return;
       }
       grid.innerHTML = filtered.map((g, i) => `
-        <div class="gallery-item">
+        <div class="gallery-item reveal-on-scroll" style="transition-delay: ${i * 0.08}s;">
           <button class="gallery-admin-delete" data-id="${g.id}" style="display:${isAdmin ? 'flex' : 'none'};"><i class="fa-solid fa-trash"></i></button>
           <img src="${g.url}" alt="${escapeHtml(g.caption)}" onclick="openLightbox(${i})" />
           <div class="gallery-overlay">
@@ -2045,6 +2201,8 @@
           </div>
         </div>
       `).join("");
+
+      observeNewReveals();
 
       grid.querySelectorAll(".gallery-admin-delete").forEach(btn => {
         btn.onclick = async (e) => {
@@ -2136,13 +2294,11 @@
     };
     document.getElementById("closeAdminLoginModalBtn").onclick = () => adminLoginModal.classList.remove("active");
 
-    // Unified Admin UI state
     function setAdminState(userOrName) {
       isAdmin = true;
       const name = (userOrName && userOrName.displayName) ? userOrName.displayName : (typeof userOrName === "string" ? userOrName : "Kamaraj");
       const initial = name.charAt(0).toUpperCase();
 
-      // Clean single-line aligned layout
       document.getElementById("authContainer").innerHTML = `
         <div class="auth-wrapper-flex">
           <div class="user-profile-badge">
@@ -2174,7 +2330,6 @@
       showToast("Admin access unlocked.", "success");
     }
 
-    // Google Sign-In with Authorized Email Checking
     document.getElementById("googleAdminLoginBtn").onclick = async () => {
       if (!isFirebaseReady || !auth) {
         showToast("Firebase keys not entered yet. Configure firebaseConfig in the script to enable Google Sign-In.", "info");
@@ -2210,7 +2365,6 @@
       });
     }
 
-    // Passcode Sign-In
     document.getElementById("adminLoginForm").onsubmit = (e) => {
       e.preventDefault();
       const entered = document.getElementById("adminPasscodeInput").value;
@@ -2354,6 +2508,50 @@
       e.target.reset();
     };
 
+    // ---------------- Scroll Down Animation Observer & Counters ----------------
+    let countersStarted = false;
+    function animateCounters() {
+      if (countersStarted) return;
+      countersStarted = true;
+      const counters = document.querySelectorAll(".stat-number");
+      counters.forEach(counter => {
+        const target = +counter.getAttribute("data-count");
+        if (isNaN(target)) return;
+        const suffix = counter.getAttribute("data-suffix") || "";
+        const duration = 1600;
+        const step = Math.ceil(target / (duration / 25));
+        let count = 0;
+        const timer = setInterval(() => {
+          count += step;
+          if (count >= target) {
+            counter.innerText = target + suffix;
+            clearInterval(timer);
+          } else {
+            counter.innerText = count + suffix;
+          }
+        }, 25);
+      });
+    }
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          if (entry.target.id === "statsCounterGrid") {
+            animateCounters();
+          }
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    function observeNewReveals() {
+      document.querySelectorAll(".reveal-on-scroll, .reveal-scale").forEach(el => {
+        if (!el.classList.contains("revealed")) {
+          scrollObserver.observe(el);
+        }
+      });
+    }
+
     // ---------------- Initial render ----------------
     applyAdminVisibility();
     renderAboutSection();
@@ -2365,6 +2563,7 @@
     renderGallery();
     renderPoints();
     initFirestoreSync();
+    observeNewReveals();
   </script>
 </body>
 </html>
