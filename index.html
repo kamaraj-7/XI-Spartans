@@ -70,7 +70,7 @@ body[data-theme="light"] .links.open{background:#f8fbff}
 // Create a Firebase project, add a Web App, enable Cloud Firestore,
 // then paste your own values below. Never publish service-account keys here.
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
+   apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
   authDomain: "otp-login-app-2f5d5.firebaseapp.com",
   projectId: "otp-login-app-2f5d5",
   storageBucket: "otp-login-app-2f5d5.firebasestorage.app",
@@ -86,11 +86,55 @@ const defaultData={
  {id:"p3",name:"Lead Bowler",role:"Bowler",number:"10",batting:"",bowling:"Right-arm fast",runs:"",wickets:"",photo:"",bio:"Add player biography and achievements."}],
  fixtures:[],achievements:[{id:"a1",title:"The Spartan journey begins",year:"2024",description:"The foundation of XI Spartans Cricket Club."}],gallery:[],news:[]
 };
-let data=loadLocal(),db=null,storage=null,cloudReady=false;
-function loadLocal(){try{return JSON.parse(localStorage.getItem("xiSpartansData"))||structuredClone(defaultData)}catch(e){return JSON.parse(JSON.stringify(defaultData))}}
-function persist(){localStorage.setItem("xiSpartansData",JSON.stringify(data));if(db&&cloudReady){db.collection("xiSpartans").doc("clubData").set(data).then(()=>status("Cloud sync: connected · changes saved")).catch(e=>{status("Cloud sync error: "+e.message);});}renderAll()}
+let data=loadLocal(),db=null,storage=null,cloudReady=false,cloudInitPromise=null,saveQueue=Promise.resolve();
+function loadLocal(){try{return JSON.parse(localStorage.getItem("xiSpartansData"))||JSON.parse(JSON.stringify(defaultData))}catch(e){return JSON.parse(JSON.stringify(defaultData))}}
+function cacheLocal(){try{localStorage.setItem("xiSpartansData",JSON.stringify(data))}catch(e){status("Browser cache unavailable: "+e.message)}}
+function persist(){
+  cacheLocal();
+  renderAll();
+  if(!db){status("Local save only · Firebase is not initialized");return Promise.resolve(false)}
+  if(!cloudReady){status("Saved on this device · waiting for Firebase connection");return Promise.resolve(false)}
+  const snapshot=JSON.parse(JSON.stringify(data));
+  saveQueue=saveQueue.then(()=>db.collection("xiSpartans").doc("clubData").set(snapshot))
+    .then(()=>{status("Firebase connected · all changes saved");return true})
+    .catch(e=>{status("Firebase save failed: "+(e.code||"")+" "+e.message);console.error("Firestore save failed",e);return false});
+  return saveQueue;
+}
 function status(s){let el=document.getElementById("syncStatus");if(el)el.textContent=s}
-function initFirebase(){if(!window.firebase||FIREBASE_CONFIG.apiKey==="AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk")return;try{firebase.initializeApp(FIREBASE_CONFIG);db=firebase.firestore();storage=firebase.storage();db.collection("xiSpartans").doc("clubData").get().then(s=>{if(s.exists){data={...defaultData,...s.data()};localStorage.setItem("xiSpartansData",JSON.stringify(data));renderAll()}else db.collection("xiSpartans").doc("clubData").set(data);cloudReady=true;status("Cloud sync: connected · Firestore ready")}).catch(e=>status("Firebase error: "+e.message))}catch(e){status("Firebase setup error: "+e.message)}}
+async function initFirebase(){
+  if(cloudInitPromise)return cloudInitPromise;
+  cloudInitPromise=(async()=>{
+    try{
+      if(!window.firebase)throw new Error("Firebase SDK did not load. Check your internet connection.");
+      // Do not compare apiKey with a placeholder: the supplied key is a real project key.
+      if(!FIREBASE_CONFIG.apiKey||!FIREBASE_CONFIG.projectId)throw new Error("Firebase web app configuration is incomplete.");
+      if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);
+      db=firebase.firestore();
+      try{storage=firebase.storage()}catch(storageError){console.warn("Firebase Storage unavailable",storageError)}
+      status("Connecting to Firebase…");
+      const ref=db.collection("xiSpartans").doc("clubData");
+      const snap=await ref.get();
+      if(snap.exists){
+        data={...JSON.parse(JSON.stringify(defaultData)),...snap.data()};
+        cacheLocal();
+        renderAll();
+        status("Firebase connected · cloud data loaded");
+      }else{
+        // First launch: seed Firestore with this browser's current starter data.
+        await ref.set(data);
+        status("Firebase connected · starter data saved to cloud");
+      }
+      cloudReady=true;
+      return true;
+    }catch(e){
+      cloudReady=false;
+      status("Firebase connection failed: "+(e.code||"")+" "+e.message);
+      console.error("Firebase initialization failed",e);
+      return false;
+    }
+  })();
+  return cloudInitPromise;
+}
 function toast(t){let el=document.getElementById("toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2600)}
 function go(id){document.querySelectorAll(".page").forEach(p=>{p.classList.remove("active");p.style.display="none"});let p=document.getElementById(id);if(p){p.classList.add("active");p.style.display=id==="home"?"block":"block"}document.querySelectorAll(".links a").forEach(a=>a.classList.toggle("active",a.dataset.page===id));document.getElementById("navLinks").classList.remove("open");window.scrollTo({top:0,behavior:"smooth"});history.replaceState(null,"","#"+id);renderAll()}
 function toggleMenu(){document.getElementById("navLinks").classList.toggle("open")}
