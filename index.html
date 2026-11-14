@@ -86,71 +86,121 @@ const defaultData={
  {id:"p3",name:"Lead Bowler",role:"Bowler",number:"10",batting:"",bowling:"Right-arm fast",runs:"",wickets:"",photo:"",bio:"Add player biography and achievements."}],
  fixtures:[],achievements:[{id:"a1",title:"The Spartan journey begins",year:"2024",description:"The foundation of XI Spartans Cricket Club."}],gallery:[],news:[]
 };
-let data=loadLocal(),db=null,storage=null,cloudReady=false,cloudInitPromise=null,saveQueue=Promise.resolve();
 function loadLocal(){try{return JSON.parse(localStorage.getItem("xiSpartansData"))||JSON.parse(JSON.stringify(defaultData))}catch(e){return JSON.parse(JSON.stringify(defaultData))}}
-function cacheLocal(){try{localStorage.setItem("xiSpartansData",JSON.stringify(data))}catch(e){status("Browser cache unavailable: "+e.message)}}
+let data=loadLocal(),db=null,storage=null,cloudReady=false,cloudInitPromise=null,saveQueue=Promise.resolve(),cloudDocRef=null,cloudDocPath="";
+
+// The supplied working scorecard app stores its records in the "matches" collection.
+// Keep the club website document in that same collection so it uses the same
+// Firestore access path. It has no createdAt/updatedAt fields, so the scorecard's
+// ordered match queries will not treat it as a match.
+const CLUB_DATA_LOCATIONS=[
+  {collection:"matches",document:"xiSpartansClubData"},
+  {collection:"xiSpartans",document:"clubData"}
+];
+
+function cacheLocal(){
+  try{localStorage.setItem("xiSpartansData",JSON.stringify(data))}
+  catch(e){console.warn("Could not cache website data locally",e)}
+}
+
+function status(s){
+  let el=document.getElementById("syncStatus");
+  if(el)el.textContent=s;
+}
+
 async function persist(){
-  // Keep an immediate local backup, but never silently treat that as a cloud save.
+  // Snapshot the edit before waiting for Firebase to finish connecting.
+  const snapshot=JSON.parse(JSON.stringify(data));
   cacheLocal();
   renderAll();
 
-  // A user may save before Firebase finishes loading. Wait for the same startup
-  // connection attempt instead of dropping this change on the floor.
-  if(!db || !cloudReady){
+  if(!db || !cloudReady || !cloudDocRef){
     status("Connecting to Firebase before saving…");
-    const connected = await initFirebase();
-    if(!connected || !db || !cloudReady){
-      status("LOCAL ONLY — Firebase is not connected. Check the Firebase error and project rules.");
+    const connected=await initFirebase();
+    if(!connected || !cloudDocRef){
+      status("LOCAL ONLY — Firebase did not connect. Open the browser console for the exact Firebase error.");
       return false;
     }
   }
 
-  const snapshot=JSON.parse(JSON.stringify(data));
-  saveQueue=saveQueue.then(()=>db.collection("xiSpartans").doc("clubData").set(snapshot))
-    .then(()=>{
-      status("FIREBASE SAVED — your changes are stored in Firestore.");
-      return true;
-    })
-    .catch(e=>{
-      status("FIREBASE SAVE FAILED — "+(e.code||"")+" "+e.message);
-      console.error("Firestore save failed",e);
-      return false;
-    });
+  saveQueue=saveQueue.then(async()=>{
+    await cloudDocRef.set(snapshot);
+    // Keep the current page state consistent with the successfully persisted snapshot.
+    status("FIREBASE SAVED — data stored in Firestore ("+cloudDocPath+").");
+    return true;
+  }).catch(e=>{
+    status("FIREBASE SAVE FAILED — "+(e.code||"")+" "+e.message);
+    console.error("XI Spartans Firestore write failed:",e);
+    return false;
+  });
   return await saveQueue;
 }
-function status(s){let el=document.getElementById("syncStatus");if(el)el.textContent=s}
+
 async function initFirebase(){
+  if(cloudReady && db && cloudDocRef)return true;
   if(cloudInitPromise)return cloudInitPromise;
+
   cloudInitPromise=(async()=>{
     try{
-      if(!window.firebase)throw new Error("Firebase SDK did not load. Check your internet connection.");
-      // Do not compare apiKey with a placeholder: the supplied key is a real project key.
-      if(!FIREBASE_CONFIG.apiKey||!FIREBASE_CONFIG.projectId)throw new Error("Firebase web app configuration is incomplete.");
+      if(!window.firebase)throw new Error("Firebase SDK did not load. Check the internet connection and Firebase script URLs.");
+      if(!FIREBASE_CONFIG.apiKey || !FIREBASE_CONFIG.projectId)throw new Error("Firebase web app configuration is incomplete.");
+
       if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);
       db=firebase.firestore();
-      try{storage=firebase.storage()}catch(storageError){console.warn("Firebase Storage unavailable",storageError)}
-      status("Connecting to Firebase…");
-      const ref=db.collection("xiSpartans").doc("clubData");
-      const snap=await ref.get();
-      if(snap.exists){
-        data={...JSON.parse(JSON.stringify(defaultData)),...snap.data()};
-        cacheLocal();
-        renderAll();
-        status("Firebase connected · cloud data loaded");
-      }else{
-        // First launch: seed Firestore with this browser's current starter data.
-        await ref.set(data);
-        status("Firebase connected · starter data saved to cloud");
+      try{storage=firebase.storage()}catch(storageError){
+        storage=null;
+        console.warn("Firebase Storage SDK/service is unavailable:",storageError);
       }
-      cloudReady=true;
-      return true;
+
+      status("Connecting to Firestore…");
+      let lastError=null;
+
+      for(const location of CLUB_DATA_LOCATIONS){
+        const ref=db.collection(location.collection).doc(location.document);
+        try{
+          const snap=await ref.get();
+          cloudDocRef=ref;
+          cloudDocPath=location.collection+"/"+location.document;
+
+          if(snap.exists){
+            const cloudData=snap.data()||{};
+            data={
+              ...JSON.parse(JSON.stringify(defaultData)),
+              ...cloudData,
+              settings:{...defaultData.settings,...(cloudData.settings||{})}
+            };
+            cacheLocal();
+            renderAll();
+            cloudReady=true;
+            status("FIREBASE CONNECTED — cloud data loaded from "+cloudDocPath+".");
+            return true;
+          }
+
+          // First use: save the browser's current data into the selected cloud document.
+          await ref.set(JSON.parse(JSON.stringify(data)));
+          cloudReady=true;
+          status("FIREBASE CONNECTED — initial data saved to "+cloudDocPath+".");
+          return true;
+        }catch(e){
+          lastError=e;
+          console.error("Firestore location failed:",location.collection+"/"+location.document,e);
+          // Try the legacy document only when the preferred collection is denied.
+          if(e.code!=="permission-denied" && e.code!=="firestore/permission-denied")throw e;
+        }
+      }
+
+      throw lastError||new Error("No permitted Firestore document path was found.");
     }catch(e){
       cloudReady=false;
-      status("Firebase connection failed: "+(e.code||"")+" "+e.message);
-      console.error("Firebase initialization failed",e);
+      cloudDocRef=null;
+      cloudDocPath="";
+      cloudInitPromise=null; // allow a later save to retry after a transient failure
+      status("FIREBASE CONNECTION FAILED — "+(e.code||"")+" "+e.message);
+      console.error("XI Spartans Firebase initialization failed:",e);
       return false;
     }
   })();
+
   return cloudInitPromise;
 }
 function toast(t){let el=document.getElementById("toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2600)}
