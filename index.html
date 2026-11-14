@@ -76,6 +76,10 @@ body:not(.admin-mode) .admin-only,body:not(.admin-mode) .admin-link{display:none
 
 .btn:disabled{opacity:.62;cursor:wait;transform:none!important;filter:saturate(.6)}
 input[type=file]::file-selector-button{margin-right:10px;border:0;border-radius:7px;padding:8px 11px;background:#14518a;color:#fff;font-weight:800;cursor:pointer}
+\n
+#itemForm button:disabled{opacity:.78;cursor:progress;min-width:165px}
+#itemForm button:disabled:after{content:"";display:inline-block;width:10px;height:10px;margin-left:9px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-1px;animation:saveSpin .7s linear infinite}
+@keyframes saveSpin{to{transform:rotate(360deg)}}
 \n</style></head>
 <body><div class="topbar"></div>
 <header class="header"><div class="wrap nav"><a class="brand" href="#home" onclick="go('home')"><img id="brandLogo" src="" data-embedded-logo="true" alt="XI Spartans logo"><span><b id="brandName">XI SPARTANS</b><small>Cricket Club · Est. 2024</small></span></a>
@@ -163,60 +167,82 @@ function readFile(file,cb){if(!file)return;let reader=new FileReader();reader.on
 // itself is uploaded to Storage and only its download URL is saved in Firestore.
 const MAX_INLINE_IMAGE_BYTES=350*1024;
 const MAX_UPLOAD_IMAGE_BYTES=5*1024*1024;
-async function saveImage(file){
- if(!file)return null;
+function withTimeout(promise,ms,label){
+ let timer;
+ return Promise.race([
+  promise,
+  new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(label+" timed out after "+Math.round(ms/1000)+" seconds.")),ms)})
+ ]).finally(()=>clearTimeout(timer));
+}
+async function saveImage(file,onStage=()=>{}){
+ if(!file)throw new Error("Choose an image file.");
  if(!file.type||!file.type.startsWith("image/"))throw new Error("Choose a valid image file.");
  if(file.size>MAX_UPLOAD_IMAGE_BYTES)throw new Error("Image is larger than 5 MB. Choose a smaller photo.");
- const dataUrl=await new Promise((resolve,reject)=>{
+ onStage("Preparing photo…");
+ const dataUrl=await withTimeout(new Promise((resolve,reject)=>{
   const reader=new FileReader();
   reader.onerror=()=>reject(new Error("Could not read the selected photo."));
   reader.onload=()=>resolve(reader.result);
   reader.readAsDataURL(file);
- });
- const img=await new Promise((resolve,reject)=>{
+ }),15000,"Reading photo");
+ const img=await withTimeout(new Promise((resolve,reject)=>{
   const image=new Image();
   image.onload=()=>resolve(image);
   image.onerror=()=>reject(new Error("The selected file is not a supported image."));
   image.src=dataUrl;
- });
+ }),15000,"Opening photo");
  let scale=Math.min(1,900/Math.max(img.naturalWidth||img.width,img.naturalHeight||img.height));
  let blob=null,canvas=document.createElement("canvas"),ctx=canvas.getContext("2d");
  if(!ctx)throw new Error("This browser could not prepare the photo.");
- for(let attempt=0;attempt<8;attempt++){
+ for(let attempt=0;attempt<9;attempt++){
   canvas.width=Math.max(1,Math.round((img.naturalWidth||img.width)*scale));
   canvas.height=Math.max(1,Math.round((img.naturalHeight||img.height)*scale));
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.drawImage(img,0,0,canvas.width,canvas.height);
-  blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/webp",Math.max(.42,.76-attempt*.045)));
+  blob=await withTimeout(new Promise(resolve=>canvas.toBlob(resolve,"image/webp",Math.max(.38,.76-attempt*.045))),15000,"Compressing photo");
   if(!blob)throw new Error("Photo compression failed. Try another image.");
   if(blob.size<=MAX_INLINE_IMAGE_BYTES)break;
-  scale*=.82;
+  scale*=.78;
  }
  if(!blob||blob.size>MAX_INLINE_IMAGE_BYTES)throw new Error("Photo is still too large after compression. Choose another image.");
+ onStage("Photo prepared ("+Math.ceil(blob.size/1024)+" KB). Saving photo…");
  if(storage&&cloudReady&&isAdmin){
+  let task=null;
   try{
-   const path="clubs/"+CLUB_ID+"/players/"+Date.now()+"-"+Math.random().toString(36).slice(2)+".webp";
+   const path="clubs/"+CLUB_ID+"/gallery/"+Date.now()+"-"+Math.random().toString(36).slice(2)+".webp";
    const ref=storage.ref().child(path);
-   await ref.put(blob,{contentType:"image/webp"});
-   return await ref.getDownloadURL();
+   task=ref.put(blob,{contentType:"image/webp"});
+   const uploadPromise=new Promise((resolve,reject)=>{
+    task.on("state_changed",
+     snap=>{const pct=snap.totalBytes?Math.round(snap.bytesTransferred/snap.totalBytes*100):0;onStage("Uploading photo… "+pct+"%");},
+     reject,
+     async()=>{try{resolve(await ref.getDownloadURL())}catch(e){reject(e)}}
+    );
+   });
+   const url=await withTimeout(uploadPromise,20000,"Firebase Storage upload");
+   onStage("Photo uploaded. Saving player details…");
+   return url;
   }catch(err){
-   console.error("Firebase Storage upload failed; using bounded compressed Firestore fallback.",err);
-   status("STORAGE UPLOAD FAILED — saving compressed photo in Firestore instead ("+(err.code||err.message)+")");
-   toast("Storage upload failed; trying compressed photo fallback.");
+   try{if(task&&typeof task.cancel==="function")task.cancel()}catch(_){}
+   console.warn("Firebase Storage upload did not complete; switching to compressed Firestore fallback.",err);
+   status("STORAGE UPLOAD NOT COMPLETED — using compressed photo fallback ("+(err.code||err.message)+")");
+   toast("Storage upload unavailable. Trying compressed photo fallback…");
   }
  }
- // Firestore document stays comfortably below its 1 MiB document limit.
- return await new Promise((resolve,reject)=>{
+ onStage("Using compressed photo fallback…");
+ const inline=await withTimeout(new Promise((resolve,reject)=>{
   const reader=new FileReader();
   reader.onerror=()=>reject(new Error("Could not encode the compressed photo."));
   reader.onload=()=>resolve(reader.result);
   reader.readAsDataURL(blob);
- });
+ }),15000,"Encoding photo");
+ onStage("Photo ready. Saving player details…");
+ return inline;
 }
-function openPlayer(id){if(!requireAdmin())return;let p=data.players.find(x=>x.id===id)||{id:"",name:"",role:"Batter",number:"",batting:"",bowling:"",runs:"",wickets:"",bio:"",photo:""};openModal(id?"Edit player":"Add player",`<form id="itemForm" class="admin-grid"><label class="wide">Player name<input class="field" name="name" required value="${esc(p.name)}"></label><label>Role<select class="field" name="role">${["Batter","Bowler","All-rounder","Wicketkeeper","Captain"].map(x=>`<option ${p.role===x?"selected":""}>${x}</option>`)}</select></label><label>Jersey number<input class="field" name="number" value="${esc(p.number)}"></label><label>Batting style<input class="field" name="batting" value="${esc(p.batting)}"></label><label>Bowling style<input class="field" name="bowling" value="${esc(p.bowling)}"></label><label>Runs<input class="field" name="runs" value="${esc(p.runs)}"></label><label>Wickets<input class="field" name="wickets" value="${esc(p.wickets)}"></label><label class="wide">Player photo<input class="field" name="photo" type="file" accept="image/*"></label><label class="wide">Bio / achievements<textarea class="field" name="bio">${esc(p.bio)}</textarea></label><div class="wide"><button class="btn gold">Save player</button></div></form>`);document.getElementById("itemForm").onsubmit=async e=>{e.preventDefault();const f=e.target,button=f.querySelector('button[type="submit"],button:not([type])');if(!requireAdmin())return;const name=f.elements.name.value.trim();if(!name){toast("Enter the player name.");return}if(button){button.disabled=true;button.textContent="Saving player…"}const previous=data.players.slice();try{const uploadedPhoto=await saveImage(f.elements.photo.files[0]);const vals=Object.fromEntries(new FormData(f));vals.name=name;const obj={...p,...vals,photo:uploadedPhoto||p.photo,id:p.id||("p"+Date.now()+"-"+Math.random().toString(36).slice(2,7))};delete obj.photoFile;if(id)data.players=data.players.map(x=>x.id===id?obj:x);else data.players.push(obj);const ok=await persist();if(!ok){data.players=previous;cacheLocal();renderAll();throw new Error("Firebase did not confirm the player save. Your previous player list was restored on screen.")}closeModal();toast("Player and photo saved to Firebase.");}catch(err){console.error("Player save failed",err);toast("Player save failed: "+(err.code||err.message));if(button){button.disabled=false;button.textContent="Save player"}}}}
+function openPlayer(id){if(!requireAdmin())return;let p=data.players.find(x=>x.id===id)||{id:"",name:"",role:"Batter",number:"",batting:"",bowling:"",runs:"",wickets:"",bio:"",photo:""};openModal(id?"Edit player":"Add player",`<form id="itemForm" class="admin-grid"><label class="wide">Player name<input class="field" name="name" required value="${esc(p.name)}"></label><label>Role<select class="field" name="role">${["Batter","Bowler","All-rounder","Wicketkeeper","Captain"].map(x=>`<option ${p.role===x?"selected":""}>${x}</option>`)}</select></label><label>Jersey number<input class="field" name="number" value="${esc(p.number)}"></label><label>Batting style<input class="field" name="batting" value="${esc(p.batting)}"></label><label>Bowling style<input class="field" name="bowling" value="${esc(p.bowling)}"></label><label>Runs<input class="field" name="runs" value="${esc(p.runs)}"></label><label>Wickets<input class="field" name="wickets" value="${esc(p.wickets)}"></label><label class="wide">Player photo<input class="field" name="photo" type="file" accept="image/*"></label><label class="wide">Bio / achievements<textarea class="field" name="bio">${esc(p.bio)}</textarea></label><div class="wide"><button class="btn gold">Save player</button></div></form>`);document.getElementById("itemForm").onsubmit=async e=>{e.preventDefault();const f=e.target,button=f.querySelector('button[type="submit"],button:not([type])');if(!requireAdmin())return;const name=f.elements.name.value.trim();if(!name){toast("Enter the player name.");return}if(button){button.disabled=true;button.textContent="Saving player…"}const previous=data.players.slice();try{const uploadedPhoto=await saveImage(f.elements.photo.files[0],stage=>{button.textContent=stage;status(stage);});button.textContent="Saving player details…";const vals=Object.fromEntries(new FormData(f));vals.name=name;const obj={...p,...vals,photo:uploadedPhoto||p.photo,id:p.id||("p"+Date.now()+"-"+Math.random().toString(36).slice(2,7))};delete obj.photoFile;if(id)data.players=data.players.map(x=>x.id===id?obj:x);else data.players.push(obj);const ok=await withTimeout(persist(),25000,"Firestore save");if(!ok){data.players=previous;cacheLocal();renderAll();throw new Error("Firebase did not confirm the player save. Your previous player list was restored on screen.")}closeModal();toast("Player and photo saved to Firebase.");}catch(err){console.error("Player save failed",err);toast("Player save failed: "+(err.code||err.message));if(button){button.disabled=false;button.textContent="Save player"}}}}
 function openFixture(id){if(!requireAdmin())return;let f=data.fixtures.find(x=>x.id===id)||{id:"",opponent:"",date:"",venue:"",type:"League match",score:"",result:"Upcoming"};openModal(id?"Edit fixture":"Add fixture",`<form id="itemForm" class="admin-grid"><label class="wide">Opponent / team<input class="field" name="opponent" required value="${esc(f.opponent)}"></label><label>Date<input class="field" type="date" name="date" value="${esc(f.date)}"></label><label>Venue<input class="field" name="venue" value="${esc(f.venue)}"></label><label>Match type<input class="field" name="type" value="${esc(f.type)}"></label><label>Score<input class="field" name="score" placeholder="e.g. 156/7" value="${esc(f.score)}"></label><label class="wide">Result / status<input class="field" name="result" value="${esc(f.result)}"></label><div class="wide"><button class="btn gold">Save fixture</button></div></form>`);document.getElementById("itemForm").onsubmit=e=>{e.preventDefault();let obj={...f,...Object.fromEntries(new FormData(e.target)),id:f.id||"f"+Date.now()};if(id)data.fixtures=data.fixtures.map(x=>x.id===id?obj:x);else data.fixtures.push(obj);persist();closeModal();toast("Fixture saved")}}
 function openAchievement(id){if(!requireAdmin())return;let a=data.achievements.find(x=>x.id===id)||{id:"",title:"",year:new Date().getFullYear(),description:""};openModal(id?"Edit achievement":"Add achievement",`<form id="itemForm" class="admin-grid"><label class="wide">Achievement / award<input class="field" name="title" required value="${esc(a.title)}"></label><label>Year<input class="field" name="year" value="${esc(a.year)}"></label><label class="wide">Description<textarea class="field" name="description">${esc(a.description)}</textarea></label><div class="wide"><button class="btn gold">Save achievement</button></div></form>`);document.getElementById("itemForm").onsubmit=e=>{e.preventDefault();let obj={...a,...Object.fromEntries(new FormData(e.target)),id:a.id||"a"+Date.now()};if(id)data.achievements=data.achievements.map(x=>x.id===id?obj:x);else data.achievements.push(obj);persist();closeModal();toast("Achievement saved")}}
-function openGallery(){if(!requireAdmin())return;openModal("Add gallery photo",`<form id="itemForm" class="admin-grid"><label class="wide">Caption<input class="field" name="caption" required placeholder="Final match day / Team celebration"></label><label class="wide">Choose image<input class="field" name="photo" type="file" accept="image/*" required></label><div class="wide"><button class="btn gold">Add to gallery</button></div></form>`);document.getElementById("itemForm").onsubmit=async e=>{e.preventDefault();const f=e.target,button=f.querySelector("button");button.disabled=true;button.textContent="Uploading photo…";const previous=data.gallery.slice();try{const photo=await saveImage(f.elements.photo.files[0]);data.gallery.unshift({id:"g"+Date.now()+"-"+Math.random().toString(36).slice(2,7),caption:f.elements.caption.value.trim(),photo});const ok=await persist();if(!ok){data.gallery=previous;cacheLocal();renderAll();throw new Error("Firebase did not confirm the gallery save.")}closeModal();toast("Gallery photo saved.");}catch(err){console.error("Gallery photo save failed",err);toast("Photo save failed: "+(err.code||err.message));button.disabled=false;button.textContent="Add to gallery"}}}
+function openGallery(){if(!requireAdmin())return;openModal("Add gallery photo",`<form id="itemForm" class="admin-grid"><label class="wide">Caption<input class="field" name="caption" required placeholder="Final match day / Team celebration"></label><label class="wide">Choose image<input class="field" name="photo" type="file" accept="image/*" required></label><div class="wide"><button class="btn gold">Add to gallery</button></div></form>`);document.getElementById("itemForm").onsubmit=async e=>{e.preventDefault();const f=e.target,button=f.querySelector("button");button.disabled=true;button.textContent="Preparing photo…";const previous=data.gallery.slice();try{const photo=await saveImage(f.elements.photo.files[0],stage=>{button.textContent=stage;status(stage);});button.textContent="Saving gallery entry…";data.gallery.unshift({id:"g"+Date.now()+"-"+Math.random().toString(36).slice(2,7),caption:f.elements.caption.value.trim(),photo});const ok=await withTimeout(persist(),25000,"Firestore save");if(!ok){data.gallery=previous;cacheLocal();renderAll();throw new Error("Firebase did not confirm the gallery save.")}closeModal();toast("Gallery photo saved.");}catch(err){console.error("Gallery photo save failed",err);toast("Photo save failed: "+(err.code||err.message));button.disabled=false;button.textContent="Add to gallery"}}}
 function openNews(id){if(!requireAdmin())return;let n=data.news.find(x=>x.id===id)||{id:"",title:"",date:new Date().toISOString().slice(0,10),body:""};openModal(id?"Edit update":"Add club update",`<form id="itemForm" class="admin-grid"><label class="wide">Headline<input class="field" name="title" required value="${esc(n.title)}"></label><label>Date<input class="field" type="date" name="date" value="${esc(n.date)}"></label><label class="wide">Update<textarea class="field" name="body" required>${esc(n.body)}</textarea></label><div class="wide"><button class="btn gold">Publish update</button></div></form>`);document.getElementById("itemForm").onsubmit=e=>{e.preventDefault();let obj={...n,...Object.fromEntries(new FormData(e.target)),id:n.id||"n"+Date.now()};if(id)data.news=data.news.map(x=>x.id===id?obj:x);else data.news.unshift(obj);persist();closeModal();toast("Update published")}}
 function removeItem(key,id){if(!requireAdmin())return;if(!confirm("Delete this item?"))return;data[key]=data[key].filter(x=>x.id!==id);persist();toast("Item deleted")}
 function saveSettings(){if(!requireAdmin())return;let s=data.settings;s.name=document.getElementById("setName").value.trim()||"XI SPARTANS";s.email=document.getElementById("setEmail").value.trim();s.location=document.getElementById("setLocation").value.trim();s.season=document.getElementById("setSeason").value.trim();s.hero=document.getElementById("setHero").value;s.about=document.getElementById("setAbout").value;let file=document.getElementById("setLogo").files[0];(async()=>{try{if(file)s.logo=await saveImage(file);const ok=await persist();if(ok)toast("Club settings saved to Firebase.");else toast("Settings were not confirmed by Firebase.");}catch(err){console.error("Settings/photo save failed",err);toast("Settings save failed: "+(err.code||err.message));}})();}
