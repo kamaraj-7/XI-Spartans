@@ -70,7 +70,7 @@ body[data-theme="light"] .links.open{background:#f8fbff}
 // Create a Firebase project, add a Web App, enable Cloud Firestore,
 // then paste your own values below. Never publish service-account keys here.
 const FIREBASE_CONFIG = {
-   apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
+  apiKey: "AIzaSyDDew880iGDPpx2giFC9RXDV6SN2m99cUk",
   authDomain: "otp-login-app-2f5d5.firebaseapp.com",
   projectId: "otp-login-app-2f5d5",
   storageBucket: "otp-login-app-2f5d5.firebasestorage.app",
@@ -89,16 +89,34 @@ const defaultData={
 let data=loadLocal(),db=null,storage=null,cloudReady=false,cloudInitPromise=null,saveQueue=Promise.resolve();
 function loadLocal(){try{return JSON.parse(localStorage.getItem("xiSpartansData"))||JSON.parse(JSON.stringify(defaultData))}catch(e){return JSON.parse(JSON.stringify(defaultData))}}
 function cacheLocal(){try{localStorage.setItem("xiSpartansData",JSON.stringify(data))}catch(e){status("Browser cache unavailable: "+e.message)}}
-function persist(){
+async function persist(){
+  // Keep an immediate local backup, but never silently treat that as a cloud save.
   cacheLocal();
   renderAll();
-  if(!db){status("Local save only · Firebase is not initialized");return Promise.resolve(false)}
-  if(!cloudReady){status("Saved on this device · waiting for Firebase connection");return Promise.resolve(false)}
+
+  // A user may save before Firebase finishes loading. Wait for the same startup
+  // connection attempt instead of dropping this change on the floor.
+  if(!db || !cloudReady){
+    status("Connecting to Firebase before saving…");
+    const connected = await initFirebase();
+    if(!connected || !db || !cloudReady){
+      status("LOCAL ONLY — Firebase is not connected. Check the Firebase error and project rules.");
+      return false;
+    }
+  }
+
   const snapshot=JSON.parse(JSON.stringify(data));
   saveQueue=saveQueue.then(()=>db.collection("xiSpartans").doc("clubData").set(snapshot))
-    .then(()=>{status("Firebase connected · all changes saved");return true})
-    .catch(e=>{status("Firebase save failed: "+(e.code||"")+" "+e.message);console.error("Firestore save failed",e);return false});
-  return saveQueue;
+    .then(()=>{
+      status("FIREBASE SAVED — your changes are stored in Firestore.");
+      return true;
+    })
+    .catch(e=>{
+      status("FIREBASE SAVE FAILED — "+(e.code||"")+" "+e.message);
+      console.error("Firestore save failed",e);
+      return false;
+    });
+  return await saveQueue;
 }
 function status(s){let el=document.getElementById("syncStatus");if(el)el.textContent=s}
 async function initFirebase(){
@@ -172,5 +190,5 @@ function exportData(){let a=document.createElement("a"),blob=new Blob([JSON.stri
 function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{data={...defaultData,...JSON.parse(r.result)};persist();toast("Backup imported")}catch(x){toast("Invalid backup file")}};r.readAsText(f)}
 function resetDemo(){if(!confirm("Restore the original sample data? This replaces current local data."))return;data=JSON.parse(JSON.stringify(defaultData));persist();toast("Sample content restored")}
 document.querySelectorAll(".links a").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();go(a.dataset.page)}));
-document.getElementById("year").textContent=new Date().getFullYear();initTheme();renderAll();initFirebase();
+document.getElementById("year").textContent=new Date().getFullYear();initTheme();renderAll();status("Connecting to Firebase…");initFirebase();
 </script></body></html>
