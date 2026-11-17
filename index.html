@@ -188,7 +188,29 @@ p.copy{color:var(--mut);max-width:540px;line-height:1.85;font-size:15px}
   .player-card .pc-no{transition:transform .35s ease}
   .player-card.is-open .pc-no{transform:scale(1.12) rotate(-5deg)}
 }
-</style></head>
+</style>
+<style id="xi-spartans-player-touch-dark-fix">
+/* Dark-first boot and dependable player detail reveal on touch devices */
+html{background:#0a1d13}
+body:not([data-theme="light"]){background-color:#0a1d13}
+.player-card{cursor:pointer; -webkit-tap-highlight-color:transparent}
+.player-card.is-open{border-color:var(--au);box-shadow:0 18px 42px rgba(0,0,0,.28),0 0 0 1px rgba(212,175,55,.55)}
+.player-card.is-open .pc-score{clip-path:inset(0)}
+.player-card.is-open .pc-row,.player-card.is-open .fl{opacity:1;transform:none}
+.player-card.is-open .player-photo img{transform:scale(1.04)}
+@media (hover:none), (pointer:coarse){
+  .player-card .pc-score{transition:clip-path .35s ease}
+  .player-card.is-open .pc-score{clip-path:inset(0)}
+  .player-card.is-open .pc-row,.player-card.is-open .fl{opacity:1;transform:none}
+  .player-card.is-open .player-photo img{transform:scale(1.04)}
+  .player-card .pc-stage{min-height:178px}
+  .player-card .player-photo:after{pointer-events:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .player-card .pc-score,.player-card .pc-row,.player-card .fl{transition:none!important}
+}
+</style>
+</head>
 <body><div id="fxLoader" role="status" aria-label="Loading"><div><div class="fx-ball"></div><div class="fx-lt">XI SPARTANS</div><div class="fx-lb"><i></i></div></div></div><div id="fxProg"></div><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-bat" viewBox="0 0 24 24"><path d="M15.5 4.5l4 4"/><path d="M17 3l4 4"/><path d="M17.5 9.5L8 19a2.1 2.1 0 01-3-3l9.5-9.5"/></symbol><symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.5 6c3 2.5 3 9.5 0 12M18.5 6c-3 2.5-3 9.5 0 12"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 01-8 0z"/><path d="M8 6H5a3 3 0 003 4M16 6h3a3 3 0 01-3 4M12 13v4M8 20h8M10 17h4"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 4.5"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.5-2.5h7L17 8h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13" r="3.5"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></symbol><symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></symbol></defs></svg><div class="topbar"></div>
 <header class="header"><div class="wrap nav"><a class="brand" href="#home" onclick="go('home')"><img id="brandLogo" src="" data-embedded-logo="true" alt="XI Spartans logo"><span><b id="brandName">XI SPARTANS</b><small>Cricket Club · Est. 2024</small></span></a>
 <nav class="links" id="navLinks"><a href="#home" data-page="home" class="active">Home</a><a href="#players" data-page="players">Players</a><a href="#fixtures" data-page="fixtures">Fixtures</a><a href="#achievements" data-page="achievements">Achievements</a><a href="#gallery" data-page="gallery">Gallery</a><a href="#news" data-page="news">News</a><a href="#contact" data-page="contact">Contact</a></nav>
@@ -272,11 +294,28 @@ async function loadCloudData(){if(!db)return;attachLiveListeners();if(!isAdmin)r
 async function initFirebase(){try{if(!window.firebase)throw new Error("Firebase SDK did not load. Check your connection.");if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);db=firebase.firestore();try{storage=firebase.storage();if(!storage)throw new Error("Firebase Storage SDK is unavailable")}catch(e){storage=null;console.warn("Firebase Storage unavailable; bounded Firestore image fallback will be used",e)}status("Firebase initialized — loading public club data…");attachLiveListeners();try{auth=firebase.auth();auth.onAuthStateChanged(async user=>{currentUser=user;isAdmin=!!(user&&ADMIN_EMAIL!=="REPLACE_WITH_ADMIN_EMAIL"&&user.email&&user.email.toLowerCase()===ADMIN_EMAIL.toLowerCase());updateAdminUI();if(user&&!isAdmin){status("SIGNED IN, BUT THIS ACCOUNT IS NOT THE CONFIGURED CLUB ADMIN.");await auth.signOut();return}await loadCloudData()})}catch(authErr){auth=null;console.warn("Firebase Auth unavailable; visitors can still view club data.",authErr)}return true}catch(e){status("FIREBASE INITIALIZATION FAILED — "+(e.code||"")+" "+e.message);console.error(e);return false}}
 async function persist(){lastSaveError="";if(!requireAdmin())return false;cacheLocal();renderAll();if(!db||!currentUser||!isAdmin){status("SIGN IN REQUIRED — changes are not uploaded.");return false}const snapshot=JSON.parse(JSON.stringify(data));saveQueue=saveQueue.catch(()=>false).then(async()=>{const ops=[];const meta=settingsRef();ops.push(b=>b.set(meta,{settings:snapshot.settings,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}));for(const key of Object.keys(CLUB_COLLECTIONS)){const ref=collectionRef(key),items=snapshot[key]||[],ids=items.map(x=>String(x.id));for(const item of items){const id=String(item.id);const clean={...item};delete clean.id;ops.push(b=>b.set(ref.doc(id),clean,{merge:true}))}for(const oldId of cloudIds[key]||[]){if(!ids.includes(oldId))ops.push(b=>b.delete(ref.doc(oldId)))}}for(let i=0;i<ops.length;i+=400){const batch=db.batch();ops.slice(i,i+400).forEach(op=>op(batch));await batch.commit()}for(const key of Object.keys(CLUB_COLLECTIONS))cloudIds[key]=(snapshot[key]||[]).map(x=>String(x.id));status("FIREBASE SAVED — separate club documents updated.");return true}).catch(e=>{lastSaveError=e.code||e.message||"unknown";status("FIREBASE SAVE FAILED — "+(e.code||"")+" "+e.message);console.error("Club save failed",e);toast("Cloud save failed: "+(e.code||e.message));return false});return await saveQueue}
 function toast(t){let el=document.getElementById("toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),Math.max(2600,t.length*75))}
-function go(id){document.querySelectorAll(".page").forEach(p=>{p.classList.remove("active");p.style.display="none"});let p=document.getElementById(id);if(p){p.classList.add("active");p.style.display=id==="home"?"block":"block"}document.querySelectorAll(".links a").forEach(a=>a.classList.toggle("active",a.dataset.page===id));document.getElementById("navLinks").classList.remove("open");window.scrollTo({top:0,behavior:"smooth"});history.replaceState(null,"","#"+id);renderAll();document.dispatchEvent(new Event("xi:pagechange"))}
+function go(id){
+ const page=document.getElementById(id);
+ if(!page||!page.classList.contains("page"))return;
+ document.querySelectorAll(".page").forEach(p=>{p.classList.remove("active");p.style.display="none"});
+ page.classList.add("active");page.style.display="block";
+ document.querySelectorAll(".links a").forEach(a=>a.classList.toggle("active",a.dataset.page===id));
+ const nav=document.getElementById("navLinks");if(nav)nav.classList.remove("open");
+ try{history.replaceState(null,"","#"+id)}catch(_){}
+ if(id==="players")renderPlayers();
+ else if(id==="home"){renderHomePage();}
+ else if(id==="fixtures")renderFixtures();
+ else if(id==="achievements")renderAchievements();
+ else if(id==="gallery")renderGallery();
+ else if(id==="news")renderNews();
+ else if(id==="manage")fillSettings();
+ document.dispatchEvent(new Event("xi:pagechange"));
+ window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+}
 function toggleMenu(){document.getElementById("navLinks").classList.toggle("open")}
-function applyTheme(theme){document.body.dataset.theme=theme;let b=document.getElementById("themeToggle");if(b){b.textContent=theme==="light"?"🌙 Dark mode":"☀ Light mode";b.setAttribute("aria-label",theme==="light"?"Switch to dark mode":"Switch to light mode")}try{localStorage.setItem("xiSpartansTheme",theme)}catch(e){}}
+function applyTheme(theme){document.body.dataset.theme=theme;let b=document.getElementById("themeToggle");if(b){b.textContent=theme==="light"?"🌙 Dark mode":"☀ Light mode";b.setAttribute("aria-label",theme==="light"?"Switch to dark mode":"Switch to light mode")}try{localStorage.setItem("xiSpartansThemeV2",theme)}catch(e){}}
 function toggleTheme(){applyTheme(document.body.dataset.theme==="light"?"dark":"light")}
-function initTheme(){let saved="light";try{saved=localStorage.getItem("xiSpartansTheme")||"light"}catch(e){}applyTheme(saved)}
+function initTheme(){let saved="dark";try{saved=localStorage.getItem("xiSpartansThemeV2")||"dark"}catch(e){}applyTheme(saved)}
 
 function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function photo(p){return p?`<img src="${p}" alt="">`:`<div class="initial">XI</div>`}
@@ -290,6 +329,11 @@ function renderAchievements(){document.getElementById("achievementList").innerHT
 function galleryCard(g){return `<div class="gallery-item"><img src="${g.photo}" alt="${esc(g.caption)}"><span>${esc(g.caption||"XI Spartans")}</span><button class="close admin-only" style="position:absolute;right:7px;top:7px" onclick="removeItem('gallery','${g.id}')">×</button></div>`}
 function renderGallery(){document.getElementById("galleryGrid").innerHTML=data.gallery.length?data.gallery.map(galleryCard).join(""):'<div class="empty" style="grid-column:1/-1">Upload team photos to start building your gallery.</div>';document.getElementById("homeGallery").innerHTML=data.gallery.slice(0,4).map(g=>`<div class="gallery-item"><img src="${g.photo}" alt="${esc(g.caption)}"><span>${esc(g.caption)}</span></div>`).join("")||'<div class="empty" style="grid-column:1/-1">Your team photos will appear here.</div>'}
 function renderNews(){document.getElementById("newsGrid").innerHTML=data.news.length?data.news.map(n=>`<article class="card"><div class="card-body"><span class="tag">${esc(n.date||"Club update")}</span><h3>${esc(n.title)}</h3><p class="muted" style="font-size:12px;line-height:1.8">${esc(n.body)}</p><div class="toolbar"><button class="btn ghost admin-only" onclick="openNews('${n.id}')">Edit</button><button class="btn ghost admin-only" onclick="removeItem('news','${n.id}')">Delete</button></div></div></article>`).join(""):'<div class="empty">No club updates yet. Share your first announcement.</div>'}
+function renderHomePage(){
+ const el=document.getElementById("homePlayers");
+ if(el)el.innerHTML=data.players.slice(0,3).map(playerCard).join("")||'<div class="empty">Add your squad to feature players here.</div>';
+ renderFixtures();renderGallery();
+}
 function renderAll(){document.getElementById("brandName").textContent=data.settings.name||"XI SPARTANS";document.getElementById("heroCopy").textContent=data.settings.hero;document.getElementById("aboutText").textContent=data.settings.about;document.getElementById("contactEmail").textContent=data.settings.email||"Add your team email in Manage";document.getElementById("contactLocation").textContent=data.settings.location||"Add your home ground in Manage";let logo=data.settings.logo||document.getElementById("brandLogo").src;document.getElementById("brandLogo").src=logo;document.getElementById("heroLogo").src=logo;document.getElementById("statPlayers").textContent=data.players.length;document.getElementById("statMatches").textContent=data.fixtures.length;document.getElementById("statTrophies").textContent=data.achievements.length;document.getElementById("statPhotos").textContent=data.gallery.length;document.getElementById("homePlayers").innerHTML=data.players.slice(0,3).map(playerCard).join("")||'<div class="empty">Add your squad to feature players here.</div>';renderPlayers();renderFixtures();renderAchievements();renderGallery();renderNews();fillSettings()}
 function fillSettings(){let s=data.settings;["Name","Email","Location","Season","Hero","About"].forEach(k=>{let el=document.getElementById("set"+k);if(el)el.value=s[k.toLowerCase()]||""})}
 function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalContent").innerHTML=body;document.getElementById("modal").classList.add("open")}
@@ -391,7 +435,7 @@ document.querySelectorAll("img[data-embedded-logo]").forEach(el=>el.src=EMBEDDED
 /* UI layer: swaps emoji in the theme button for animated SVG icons (logic unchanged) */
 (function(){const _t=applyTheme;const svg=n=>'<svg class="ico ico-'+n+'" aria-hidden="true"><use href="#i-'+n+'"/></svg>';
 applyTheme=function(t){_t(t);const b=document.getElementById("themeToggle");if(b)b.innerHTML=t==="light"?svg("moon")+"<span>Dark mode</span>":svg("sun")+"<span>Light mode</span>"};
-applyTheme(document.body.dataset.theme||"light");const a=document.getElementById("authButton");if(a)a.title="Admin sign in / sign out"})();
+applyTheme(document.body.dataset.theme||"dark");const a=document.getElementById("authButton");if(a)a.title="Admin sign in / sign out"})();
 </script>
 <script id="premium-fx">
 (()=>{'use strict';
@@ -408,11 +452,28 @@ reveal(){const m=$('main');if(reduce||!m||!('IntersectionObserver'in window))ret
 counters(){const run=(el,to)=>{const from=el._cur||0;el._cur=to;if(reduce||from===to){el._shown=String(to);el.textContent=to;return}const t0=performance.now(),step=t=>{const p=Math.min(1,(t-t0)/1100),v=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));el._shown=String(v);el.textContent=v;if(p<1&&el._cur===to)requestAnimationFrame(step)};requestAnimationFrame(step)};$$('.stat strong').forEach(el=>{const chk=()=>{const v=el.textContent.trim();if(v===el._shown)return;const n=parseInt(v,10);if(!isNaN(n))run(el,n)};new MutationObserver(chk).observe(el,{childList:true,characterData:true,subtree:true});chk()})},
 tilt(){if(!fine||reduce)return;let cur=null,raf=0,dt=0,ex=0,ey=0;const reset=c=>{c.classList.remove('is-tilt');c.style.removeProperty('--rx');c.style.removeProperty('--ry');$$('.pfx-dot',c).forEach(d=>d.remove())},dots=c=>{for(let i=0;i<9;i++){const d=document.createElement('i');d.className='pfx-dot';d.style.cssText=`--x:${Math.random()*100}%;--y:${50+Math.random()*50}%;--s:${3+Math.random()*4}px;--t:${2.2+Math.random()*2}s;animation-delay:${Math.random()*1.2}s`;c.appendChild(d);d.addEventListener('animationend',()=>d.remove())}},leave=()=>{if(cur)reset(cur);clearInterval(dt);cur=null};
 document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const c=e.target.closest&&e.target.closest('.player-card');if(c!==cur){leave();cur=c;if(c){c.classList.add('is-tilt');dots(c);dt=setInterval(()=>dots(c),1800)}}if(!c)return;ex=e.clientX;ey=e.clientY;raf||(raf=requestAnimationFrame(()=>{raf=0;if(!cur)return;const r=cur.getBoundingClientRect(),x=(ex-r.left)/r.width,y=(ey-r.top)/r.height;cur.style.setProperty('--mx',x*100+'%');cur.style.setProperty('--my',y*100+'%');cur.style.setProperty('--ry',((x-.5)*14).toFixed(2)+'deg');cur.style.setProperty('--rx',((.5-y)*12).toFixed(2)+'deg')}))});root.addEventListener('mouseleave',leave)},
-touch(){document.addEventListener('click',e=>{if(fine)return;const c=e.target.closest&&e.target.closest('.player-card');if(!c||e.target.closest('button,a'))return;const o=c.classList.contains('is-open');$$('.player-card.is-open').forEach(x=>x.classList.remove('is-open'));if(!o)c.classList.add('is-open')})},
+touch(){
+ const toggle=c=>{const open=c.classList.contains('is-open');$$('.player-card.is-open').forEach(x=>x.classList.remove('is-open'));if(!open)c.classList.add('is-open')};
+ // Pointer events cover phones, tablets and hybrid touch laptops even when a mouse is also available.
+ document.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;const c=e.target.closest&&e.target.closest('.player-card');if(!c||e.target.closest('button,a'))return;toggle(c)});
+ document.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest&&e.target.closest('.player-card');if(!c||e.target.closest('button,a'))return;e.preventDefault();toggle(c)});
+ // Legacy fallback only where Pointer Events are not supported (avoids double toggles on modern phones).
+ if(!window.PointerEvent)document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('.player-card');if(!c||e.target.closest('button,a'))return;toggle(c)});
+},
 spot(){if(!fine||reduce)return;const s=document.createElement('div');s.className='fx-spot';document.body.appendChild(s);let t=0,x=0,y=0;addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;x=e.clientX;y=e.clientY;t||(t=requestAnimationFrame(()=>{t=0;s.style.opacity=1;s.style.transform=`translate3d(${x}px,${y}px,0)`}))},{passive:true})}
 };
 root.classList.add('fx-on');
 Object.keys(mods).forEach(k=>{try{mods[k]()}catch(err){console.warn('FX module skipped:',k,err)}});
 })();
 </script>
+
+<script id="xi-spartans-navigation-touch-fix">
+document.addEventListener("click",function(e){
+ const a=e.target.closest&&e.target.closest("#navLinks a[data-page]");
+ if(!a)return;
+ e.preventDefault();
+ if(typeof go==="function")go(a.dataset.page);
+});
+</script>
+
 </body></html>
